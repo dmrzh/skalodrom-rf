@@ -1,0 +1,24 @@
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+  xmlns:beans="http://www.springframework.org/schema/beans"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.springframework.org/schema/beans
+           http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+           http://www.springframework.org/schema/security
+           http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+    <http auto-config='true'>
+        <intercept-url pattern="/login.html*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <intercept-url pattern="/index.html"  access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <intercept-url pattern="/register.html*/**"  access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <intercept-url pattern="/**"          access="ROLE_USER" />
+        <form-login login-page="/login.html"/>
+    </http>
+    <authentication-manager>
+        <authentication-provider user-service-ref='userDetailsService'/>
+     </authentication-manager>
+
+
+  <beans:bean id="userDetailsService" class="ru.skalodrom_rf.security.HibernateUserDetailsService"/>
+
+    
+
+</beans:beans>
