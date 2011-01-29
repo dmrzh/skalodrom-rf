@@ -10,6 +10,11 @@
 </head>
 <body>
     <a href="index.html">Главная страница</a>
+    <p>
+    <font color="red">
+        <div wicket:id="feedback">[Feedback Panel]</div>       
+    </font>
+</p>
     <form wicket:id="form" >
         <table>
             <tr>
@@ -25,7 +30,7 @@
                 <td><input wicket:id="password" type="password"> </td>
             </tr>
             <tr>
-                <td><img wicket:id="captcha" src="#" alt="captcha"></td>
+                <td><img wicket:id="captchaImage" src="#" alt="captcha"></td>
                 <td><input wicket:id="captchaText" type="text"> </td>
             </tr>
         </table>
