@@ -8,9 +8,10 @@
     <http auto-config='true'>
         <intercept-url pattern="/login.html*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <intercept-url pattern="/index.html"  access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <intercept-url pattern="/" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <intercept-url pattern="/register.html*/**"  access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <intercept-url pattern="/**"          access="ROLE_USER" />
-        <form-login login-page="/login.html"/>
+        <form-login login-page="/login.html" authentication-failure-url="/login.html?wrongPassword=true"/>
     </http>
     <authentication-manager>
         <authentication-provider user-service-ref='userDetailsService'/>
