@@ -15,6 +15,8 @@ import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.protocol.http.RequestUtils;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.skalodrom_rf.dao.UserDao;
 import ru.skalodrom_rf.model.User;
 
@@ -30,10 +32,12 @@ import java.security.SecureRandom;
 import java.util.Properties;
 
 public class RegisterPage extends WebPage{
+    private static final Logger LOG=LoggerFactory.getLogger(RegisterPage.class);
     private CaptchaImageResource captchaImageResource;
     private String captchaText;
     private String captchaPassword;
     static private SecureRandom prng ;
+
     {
         try {
            prng = SecureRandom.getInstance("SHA1PRNG");
@@ -83,7 +87,8 @@ public class RegisterPage extends WebPage{
                                 captchaImageResource = new CaptchaImageResource(captchaPassword);
                                 final Image image = new Image("captchaImage", captchaImageResource);
                                 form.replace(image);
-                                info("пользователь заркгистрирован. Письмо с интрукциями по активации аккаунта выслано на почту.");
+                                info("пользователь зарегистрирован. Письмо с интрукциями по активации аккаунта выслано на почту.");
+                                LOG.debug("new user {} registred.", user.getLogin());
                             }
                         }else{
                             error("Проверочный код введён неправильно");

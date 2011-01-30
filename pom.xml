@@ -42,23 +42,6 @@
             <artifactId>wicket-extensions</artifactId>
             <version>${wicket.version}</version>
         </dependency>
-        <!--
-              OPTIONAL <dependency> <groupId>org.apache.wicket</groupId>
-              <artifactId>wicket-extensions</artifactId>
-              <version>${wicket.version}</version> </dependency>
-          -->
-
-        <!-- LOGGING DEPENDENCIES - LOG4J -->
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>1.5.8</version>
-        </dependency>
-        <dependency>
-            <groupId>log4j</groupId>
-            <artifactId>log4j</artifactId>
-            <version>1.2.14</version>
-        </dependency>
 
         <!--
             Object-to-Relation-Mapping (ORM) integration with Hibernate, JPA, and iBatis.
@@ -127,6 +110,12 @@
             <version>3.9.0.GA</version>
         </dependency>
         <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-validator</artifactId>
+            <version>4.0.2.GA</version>
+        </dependency>
+        
+        <dependency>
             <groupId>net.sf.autodao</groupId>
             <artifactId>autodao</artifactId>
             <version>0.10-SNAPSHOT</version>
@@ -151,6 +140,25 @@
             <version>4.8.1</version>
             <scope>test</scope>
         </dependency>
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.6.1</version>
+        </dependency>
+         <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>1.6.1</version>
+        </dependency>
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.16</version>
+        </dependency>
+        
+        
+
 
         <!--  JETTY DEPENDENCIES FOR TESTING  -->
         <dependency>
