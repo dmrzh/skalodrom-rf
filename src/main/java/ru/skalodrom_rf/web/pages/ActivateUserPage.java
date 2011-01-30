@@ -5,7 +5,7 @@ import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import ru.skalodrom_rf.dao.UserDao;
-import ru.skalodrom_rf.model.TUser;
+import ru.skalodrom_rf.model.User;
 
 /**
  */
@@ -17,7 +17,7 @@ public class ActivateUserPage extends WebPage {
         super(parameters);
         try {
             String login = extractParam(parameters, "login");
-            final TUser user = userDao.get(login);
+            final User user = userDao.get(login);
             if (user == null) {
                 throwExeption();
             }

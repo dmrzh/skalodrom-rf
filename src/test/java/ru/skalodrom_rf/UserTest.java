@@ -7,7 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import ru.skalodrom_rf.dao.UserDao;
-import ru.skalodrom_rf.model.TUser;
+import ru.skalodrom_rf.model.User;
 
 import javax.annotation.Resource;
 
@@ -21,7 +21,7 @@ public class UserTest {
     @Test
     @Transactional()
     public void doSaveUserTest(){
-        final TUser u = new TUser();
+        final User u = new User();
         u.setLogin("dima");
         u.setPassword("dima");
         u.setActivationCode(2134);

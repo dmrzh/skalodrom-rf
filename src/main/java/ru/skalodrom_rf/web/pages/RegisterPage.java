@@ -16,7 +16,7 @@ import org.apache.wicket.model.PropertyModel;
 import org.apache.wicket.protocol.http.RequestUtils;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import ru.skalodrom_rf.dao.UserDao;
-import ru.skalodrom_rf.model.TUser;
+import ru.skalodrom_rf.model.User;
 
 import javax.mail.Authenticator;
 import javax.mail.Message;
@@ -47,10 +47,10 @@ public class RegisterPage extends WebPage{
     public RegisterPage() {
         captchaPassword=Integer.toString(prng.nextInt(1000));
         add(new FeedbackPanel("feedback"));
-        final IModel<TUser> newUserModel = new LoadableDetachableModel<TUser>() {
+        final IModel<User> newUserModel = new LoadableDetachableModel<User>() {
             @Override
-            protected TUser load() {
-                return new TUser();
+            protected User load() {
+                return new User();
             }
         };
         final StatelessForm form = new StatelessForm("form", new CompoundPropertyModel(newUserModel));
@@ -69,7 +69,7 @@ public class RegisterPage extends WebPage{
                 @Override
                 public void onSubmit() {
                         if(captchaPassword.equals(captchaText)){
-                            TUser user=newUserModel.getObject();
+                            User user=newUserModel.getObject();
                             if( user.getLogin()== null){
                                 error("поле логин обязательное");
                             }else if(userDao.get(user.getLogin())!= null){
@@ -82,7 +82,8 @@ public class RegisterPage extends WebPage{
                                 captchaPassword=Integer.toString(prng.nextInt(1000));
                                 captchaImageResource = new CaptchaImageResource(captchaPassword);
                                 final Image image = new Image("captchaImage", captchaImageResource);
-                                form.replace(image);                                
+                                form.replace(image);
+                                info("пользователь заркгистрирован. Письмо с интрукциями по активации аккаунта выслано на почту.");
                             }
                         }else{
                             error("Проверочный код введён неправильно");
@@ -92,7 +93,7 @@ public class RegisterPage extends WebPage{
         add(form);
     }
 
-    private void sendActivationMessage(TUser user){
+    private void sendActivationMessage(User user){
         try{
             final Properties props= new Properties();
             props.put("mail.smtp.host", "smtp-56.1gb.ru");

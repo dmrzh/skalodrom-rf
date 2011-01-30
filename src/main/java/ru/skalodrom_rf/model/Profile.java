@@ -13,15 +13,15 @@ public class Profile  {
     private Long id;
 
     @OneToOne(mappedBy = "profile")
-    private TUser user;
+    private User user;
 
     private String email;
 
-    public TUser getUser() {
+    public User getUser() {
         return user;
     }
 
-    public void setUser(TUser user) {
+    public void setUser(User user) {
         this.user = user;
     }
 

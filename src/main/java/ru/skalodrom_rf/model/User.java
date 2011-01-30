@@ -6,10 +6,12 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 
 
 @Entity()
-public class TUser implements PersistentEntity<String>{
+@Table(name = "User")
+public class User implements PersistentEntity<String>{
     public String getPrimaryKey() {
         return login;
     }
@@ -25,7 +27,7 @@ public class TUser implements PersistentEntity<String>{
     @OneToOne(cascade = CascadeType.ALL)
     private Profile profile=new Profile();
 
-    public TUser() {
+    public User() {
     }
 
     public Profile getProfile() {
