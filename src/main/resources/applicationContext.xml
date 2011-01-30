@@ -39,7 +39,7 @@
     </bean>
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
-    <context:annotation-config/>
+    <context:annotation-config />
     
 
 
@@ -47,9 +47,11 @@
         <property name="sessionFactory" ref="sessionFactory"/>
     </bean>
 
-    <!--<dao:hibernate id="userDao"  interface="ru.skalodrom_rf.dao.UserDao"-->
-                   <!--entity="ru.skalodrom_rf.model.TUserr" />-->
+
     <dao:hibernateScan base-package="ru.skalodrom_rf.dao" transaction-manager="transactionManager"/>
+
+    <bean class="ru.skalodrom_rf.dataloader.DataloaderInit"/>
+    <bean class="ru.skalodrom_rf.dataloader.Dataloader"/>
 
      <import resource="securityContext.xml"/>
     
