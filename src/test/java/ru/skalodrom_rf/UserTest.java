@@ -24,7 +24,7 @@ public class UserTest {
         final TUser u = new TUser();
         u.setLogin("dima");
         u.setPassword("dima");
-        u.setActivationCode("wqerwertg");
+        u.setActivationCode(2134);
         userDao.create(u);
         Assert.assertEquals(userDao.get("dima").getActivationCode(),"wqerwertg");
     }

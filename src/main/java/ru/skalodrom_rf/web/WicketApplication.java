@@ -3,6 +3,7 @@ package ru.skalodrom_rf.web;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.request.IRequestCycleProcessor;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
+import ru.skalodrom_rf.web.pages.ActivateUserPage;
 import ru.skalodrom_rf.web.pages.IndexPage;
 import ru.skalodrom_rf.web.pages.LoginPage;
 import ru.skalodrom_rf.web.pages.ProfileEditPage;
@@ -46,6 +47,8 @@ public class WicketApplication extends WebApplication{
         mountBookmarkablePage("/register.html", RegisterPage.class);
         mountBookmarkablePage("/index.html", IndexPage.class);
         mountBookmarkablePage("/login.html", LoginPage.class);
+        mountBookmarkablePage("/activate.html", ActivateUserPage.class);
+
         mountBookmarkablePage("/sendMessage.html", SendMessagePage.class);
         mountBookmarkablePage("/skalodrom.html", SkalodromPage.class);
         mountBookmarkablePage("/search.html", SearchPage.class);
