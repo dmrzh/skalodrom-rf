@@ -1,7 +1,6 @@
 package ru.skalodrom_rf.web.pages;
 
 import org.apache.wicket.PageParameters;
-import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import ru.skalodrom_rf.dao.UserDao;
@@ -9,7 +8,7 @@ import ru.skalodrom_rf.model.User;
 
 /**
  */
-public class ActivateUserPage extends WebPage {
+public class ActivateUserPage extends BasePage {
     @SpringBean
     UserDao userDao;
 

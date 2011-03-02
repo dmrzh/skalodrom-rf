@@ -2,7 +2,6 @@ package ru.skalodrom_rf.web.pages;
 
 import org.apache.wicket.RequestCycle;
 import org.apache.wicket.extensions.markup.html.captcha.CaptchaImageResource;
-import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.PasswordTextField;
 import org.apache.wicket.markup.html.form.RequiredTextField;
@@ -31,7 +30,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Properties;
 
-public class RegisterPage extends WebPage{
+public class RegisterPage extends BasePage{
     private static final Logger LOG=LoggerFactory.getLogger(RegisterPage.class);
     private CaptchaImageResource captchaImageResource;
     private String captchaText;

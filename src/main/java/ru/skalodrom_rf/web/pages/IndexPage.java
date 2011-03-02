@@ -1,6 +1,5 @@
 package ru.skalodrom_rf.web.pages;
 
-import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.spring.injection.annot.SpringBean;
@@ -13,7 +12,7 @@ import java.util.List;
 /**
  * Homepage
  */
-public class IndexPage extends WebPage {
+public class IndexPage extends BasePage {
     @SpringBean
     ScalodromDao scalodromDao;
 

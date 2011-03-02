@@ -1,12 +1,11 @@
 package ru.skalodrom_rf.web.pages;
 
 import org.apache.wicket.PageParameters;
-import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
 
 /**
  */
-public class LoginPage extends WebPage {
+public class LoginPage extends BasePage {
 
     public LoginPage(PageParameters parameters) {
         super(parameters);
