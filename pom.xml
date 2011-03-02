@@ -60,6 +60,17 @@
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
+            <artifactId>spring-aspects</artifactId>
+            <version>${org.springframework.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjrt</artifactId>
+            <version>1.6.7</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
             <artifactId>spring-web</artifactId>
             <version>${org.springframework.version}</version>
         </dependency>
@@ -79,7 +90,7 @@
             <artifactId>spring-security-web</artifactId>
             <version>${org.springframework.version}</version>
         </dependency>
-        
+
 
         <dependency>
             <groupId>org.hsqldb</groupId>
@@ -92,7 +103,7 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>3.3.2.GA</version>
-            
+
         </dependency>
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -104,7 +115,7 @@
             <artifactId>hibernate-commons-annotations</artifactId>
             <version>3.3.0.ga</version>
         </dependency>
-         <dependency>
+        <dependency>
             <groupId>javassist</groupId>
             <artifactId>javassist</artifactId>
             <version>3.9.0.GA</version>
@@ -114,7 +125,7 @@
             <artifactId>hibernate-validator</artifactId>
             <version>4.0.2.GA</version>
         </dependency>
-        
+
         <dependency>
             <groupId>net.sf.autodao</groupId>
             <artifactId>autodao</artifactId>
@@ -146,7 +157,7 @@
             <artifactId>slf4j-api</artifactId>
             <version>1.6.1</version>
         </dependency>
-         <dependency>
+        <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-log4j12</artifactId>
             <version>1.6.1</version>
@@ -156,8 +167,6 @@
             <artifactId>log4j</artifactId>
             <version>1.2.16</version>
         </dependency>
-        
-        
 
 
         <!--  JETTY DEPENDENCIES FOR TESTING  -->
@@ -216,21 +225,55 @@
                 <configuration>
                     <source>1.6</source>
                     <target>1.6</target>
+                    <encoding>UTF-8</encoding>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>aspectj-maven-plugin</artifactId>
+                <version>1.3</version>
+                <configuration>
+                    <source>1.6</source>
+                    <target>1.6</target>
+                    <encoding>UTF-8</encoding>
+                    <showWeaveInfo>true</showWeaveInfo>
+                    <forceAjcCompile>true</forceAjcCompile>
+                    <includes>
+                        <include>ru.skalodrom_rf..*</include>
+                        <include>org.springframework.beans.factory.aspectj.AnnotationBeanConfigurerAspect</include>
+                    </includes>
+                    <aspectLibraries>
+                        <aspectLibrary>
+                            <groupId>org.springframework</groupId>
+                            <artifactId>spring-aspects</artifactId>
+                        </aspectLibrary>
+                    </aspectLibraries>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>test-compile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
             <plugin>
                 <groupId>org.mortbay.jetty</groupId>
                 <artifactId>maven-jetty-plugin</artifactId>
             </plugin>
+
             <plugin>
-                    <groupId>org.codehaus.mojo</groupId>
-                    <artifactId>tomcat-maven-plugin</artifactId>
-                    <configuration>
-                        <server>panda</server>                        
-                        <url>http://panda/manager</url>                        
-                    </configuration>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>tomcat-maven-plugin</artifactId>
+                <configuration>
+                    <fork>false</fork>
+                    <server>panda</server>
+                    <url>http://panda/manager</url>
+                </configuration>
             </plugin>
-            
+
         </plugins>
     </build>
     <repositories>
@@ -239,15 +282,11 @@
             <url>http://autodao.sourceforge.net/maven2-snapshots</url>
         </repository>
     </repositories>
-    <!--<distributionManagement>-->
-        <!--<site>-->
-            <!--<id>panda</id>-->
-            <!--<url>scp://root@panda/opt/tomcat/skalodrom-rf/ROOT</url>-->
-        <!--</site>-->
-    <!--</distributionManagement>-->
+
     <properties>
         <wicket.version>1.4.14</wicket.version>
         <jetty.version>6.1.25</jetty.version>
         <org.springframework.version>3.0.5.RELEASE</org.springframework.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>        
     </properties>
 </project>

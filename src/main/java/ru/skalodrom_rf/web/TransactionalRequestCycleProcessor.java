@@ -9,11 +9,6 @@ import org.apache.wicket.request.RequestParameters;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
-* Created by IntelliJ IDEA.
-* User: dima
-* Date: 17.01.2011
-* Time: 2:21:24
-* To change this template use File | Settings | File Templates.
 */
 class TransactionalRequestCycleProcessor implements IRequestCycleProcessor {
     private final IRequestCycleProcessor rcp = new WebRequestCycleProcessor();

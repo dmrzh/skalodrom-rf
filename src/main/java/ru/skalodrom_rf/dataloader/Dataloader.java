@@ -38,7 +38,6 @@ public class Dataloader {
         scalodromDao.create(new Scalodrom("Южная"));
         scalodromDao.create(new Scalodrom("Бауманская"));
         scalodromDao.create(new Scalodrom("Скалатория"));
-        scalodromDao.create(new Scalodrom("Ю"));
 
         LOG.debug("database initialized");
 

@@ -13,6 +13,8 @@ import javax.validation.constraints.Size;
  */
 @Entity
 public class Scalodrom implements PersistentEntity<Long>{
+    public Scalodrom() {
+    }
     public Scalodrom(String name) {
         this.name = name;
     }

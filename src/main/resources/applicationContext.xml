@@ -41,8 +41,12 @@
     </bean>
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
-    <context:annotation-config />
+    <context:annotation-config/>
+    <context:load-time-weaver/>
     
+    <bean
+            class="org.springframework.beans.factory.aspectj.AnnotationBeanConfigurerAspect"
+            factory-method="aspectOf"/>
 
 
     <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
@@ -52,9 +56,12 @@
 
     <dao:hibernateScan base-package="ru.skalodrom_rf.dao" transaction-manager="transactionManager"/>
 
+    <bean class="ru.skalodrom_rf.dao.DaoFinder"/>
+    <!--<bean class="ru.skalodrom_rf.web.HibernateModel"/>-->
+
     <bean class="ru.skalodrom_rf.dataloader.DataloaderInit"/>
     <bean class="ru.skalodrom_rf.dataloader.Dataloader"/>
 
-     <import resource="securityContext.xml"/>
-    
+    <import resource="securityContext.xml"/>
+
 </beans>
