@@ -23,6 +23,7 @@ public class IndexPage extends BasePage {
         dropDownChoice.setModel(new HibernateModel(list.get(0)));
         add(dropDownChoice);
 
+
     }
 
     /**
