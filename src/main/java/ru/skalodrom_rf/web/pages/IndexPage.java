@@ -10,7 +10,6 @@ import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import ru.skalodrom_rf.dao.ScalodromDao;
-import ru.skalodrom_rf.model.Query;
 import ru.skalodrom_rf.model.Scalodrom;
 import ru.skalodrom_rf.web.HibernateModel;
 import ru.skalodrom_rf.web.HibernateModelList;
@@ -32,7 +31,7 @@ public class IndexPage extends BasePage {
         final List<Scalodrom> list = scalodromDao.findAll();
         final HibernateModel<Scalodrom,Long> skalModel = new HibernateModel<Scalodrom,Long>(list.get(0));
 
-        final Form<Query> form = new Form<Query>("form"){
+        final Form form = new Form("form"){
             @Override
             protected void onSubmit() {
                 //go to search page
