@@ -7,26 +7,40 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
 import java.io.Serializable;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+import java.util.Arrays;
 import java.util.Collection;
 
 /**
  */
-public class DaoFinder<T extends PersistentEntity<K>, K extends Serializable>  implements ApplicationContextAware {
-      ApplicationContext applicationContext;
+public class DaoFinder<T extends PersistentEntity<K>, K extends Serializable> implements ApplicationContextAware {
+    ApplicationContext applicationContext;
+
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-        this.applicationContext=applicationContext;
+        this.applicationContext = applicationContext;
 
 
     }
-    public Dao<T,K> findDao(Class<T> tClass){
+
+    public Dao<T, K> findDao(Class<T> tClass) {
         final Collection<Dao> daoCollection = applicationContext.getBeansOfType(Dao.class).values();
-        for(Dao dao:daoCollection){
-            if(dao.getClass().getGenericInterfaces()[0] == tClass){
-                return dao;
+        for (Dao dao : daoCollection) {
+            final Class[] cleanifaces = (Class[]) dao.getClass().getInterfaces();
+            for (Class t : cleanifaces) {
+                for (Type pt : t.getGenericInterfaces()){
+                    if(! (pt instanceof ParameterizedType)) {
+                        continue;
+                    }
+                    final Type[] actualTypeArguments = ((ParameterizedType) pt).getActualTypeArguments();
+                    if (Arrays.asList(actualTypeArguments).contains(tClass)) {
+                        return dao;
+                    }
+                }
+
             }
         }
         return null;
-
     }
 }

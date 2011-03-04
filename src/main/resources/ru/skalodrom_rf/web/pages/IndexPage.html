@@ -7,10 +7,11 @@
 </head>
 <body>
 <wicket:extend>
+<form wicket:id="form">
 <table width="100%" border="1">
     <tr>
         <td>Выберите скалодром
-            <select wicket:id="scalodroms">
+            <select wicket:id="scalodrom">
                 <option>КС ДДС</option>
                 <option>Скаласити</option>
                 <option>Экстрим</option>
@@ -19,10 +20,11 @@
             </select>
             Описание скалодрома <a href="skalodrom.html?dds">Подробнее</a>
         </td>
-        <td>дата <input type="text" maxlength="10"></td>
+        <td>дата <input type="text" maxlength="10" wicket:id="date"></td>
     </tr>
-  
 </table>
+<input type="submit" wicket:id="submit"> 
+ </form>
 </wicket:extend>
 
 </body>

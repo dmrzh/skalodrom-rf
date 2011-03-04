@@ -42,11 +42,11 @@
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
     <context:annotation-config/>
-    <context:load-time-weaver/>
+    <!--<context:load-time-weaver/>-->
     
-    <bean
-            class="org.springframework.beans.factory.aspectj.AnnotationBeanConfigurerAspect"
-            factory-method="aspectOf"/>
+    <!--<bean-->
+            <!--class="org.springframework.beans.factory.aspectj.AnnotationBeanConfigurerAspect"-->
+            <!--factory-method="aspectOf"/>-->
 
 
     <bean id="transactionManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">

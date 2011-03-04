@@ -42,6 +42,12 @@
             <artifactId>wicket-extensions</artifactId>
             <version>${wicket.version}</version>
         </dependency>
+           <dependency>
+            <groupId>org.apache.wicket</groupId>
+            <artifactId>wicket-datetime</artifactId>
+            <version>${wicket.version}</version>
+        </dependency>
+        
 
         <!--
             Object-to-Relation-Mapping (ORM) integration with Hibernate, JPA, and iBatis.

@@ -105,7 +105,7 @@ public class RegisterPage extends BasePage{
             props.put("mail.transport.protocol", "smtp");
             props.put("mail.smtp.auth", "true");
 
-//            props.put("mail.from", "info@relc.1gb.ru");
+//          props.put("mail.from", "info@relc.1gb.ru");
             Authenticator auth = new Authenticator(){
                 @Override
                 protected PasswordAuthentication getPasswordAuthentication() {
