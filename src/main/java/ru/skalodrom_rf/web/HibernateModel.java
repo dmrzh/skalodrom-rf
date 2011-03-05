@@ -44,8 +44,7 @@ public class HibernateModel<T extends PersistentEntity<K>, K extends Serializabl
 
 
     @Override
-    protected T load() {
-        
+    protected T load() {        
         final Dao<T,K> dao = daoFinder.findDao(tClass);
         LOG.trace("dao={}",dao);
         return dao.get(id);

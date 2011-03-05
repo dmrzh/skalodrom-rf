@@ -7,19 +7,19 @@
 </head>
 <body>
 <wicket:extend>
-<form action="profileView.html" method="get">
+<form wicket:id="form">
     <table>
         <tr>
             <td>Имя</td>
-            <td><input name="fio" type="text"></td>
+            <td><input type="text" wicket:id="fio"></td>
         </tr>
         <tr>
             <td>email</td>
-            <td><input name="email" type="text"></td>
+            <td><input  type="text" wicket:id="email"></td>
         </tr>
         <tr>
             <td>телефон</td>
-            <td><input type="text"></td>
+            <td><input type="text" wicket:id="phone"></td>
         </tr>
         <tr>
             <td>аватар</td>
