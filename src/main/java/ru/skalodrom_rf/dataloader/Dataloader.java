@@ -27,12 +27,18 @@ public class Dataloader {
         
         final User user = new User();
         user.setLogin("dima");
+        user.getProfile().setFio("Дима");
+
         user.setPassword("");
         user.getProfile().setEmail("dima@rzhevskiy.info");
         userDao.create(user);
 
 
-        scalodromDao.create(new Scalodrom("ДДС"));
+        final Scalodrom dds = new Scalodrom("ДДС");
+
+        user.getProfile().getWhereClimb().add(dds);
+        scalodromDao.create(dds);
+        userDao.saveOrUpdate(user);
         scalodromDao.create(new Scalodrom("Скаласити"));
         scalodromDao.create(new Scalodrom("Экстрим"));
         scalodromDao.create(new Scalodrom("Южная"));

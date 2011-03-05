@@ -7,6 +7,7 @@
 </head>
 <body>
 <wicket:extend>
+<font color="red"> <span wicket:id="feedback">feedbackmessages will be put here</span></font>
 <form wicket:id="form">
     <table>
         <tr>
@@ -36,7 +37,7 @@
         <tr>
             <td>уровень лазания</td>
             <td>
-                <select>
+                <select wicket:id="climbLevel">
                     <option>Новичёк</option>
                     <option>5a</option>
                     <option>5b</option>
@@ -55,11 +56,14 @@
         </tr>
         <tr>
             <td>вес</td>
-            <td><input type="text"></td>
+            <td><input type="text" wicket:id="weight"></td>
         </tr>
         <tr>
             <td>Где лазаю</td>
-            <td><input type="text"></td>
+            <td>
+              <span wicket:id="palette">scalodroms</span>
+
+            </td>
         </tr>
         <tr>
             <td>Когда могу</td>

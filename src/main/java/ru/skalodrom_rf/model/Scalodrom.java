@@ -5,14 +5,17 @@ import net.sf.autodao.PersistentEntity;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import java.util.HashSet;
+import java.util.Set;
 
 /**
  *
  */
 @Entity
-public class Scalodrom implements PersistentEntity<Long>{
+public class Scalodrom implements PersistentEntity<Long> , Comparable{
     public Scalodrom() {
     }
     public Scalodrom(String name) {
@@ -37,6 +40,9 @@ public class Scalodrom implements PersistentEntity<Long>{
     @Size(min = 5, max = 1000)
     private String description;
 
+    @ManyToMany(mappedBy = "whereClimb")
+    private Set<Profile> whoClimb=new HashSet();
+
     public String getDescription() {
         return description;
     }
@@ -59,5 +65,18 @@ public class Scalodrom implements PersistentEntity<Long>{
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Set<Profile> getWhoClimb() {
+        return whoClimb;
+    }
+
+    public void setWhoClimb(Set<Profile> whoClimb) {
+        this.whoClimb = whoClimb;
+    }
+
+    @Override
+    public int compareTo(Object o) {
+        return getName().compareTo(((Scalodrom)o).getName());
     }
 }
