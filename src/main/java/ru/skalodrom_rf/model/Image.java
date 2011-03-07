@@ -2,9 +2,14 @@ package ru.skalodrom_rf.model;
 
 import net.sf.autodao.PersistentEntity;
 
+import javax.persistence.Entity;
+import javax.persistence.Lob;
+
 /**.*/
+@Entity
 public class Image  implements PersistentEntity<Long> {
     private Long id;
+    @Lob
     private byte[] imageData;
 
     public Image() {
