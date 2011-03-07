@@ -28,6 +28,8 @@ public class Profile  implements PersistentEntity<Long>{
     private String email;
     private String fio;
     private String phone;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Image avatar= new Image();
     private Double weight;
     @Enumerated(EnumType.STRING)
     private ClimbLevel climbLevel;
@@ -144,5 +146,13 @@ public class Profile  implements PersistentEntity<Long>{
 
     public void setPrefferedWeekDays(PrefferedDays prefferedWeekDays) {
         this.prefferedWeekDays = prefferedWeekDays;
+    }
+
+    public Image getAvatar() {
+        return avatar;
+    }
+
+    public void setAvatar(Image avatar) {
+        this.avatar = avatar;
     }
 }

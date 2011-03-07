@@ -7,8 +7,13 @@ import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.form.upload.FileUpload;
+import org.apache.wicket.markup.html.form.upload.FileUploadField;
+import org.apache.wicket.markup.html.image.Image;
+import org.apache.wicket.markup.html.image.resource.DynamicImageResource;
 import org.apache.wicket.markup.html.panel.FeedbackPanel;
 import org.apache.wicket.model.CompoundPropertyModel;
+import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.util.lang.Bytes;
 import ru.skalodrom_rf.dao.ProfileDao;
@@ -36,6 +41,9 @@ public class ProfileEditPage extends BasePage{
         ScalodromDao scalodromDao;
 
     public ProfileEditPage() {
+
+        final FileUploadField avatarFi = new FileUploadField("avatarFi", new Model());
+
         FeedbackPanel feedbackPanel = new FeedbackPanel("feedback");
         add(feedbackPanel);
 
@@ -48,6 +56,10 @@ public class ProfileEditPage extends BasePage{
             protected void onSubmit() {
                 final Profile p = model.getObject();
                 p.setWhereClimb(new TreeSet<Scalodrom>(selectedScalodroms.getObject()));
+                final FileUpload fileUpload = avatarFi.getFileUpload();
+                if(fileUpload!=null){
+                    p.getAvatar().setImageData(fileUpload.getBytes());
+                }
                 profileDao.saveOrUpdate(p);
                 System.out.println("profile saved "+model.getObject());
             }
@@ -57,6 +69,16 @@ public class ProfileEditPage extends BasePage{
         form.add(new TextField("phone"));
 
         form.setMultiPart(true);
+
+        form.add(avatarFi);
+
+        final DynamicImageResource avatarImageResource = new DynamicImageResource() {
+            @Override
+            protected byte[] getImageData() {
+                return model.getObject().getAvatar().getImageData();
+            }
+        };
+        form.add(new Image("avatar", avatarImageResource));
         form.setMaxSize(Bytes.kilobytes(100));
 
         form.add(new TextArea("about"));
