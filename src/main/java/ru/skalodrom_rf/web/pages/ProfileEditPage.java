@@ -23,6 +23,7 @@ import ru.skalodrom_rf.dao.Utils;
 import ru.skalodrom_rf.model.ClimbLevel;
 import ru.skalodrom_rf.model.Profile;
 import ru.skalodrom_rf.model.Scalodrom;
+import ru.skalodrom_rf.web.EnumRendererer;
 import ru.skalodrom_rf.web.HibernateModel;
 import ru.skalodrom_rf.web.HibernateModelList;
 
@@ -84,8 +85,8 @@ public class ProfileEditPage extends BasePage{
         form.add(new TextArea("about"));
         form.add(new TextField("site"));
 
-        form.add(new TextField("weight",Double.class));
-        form.add(new DropDownChoice<ClimbLevel>("climbLevel", Arrays.asList(ClimbLevel.values())));
+        form.add(new TextField<Double>("weight",Double.class));
+        form.add(new DropDownChoice<ClimbLevel>("climbLevel", Arrays.asList(ClimbLevel.values()),new EnumRendererer<ClimbLevel>(ClimbLevel.class)));
 
         addSkalodromForm(form,selectedScalodroms );
 

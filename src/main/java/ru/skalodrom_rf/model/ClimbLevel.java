@@ -1,12 +1,6 @@
 package ru.skalodrom_rf.model;
 
-/**
- * Created by IntelliJ IDEA.
- * User: dima
- * Date: 05.03.2011
- * Time: 10:10:29
- * To change this template use File | Settings | File Templates.
- */
+/**.*/
 public enum ClimbLevel {
-    newbe, a5,b5,c5
+    newbie, a5,b5,c5,a6,b6,c6,a7,b7,c7,a8,b8,c8
 }

@@ -32,7 +32,7 @@ public class Profile  implements PersistentEntity<Long>{
     private Image avatar= new Image();
     private Double weight;
     @Enumerated(EnumType.STRING)
-    private ClimbLevel climbLevel;
+    private ClimbLevel climbLevel=ClimbLevel.newbie;
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<Scalodrom> whereClimb= new TreeSet<Scalodrom>();
 
