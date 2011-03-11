@@ -8,6 +8,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
 import ru.skalodrom_rf.dao.ClimbTimeDao;
 import ru.skalodrom_rf.model.ClimbTime;
+import ru.skalodrom_rf.model.Time;
 
 import javax.annotation.Resource;
 
@@ -26,7 +27,7 @@ public class ClimbTimeTest {
     public void testConstraint(){
         final ClimbTime ct = new ClimbTime();
         ct.setDate(new LocalDate());
-        ct.setTime(ClimbTime.Time.DAY);
+        ct.setTime(Time.DAY);
         climbTimeDao.create(ct);
 
 

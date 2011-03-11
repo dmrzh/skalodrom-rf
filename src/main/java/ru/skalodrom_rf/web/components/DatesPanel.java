@@ -7,6 +7,7 @@ import org.apache.wicket.datetime.StyleDateConverter;
 import org.apache.wicket.datetime.markup.html.form.DateTextField;
 import org.apache.wicket.extensions.yui.calendar.DatePicker;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
 import org.apache.wicket.markup.html.panel.Panel;
 import org.apache.wicket.markup.repeater.Item;
@@ -19,10 +20,13 @@ import ru.skalodrom_rf.dao.ClimbTimeDao;
 import ru.skalodrom_rf.dao.ProfileDao;
 import ru.skalodrom_rf.model.ClimbTime;
 import ru.skalodrom_rf.model.Profile;
+import ru.skalodrom_rf.model.Time;
+import ru.skalodrom_rf.web.EnumRendererer;
 import ru.skalodrom_rf.web.HibernateFieldDataProvider;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 
 /**.*/
@@ -37,12 +41,14 @@ public class DatesPanel extends Panel {
     public DatesPanel(String id, final HibernateFieldDataProvider<Profile,Long,ClimbTime> dp) {
         super(id);
         setOutputMarkupId(true);
+        final EnumRendererer<Time> timeRenderer = new EnumRendererer<Time>(Time.class);
         final DataView<ClimbTime> dataView = new DataView<ClimbTime>("dataView", dp){
             @Override
             protected void populateItem(final Item<ClimbTime> dateItem) {
                 ClimbTime time = dateItem.getModelObject();
                 final IModel<ClimbTime> timeModel = dateItem.getModel();
                 dateItem.add(new Label("dateLabel", dateFormat.format(time.getDate().toDateTimeAtStartOfDay().toDate())));
+                dateItem.add(new Label("timeLabel",""+timeRenderer.getDisplayValue(time.getTime())));
                 dateItem.add(new AjaxLink("removeLink"){
                     IModel<ClimbTime> when=timeModel ;
                     @Override
@@ -69,6 +75,10 @@ public class DatesPanel extends Panel {
         dateTextField.add(datePicker);
         add(dateTextField);
 
+        final Model<Time> timeModel = new Model<Time>(Time.EVENING);
+
+        add(new DropDownChoice<Time>("timeText", timeModel,Arrays.asList(Time.values()), timeRenderer));
+
         add(new AjaxButton("submit"){
             @Override
             protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
@@ -76,6 +86,7 @@ public class DatesPanel extends Panel {
                 final Profile object = dp.getRootModel().getObject();
                 final ClimbTime climbTime = new ClimbTime();
                 climbTime.setDate(new LocalDate(date));
+                climbTime.setTime(timeModel.getObject());
                 climbTimeDao.create(climbTime);
                 object.getWhenClimb().add(climbTime);
                 profileDao.saveOrUpdate(object);

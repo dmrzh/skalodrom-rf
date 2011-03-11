@@ -6,15 +6,28 @@
     <title>Скалодром.рф. поиск напарника по скалолазанию.</title>
 </head>
 <body>
-<wicket:panel>   
-    <table>
+<wicket:panel>
+    <table border="1">
         <tr wicket:id="dataView">
             <td><div wicket:id="dateLabel">15.01.2011</div></td>
+            <td><div wicket:id="timeLabel">вечер</div></td>
             <td><a wicket:id="removeLink" href="#">удалить</a></td>
         </tr>
+        <tr>
+            <td><input type="text" wicket:id="dateText"></td>
+            <td>
+                <select wicket:id="timeText">
+                <option>утро</option>
+                <option>день</option>
+                </select>
+            </td>
+            <td>
+                <input type="submit" wicket:id="submit" value="добавить">
+            </td>
+        </tr>
     </table>
-    <input type="text" wicket:id="dateText">
-    <input type="submit" wicket:id="submit" value="добавить">
+
+
 
 
 </wicket:panel>

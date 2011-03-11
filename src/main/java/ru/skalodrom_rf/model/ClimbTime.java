@@ -16,9 +16,6 @@ import java.io.Serializable;
 /**.*/
 @Entity
 public class ClimbTime implements PersistentEntity<Long> ,Comparable<ClimbTime> , Serializable{
-    public enum Time{
-        MORNING,DAY,EVENING
-    }
 
     public ClimbTime() {
     }
@@ -30,7 +27,7 @@ public class ClimbTime implements PersistentEntity<Long> ,Comparable<ClimbTime> 
     @Type(type="org.joda.time.contrib.hibernate.PersistentLocalDate")
     private LocalDate date=new LocalDate();
     @Enumerated(EnumType.STRING)
-    private Time time=Time.DAY;
+    private Time time=Time.EVENING;
 
 
 
