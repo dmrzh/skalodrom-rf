@@ -21,11 +21,14 @@ import ru.skalodrom_rf.dao.ScalodromDao;
 import ru.skalodrom_rf.dao.UserDao;
 import ru.skalodrom_rf.dao.Utils;
 import ru.skalodrom_rf.model.ClimbLevel;
+import ru.skalodrom_rf.model.ClimbTime;
 import ru.skalodrom_rf.model.Profile;
 import ru.skalodrom_rf.model.Scalodrom;
 import ru.skalodrom_rf.web.EnumRendererer;
+import ru.skalodrom_rf.web.HibernateFieldDataProvider;
 import ru.skalodrom_rf.web.HibernateModel;
 import ru.skalodrom_rf.web.HibernateModelList;
+import ru.skalodrom_rf.web.components.DatesPanel;
 
 import java.util.Arrays;
 import java.util.List;
@@ -98,6 +101,8 @@ public class ProfileEditPage extends BasePage{
         form.add(new CheckBox("prefferedWeekDays.friday"));
         form.add(new CheckBox("prefferedWeekDays.saturday"));
         form.add(new CheckBox("prefferedWeekDays.sunday"));
+
+        form.add(new DatesPanel("whenClimb", new HibernateFieldDataProvider<Profile,Long, ClimbTime>(pe,"whenClimb")));
 
 
         

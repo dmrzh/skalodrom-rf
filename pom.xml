@@ -47,6 +47,29 @@
             <artifactId>wicket-datetime</artifactId>
             <version>${wicket.version}</version>
         </dependency>
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time-hibernate</artifactId>
+            <version>1.2</version>
+            <exclusions>
+                 <exclusion>
+                    <groupId>joda-time</groupId>
+                    <artifactId>joda-time</artifactId>
+                </exclusion>
+                <exclusion>
+                  <groupId>org.hibernate</groupId>
+                  <artifactId>hibernate</artifactId>
+                </exclusion>
+                <exclusion>
+                  <groupId>junit</groupId>
+                  <artifactId>junit</artifactId>
+                </exclusion>
+                <exclusion>
+                  <groupId>hsqldb</groupId>
+                  <artifactId>hsqldb</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
         
 
         <!--

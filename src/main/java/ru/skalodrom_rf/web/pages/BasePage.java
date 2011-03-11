@@ -24,13 +24,17 @@ public class BasePage extends WebPage{
 
     private void init() {
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        final GrantedAuthority grantedAuthority = authentication.getAuthorities().iterator().next();
-        if("ROLE_ANONYMOUS".equals(grantedAuthority.getAuthority())){
-            add(new LoginPanel("loginPanel"));
+        if(authentication!=null){
+            final GrantedAuthority grantedAuthority = authentication.getAuthorities().iterator().next();
+            if("ROLE_ANONYMOUS".equals(grantedAuthority.getAuthority())){
+                add(new LoginPanel("loginPanel"));
+            }else{
+                add(new LogoutPanel("loginPanel"));
+            }
         }else{
-            add(new LogoutPanel("loginPanel"));
+             add(new Label("loginPanel", "no spring security filters installed"));
         }
-        
+
         addStatisticLabel();
     }
 

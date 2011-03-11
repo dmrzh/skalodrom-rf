@@ -31,6 +31,7 @@ public class Dataloader {
 
         user.setPassword("");
         user.getProfile().setEmail("dima@rzhevskiy.info");
+        //user.getProfile().getWhenClimb().add(new Date());
         userDao.create(user);
 
 

@@ -1,5 +1,6 @@
 package ru.skalodrom_rf.web.pages;
 
+import org.apache.wicket.RequestCycle;
 import org.apache.wicket.datetime.StyleDateConverter;
 import org.apache.wicket.datetime.markup.html.form.DateTextField;
 import org.apache.wicket.extensions.yui.calendar.DatePicker;
@@ -27,6 +28,14 @@ public class IndexPage extends BasePage {
     private final Date date = new Date();
 
     public IndexPage() {
+        init();
+    }
+    public IndexPage(ScalodromDao scalodromDao) {
+        this.scalodromDao=scalodromDao;
+        init();
+    }
+
+    private void init() {
         final Model dateModel = new Model(new Date());
         final List<Scalodrom> list = scalodromDao.findAll();
         final HibernateModel<Scalodrom,Long> skalModel = new HibernateModel<Scalodrom,Long>(list.get(0));
@@ -34,13 +43,13 @@ public class IndexPage extends BasePage {
         final Form form = new Form("form"){
             @Override
             protected void onSubmit() {
-                //go to search page
+                RequestCycle.get().setResponsePage(SearchPage.class); 
             }
         };
 
 
         add(form);
-        
+
         ChoiceRenderer<Scalodrom> choiceRenderer = new ChoiceRenderer<Scalodrom>("name", "name");
 
         final HibernateModelList<Scalodrom, Long> modelList = new HibernateModelList<Scalodrom, Long>(list);
@@ -57,14 +66,4 @@ public class IndexPage extends BasePage {
 
         form.add(new Button("submit"));
     }
-
-    /**
-	 * Constructor that is invoked when page is invoked without a session.
-	 *
-	 * @param parameters
-	 *            Page parameters
-	 */
-//    public IndexPage(final PageParameters parameters) {
-//
-//    }
 }

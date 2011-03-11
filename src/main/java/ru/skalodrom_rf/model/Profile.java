@@ -2,7 +2,6 @@ package ru.skalodrom_rf.model;
 
 import net.sf.autodao.PersistentEntity;
 
-import javax.persistence.Basic;
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -11,9 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import java.util.ArrayList;
-import java.util.Date;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -38,8 +36,9 @@ public class Profile  implements PersistentEntity<Long>{
 
     @OneToOne(cascade = CascadeType.ALL)
     private PrefferedDays prefferedWeekDays= new PrefferedDays();
-    @Basic()
-    private ArrayList<Date> whenClimb=new ArrayList<Date>();
+
+    @OneToMany( cascade = CascadeType.ALL)
+    private Set<ClimbTime> whenClimb=new TreeSet<ClimbTime>();
 
     private String about;
     private String site;
@@ -108,11 +107,11 @@ public class Profile  implements PersistentEntity<Long>{
         this.climbLevel = climbLevel;
     }
 
-    public ArrayList<Date> getWhenClimb() {
+    public Set<ClimbTime> getWhenClimb() {
         return whenClimb;
     }
 
-    public void setWhenClimb(ArrayList<Date> whenClimb) {
+    public void setWhenClimb(Set<ClimbTime> whenClimb) {
         this.whenClimb = whenClimb;
     }
 
