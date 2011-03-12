@@ -26,6 +26,7 @@ import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import java.io.InputStream;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Properties;
@@ -100,16 +101,15 @@ public class RegisterPage extends BasePage{
     private void sendActivationMessage(User user){
         try{
             final Properties props= new Properties();
-            props.put("mail.smtp.host", "smtp-56.1gb.ru");
-            props.put("mail.smtp.port", "465");
-            props.put("mail.transport.protocol", "smtp");
-            props.put("mail.smtp.auth", "true");
+            final InputStream stream = getClass().getClassLoader().getResourceAsStream("mail.properties");
+            props.load(stream);
 
-//          props.put("mail.from", "info@relc.1gb.ru");
             Authenticator auth = new Authenticator(){
                 @Override
                 protected PasswordAuthentication getPasswordAuthentication() {
-                    return new PasswordAuthentication("u215104","5f50d771");
+                    final String uname = (String)props.get("rf.skalodrom.mail.username");
+                    final String upassword = (String)props.get("rf.skalodrom.mail.password");
+                    return new PasswordAuthentication(uname, upassword);
                 }
             };
             
