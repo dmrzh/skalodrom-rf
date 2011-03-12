@@ -2,6 +2,7 @@ package ru.skalodrom_rf.web;
 
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.request.IRequestCycleProcessor;
+import org.apache.wicket.request.target.coding.IndexedParamUrlCodingStrategy;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import ru.skalodrom_rf.web.pages.ActivateUserPage;
 import ru.skalodrom_rf.web.pages.IndexPage;
@@ -55,6 +56,7 @@ public class WicketApplication extends WebApplication{
         mountBookmarkablePage("/reminder.html", ReminderPage.class);
         mountBookmarkablePage("/profileView.html", ProfileViewPage.class);
         mountBookmarkablePage("/profileEdit.html", ProfileEditPage.class);
+        mount(new IndexedParamUrlCodingStrategy("/users",ProfileViewPage.class));
         getMarkupSettings().setDefaultMarkupEncoding("UTF-8");
     }
 

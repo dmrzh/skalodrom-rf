@@ -46,7 +46,7 @@ public class ProfileEditPage extends BasePage{
 
     public ProfileEditPage() {
 
-        final FileUploadField avatarFi = new FileUploadField("avatarFi", new Model());
+        final FileUploadField avatarFi = new FileUploadField("avatarFi", new Model<FileUpload>());
 
         FeedbackPanel feedbackPanel = new FeedbackPanel("feedback");
         add(feedbackPanel);

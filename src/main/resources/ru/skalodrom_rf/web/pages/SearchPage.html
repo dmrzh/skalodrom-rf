@@ -22,32 +22,18 @@
 <table width="100%" border="1">
     <thead>
    <tr>
-        <th>ФИО</th>
-        <th>уровень</th>
-        <th>дата-время</th>
-        <th>действия</th>
+        <th>Имя</th>
+        <th>Вес, кг</th>
+        <th>Уровень</th>
+        <th>Действия</th>
     </tr>
     </thead>
-    <tr>
-        <td>Иванов Иван Иванович</td>
-        <td>7а</td>
-        <td> 31  января 23:30</td>
-        <td><a href="profileView.html">посмотреть</a> <a href="sendMessage.html">написать</a></td>
+    <tr wicket:id="profilesTable">
+        <td><span wicket:id="fio">fio</span> </td>
+        <td><span wicket:id="weight"></span></td>
+        <td> <span wicket:id="level"></span></td>
+        <td><a href="#" wicket:id="viewProfile">посмотреть</a> <a href="sendMessage.html">написать</a></td>
     </tr>
-    <tr>
-        <td>Петров Петро Петрович</td>
-        <td>7а</td>
-        <td> 31  января 23:30</td>
-        <td><a href="profileView.html">посмотреть</a> <a href="sendMessage.html">написать</a></td>
-    </tr>
-    <tr>
-        <td>Сидоров Иван Иванович</td>
-        <td>7а</td>
-        <td> 31  января 23:30</td>
-        <td><a href="profileView.html">посмотреть</a> <a href="sendMessage.html">написать</a></td>
-    </tr>
-
-
 </table>
 
     <a href="subscribe.html">Подписаться на этот запрос</a>
