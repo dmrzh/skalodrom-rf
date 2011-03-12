@@ -10,39 +10,52 @@
  <table>
      <tr>
          <td>Имя</td>
-         <td>x</td>
+         <td><span wicket:id="fio"></span></td>
      </tr>
      <tr>
          <td>email</td>
-         <td>x</td>
+         <td><span wicket:id="email"></span></td>
      </tr>
      <tr>
          <td>телефон</td>
-         <td>x</td>
+         <td><span wicket:id="phone"></span></td>
      </tr>
      <tr>
          <td>аватар</td>
-         <td>x</td>
+         <td><img src="#" alt="Avatar" wicket:id="avatar"></td>
      </tr>
      <tr>
          <td>о себе</td>
-         <td>x</td>
-     </tr>
-     <tr>
-         <td>ссылка на сайт</td>
-         <td>x</td>
+         <td><span wicket:id="about"></span></td>
      </tr>
      <tr>
          <td>уровень лазания</td>
-         <td>x</td>
+         <td><span wicket:id="level"></span></td>
      </tr>
      <tr>
+            <td>вес, кг</td>
+            <td><div wicket:id="weight"></div></td>
+        </tr>
+     <tr>
          <td>Где лазаю</td>
-         <td>x</td>
+         <td>
+             <table border="1">
+                 <tr wicket:id="skalodromsView">
+                     <td><div wicket:id="skaladromName">ДДС</div></td>
+                 </tr>
+             </table>
+         </td>
      </tr>
      <tr>
          <td>Когда могу</td>
-         <td>x</td>
+         <td>
+             <table border="1">
+                 <tr wicket:id="whenView">
+                     <td><div wicket:id="date">15.01.2011</div></td>
+                     <td><div wicket:id="time">день</div></td>
+                 </tr>
+             </table>
+         </td>
      </tr>
      <br/>
 

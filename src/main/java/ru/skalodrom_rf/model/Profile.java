@@ -12,6 +12,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.validation.constraints.NotNull;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -30,6 +31,7 @@ public class Profile  implements PersistentEntity<Long>{
     private Image avatar= new Image();
     private Double weight;
     @Enumerated(EnumType.STRING)
+    @NotNull
     private ClimbLevel climbLevel=ClimbLevel.newbie;
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<Scalodrom> whereClimb= new TreeSet<Scalodrom>();
@@ -41,7 +43,6 @@ public class Profile  implements PersistentEntity<Long>{
     private Set<ClimbTime> whenClimb=new TreeSet<ClimbTime>();
 
     private String about;
-    private String site;
 
     public Profile() {
     }
@@ -131,13 +132,6 @@ public class Profile  implements PersistentEntity<Long>{
         this.about = about;
     }
 
-    public String getSite() {
-        return site;
-    }
-
-    public void setSite(String site) {
-        this.site = site;
-    }
 
     public PrefferedDays getPrefferedWeekDays() {
         return prefferedWeekDays;

@@ -5,6 +5,7 @@ import org.apache.wicket.request.IRequestCycleProcessor;
 import org.apache.wicket.request.target.coding.IndexedParamUrlCodingStrategy;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import ru.skalodrom_rf.web.pages.ActivateUserPage;
+import ru.skalodrom_rf.web.pages.FileNotFoundPage;
 import ru.skalodrom_rf.web.pages.IndexPage;
 import ru.skalodrom_rf.web.pages.LoginPage;
 import ru.skalodrom_rf.web.pages.ProfileEditPage;
@@ -56,6 +57,7 @@ public class WicketApplication extends WebApplication{
         mountBookmarkablePage("/reminder.html", ReminderPage.class);
         mountBookmarkablePage("/profileView.html", ProfileViewPage.class);
         mountBookmarkablePage("/profileEdit.html", ProfileEditPage.class);
+        mountBookmarkablePage("/FileNotFound.html", FileNotFoundPage.class);
         mount(new IndexedParamUrlCodingStrategy("/users",ProfileViewPage.class));
         getMarkupSettings().setDefaultMarkupEncoding("UTF-8");
     }

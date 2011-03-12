@@ -76,17 +76,12 @@ public class ProfileEditPage extends BasePage{
 
         form.add(avatarFi);
 
-        final DynamicImageResource avatarImageResource = new DynamicImageResource() {
-            @Override
-            protected byte[] getImageData() {
-                return model.getObject().getAvatar().getImageData();
-            }
-        };
+        final DynamicImageResource avatarImageResource = new AvatarImageResource(model);
         form.add(new Image("avatar", avatarImageResource));
         form.setMaxSize(Bytes.kilobytes(100));
 
         form.add(new TextArea("about"));
-        form.add(new TextField("site"));
+        
 
         form.add(new TextField<Double>("weight",Double.class));
         form.add(new DropDownChoice<ClimbLevel>("climbLevel", Arrays.asList(ClimbLevel.values()),new EnumRendererer<ClimbLevel>(ClimbLevel.class)));
@@ -126,4 +121,5 @@ public class ProfileEditPage extends BasePage{
            form.add(palette);
 
     }
+
 }

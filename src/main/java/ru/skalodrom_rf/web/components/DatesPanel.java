@@ -37,9 +37,9 @@ public class DatesPanel extends Panel {
     ClimbTimeDao climbTimeDao;
 
 
-    private static DateFormat dateFormat = SimpleDateFormat.getDateInstance(SimpleDateFormat.LONG);
     public DatesPanel(String id, final HibernateFieldDataProvider<Profile,Long,ClimbTime> dp) {
         super(id);
+        final DateFormat dateFormat = SimpleDateFormat.getDateInstance(SimpleDateFormat.LONG,getRequest().getLocale());        
         setOutputMarkupId(true);
         final EnumRendererer<Time> timeRenderer = new EnumRendererer<Time>(Time.class);
         final DataView<ClimbTime> dataView = new DataView<ClimbTime>("dataView", dp){
