@@ -9,6 +9,7 @@ import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.markup.repeater.data.DataView;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import ru.skalodrom_rf.dao.UserDao;
+import ru.skalodrom_rf.model.ClimbLevel;
 import ru.skalodrom_rf.model.ClimbTime;
 import ru.skalodrom_rf.model.Profile;
 import ru.skalodrom_rf.model.Scalodrom;
@@ -39,6 +40,8 @@ public class ProfileViewPage extends BasePage{
             return;
         }
         final Profile p = user.getProfile();
+
+        add(new Label("login", p.getUser().getLogin()));
         add(new Label("fio", p.getFio()));
         add(new Label("email", p.getEmail()));
         add(new Label("phone", p.getPhone()));
@@ -47,8 +50,10 @@ public class ProfileViewPage extends BasePage{
         final DynamicImageResource avatarImageResource = new AvatarImageResource(model);
         add(new Image("avatar", avatarImageResource));
         add(new Label("about", p.getAbout()));
-        add(new Label("level", p.getClimbLevel().name()));
-        add(new Label("weight", ""+p.getWeight()));
+        final EnumRendererer<ClimbLevel> climbLevelRenderer = new EnumRendererer<ClimbLevel>(ClimbLevel.class);
+
+        add(new Label("level", climbLevelRenderer.getDisplayValue(p.getClimbLevel())));
+        add(new Label("weight", p.getWeight()==null?"":""+p.getWeight()));
 
         final HibernateFieldDataProvider<Profile,Long,Scalodrom> provider = new HibernateFieldDataProvider<Profile,Long,Scalodrom>(p,"whereClimb");
         final DataView<Scalodrom> skalodromsView= new DataView<Scalodrom>("skalodromsView", provider){
@@ -70,7 +75,7 @@ public class ProfileViewPage extends BasePage{
                 final EnumRendererer timeRendererer = new EnumRendererer(Time.class);
                 final Date date = when.getDate().toDateTimeAtStartOfDay().toDate();
                 climbTimeItem.add(new Label("date", dateFormat.format(date)));
-                climbTimeItem.add(new Label("time", (String)timeRendererer.getDisplayValue(when.getTime())));
+                climbTimeItem.add(new Label("time", timeRendererer.getDisplayValue(when.getTime())));
             }
         };
         add(whenView);

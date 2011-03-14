@@ -5,6 +5,7 @@ import org.apache.wicket.markup.html.form.CheckBox;
 import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
+import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.markup.html.form.TextField;
 import org.apache.wicket.markup.html.form.upload.FileUpload;
@@ -68,8 +69,8 @@ public class ProfileEditPage extends BasePage{
                 System.out.println("profile saved "+model.getObject());
             }
         };
-        form.add(new TextField("fio"));
-        form.add(new TextField("email"));
+        form.add(new RequiredTextField("fio"));
+        form.add(new RequiredTextField("email"));
         form.add(new TextField("phone"));
 
         form.setMultiPart(true);
@@ -83,7 +84,7 @@ public class ProfileEditPage extends BasePage{
         form.add(new TextArea("about"));
         
 
-        form.add(new TextField<Double>("weight",Double.class));
+        form.add(new RequiredTextField<Double>("weight",Double.class));
         form.add(new DropDownChoice<ClimbLevel>("climbLevel", Arrays.asList(ClimbLevel.values()),new EnumRendererer<ClimbLevel>(ClimbLevel.class)));
 
         addSkalodromForm(form,selectedScalodroms );

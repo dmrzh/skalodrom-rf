@@ -28,8 +28,8 @@ public class EnumRendererer<E extends Enum> implements IChoiceRenderer<E>{
     Properties i18n=new Properties();
 
     @Override
-    public Object getDisplayValue(E object) {
-        return i18n.get(object.name());
+    public String getDisplayValue(E object) {
+        return (String)i18n.get(object.name());
     }
 
     @Override
