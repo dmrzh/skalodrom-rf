@@ -25,10 +25,24 @@ public class HibernateUserDetailsService implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException, DataAccessException {
-        if(userDao.get(username)==null){
+        User springSecurityUser;
+        final ru.skalodrom_rf.model.User user = userDao.get(username);
+        if(user==null){
              throw new UsernameNotFoundException( "HibernateUserDetailsService.notFound Username "+ username+ " not found");
         }
-        final GrantedAuthority[] authorities = {new GrantedAuthorityImpl("ROLE_USER")};
-        return new User(username, userDao.get(username).getPassword(),true,true,true,true, authorities);
+
+        final GrantedAuthority[] userRole = {new GrantedAuthorityImpl("ROLE_USER")};
+        final GrantedAuthority[] notActivatedRole = {new GrantedAuthorityImpl("ROLE_NOT_ACTIVATED_USER")};
+
+
+
+        if(user.getActivationCode()==null){
+            springSecurityUser = new User(username, user.getPassword(), true, true, true, true, userRole);
+        }else{
+            springSecurityUser = new User(username, user.getPassword(), true, true, true, true, notActivatedRole);
+        }
+
+
+        return springSecurityUser;
     }
 }
