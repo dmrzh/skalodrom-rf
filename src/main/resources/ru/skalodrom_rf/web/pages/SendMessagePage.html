@@ -7,20 +7,20 @@
 </head>
     <body>
     <wicket:extend>
-        <form action="/">
-            <p>Кому: Иванову Ивану Иванович</p>
+        <p>Кому: <span wicket:id="whom"> Иванов Иван Иванович</span></p>
+        <form wicket:id="form">
             <table width="100%">
               <tr>
                   <td>Тема:</td>
-                  <td><input type="text" size="131"></td>
+                  <td><input type="text" size="131" wicket:id="subject"></td>
               </tr>
 
               <tr>
                   <td>Текст: </td>
-                  <td><textarea rows="20" cols="150"></textarea></td>
+                  <td><textarea wicket:id="text" rows="20" cols="150"></textarea></td>
               </tr>
             </table>
-            <input type="submit" value="Отправить">
+            <input type="submit" value="Отправить" wicket:id="submit">
         </form>
     </wicket:extend>
     </body>

@@ -51,6 +51,8 @@
     <dao:hibernateScan base-package="ru.skalodrom_rf.dao" transaction-manager="transactionManager"/>
 
     <bean class="ru.skalodrom_rf.dao.DaoFinder"/>
+    <bean class="ru.skalodrom_rf.EmailSender"/>
+
 
     <bean class="ru.skalodrom_rf.dataloader.DataloaderInit"/>
     <bean class="ru.skalodrom_rf.dataloader.Dataloader"/>
