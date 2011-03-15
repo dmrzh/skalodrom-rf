@@ -1,5 +1,6 @@
 package ru.skalodrom_rf.web;
 
+import org.apache.wicket.Page;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.request.IRequestCycleProcessor;
 import org.apache.wicket.request.target.coding.IndexedParamUrlCodingStrategy;
@@ -12,7 +13,6 @@ import ru.skalodrom_rf.web.pages.ProfileEditPage;
 import ru.skalodrom_rf.web.pages.ProfileViewPage;
 import ru.skalodrom_rf.web.pages.RegisterPage;
 import ru.skalodrom_rf.web.pages.ReminderPage;
-import ru.skalodrom_rf.web.pages.SearchPage;
 import ru.skalodrom_rf.web.pages.SendMessagePage;
 import ru.skalodrom_rf.web.pages.SkalodromPage;
 
@@ -37,7 +37,7 @@ public class WicketApplication extends WebApplication{
 	/**
 	 * @see org.apache.wicket.Application#getHomePage()
 	 */
-	public Class<IndexPage> getHomePage(){
+	public Class<? extends Page> getHomePage(){
 		return IndexPage.class;
 	}
 
@@ -47,13 +47,13 @@ public class WicketApplication extends WebApplication{
         addComponentInstantiationListener(new SpringComponentInjector(this));
 
         mountBookmarkablePage("/register.html", RegisterPage.class);
-        mountBookmarkablePage("/index.html", IndexPage.class);
+
         mountBookmarkablePage("/login.html", LoginPage.class);
         mountBookmarkablePage("/activate.html", ActivateUserPage.class);
 
         mountBookmarkablePage("/sendMessage.html", SendMessagePage.class);
         mountBookmarkablePage("/skalodrom.html", SkalodromPage.class);
-        mountBookmarkablePage("/search.html", SearchPage.class);
+        mountBookmarkablePage("/index.html", IndexPage.class);
         mountBookmarkablePage("/reminder.html", ReminderPage.class);
         mountBookmarkablePage("/profileView.html", ProfileViewPage.class);
         mountBookmarkablePage("/profileEdit.html", ProfileEditPage.class);

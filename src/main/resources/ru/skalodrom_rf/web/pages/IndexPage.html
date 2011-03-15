@@ -3,10 +3,11 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
 <head>
      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title>Скалодром.рф. поиск напарника по скалолазанию.</title>          
+    <title>Скалодром.рф. Поиск напарника по скалолазанию.</title>
 </head>
 <body>
 <wicket:extend>
+<p>
 <form wicket:id="form" >
 <table width="100%" border="1">
     <tr>
@@ -21,11 +22,30 @@
             Описание скалодрома <a href="skalodrom.html?dds">Подробнее</a>
         </td>
         <td>дата <input type="text" maxlength="10" wicket:id="date"></td>
+        <td><input type="submit" wicket:id="submit" value="Найти"></td>
     </tr>
 </table>
-<input type="submit" wicket:id="submit" value="Найти"> 
  </form>
-</wicket:extend>
+</p>
+<table width="100%" border="1">
+    <thead>
+   <tr>
+        <th>Имя</th>
+        <th>Вес, кг</th>
+        <th>Уровень</th>
+        <th>Действия</th>
+    </tr>
+    </thead>
+    <tr wicket:id="profilesTable">
+        <td><span wicket:id="fio">fio</span> </td>
+        <td><span wicket:id="weight"></span></td>
+        <td> <span wicket:id="level"></span></td>
+        <td><a href="#" wicket:id="viewProfile">посмотреть</a> <a wicket:id="sendMessage" href="#">написать</a></td>
+    </tr>
+</table>
 
+    <a href="subscribe.html">Подписаться на этот запрос</a>
+
+</wicket:extend>
 </body>
 </html>

@@ -32,7 +32,7 @@ public class SendMessagePage extends BasePage{
                 final String subjectText = "сообщение через сайт скалодром.рф[" + subject.getObject() + "]";
                 final User to = whomModel.getObject().getUser();
                 emailSender.sendMessage(to, subjectText,text.getObject());
-                RequestCycle.get().setResponsePage(SearchPage.class);
+                RequestCycle.get().setResponsePage(IndexPage.class);
             }
         };
         form.add(button);
