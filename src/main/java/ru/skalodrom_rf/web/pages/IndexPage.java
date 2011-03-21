@@ -24,11 +24,13 @@ import ru.skalodrom_rf.dao.ScalodromDao;
 import ru.skalodrom_rf.model.ClimbLevel;
 import ru.skalodrom_rf.model.Profile;
 import ru.skalodrom_rf.model.Scalodrom;
+import ru.skalodrom_rf.model.Time;
 import ru.skalodrom_rf.web.EnumRendererer;
 import ru.skalodrom_rf.web.HibernateModel;
 import ru.skalodrom_rf.web.HibernateModelList;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -72,11 +74,17 @@ public class IndexPage extends BasePage{
         dateTextField.add(datePicker);
         form.add(dateTextField);
 
+        final Model<Time> timeModel = new Model<Time>(Time.EVENING);
+        final EnumRendererer<Time> timeRenderer = new EnumRendererer<Time>(Time.class);
+        form.add(new  DropDownChoice<Time>("time",timeModel, Arrays.asList(Time.values()), timeRenderer));
+
         form.add(new AjaxButton("submit"){
             @Override
             protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
                 System.out.println("skalModel = " + skalModel.getObject().getName());
                 System.out.println("dateModel = " + dateModel.getObject());
+                System.out.println("timeModel = " + timeModel.getObject());
+
                 target.addComponent(resultContainer);
             }
         });
