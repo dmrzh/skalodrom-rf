@@ -36,10 +36,14 @@ public class Dataloader {
 
 
         final Scalodrom dds = new Scalodrom("ДДС");
+        scalodromDao.create(dds);
 
         user.getProfile().getWhereClimb().add(dds);
-        scalodromDao.create(dds);
+        dds.getWhoClimb().add(user.getProfile());
+        
         userDao.saveOrUpdate(user);
+        scalodromDao.saveOrUpdate(dds);
+
         scalodromDao.create(new Scalodrom("Скаласити"));
         scalodromDao.create(new Scalodrom("Экстрим"));
         scalodromDao.create(new Scalodrom("Южная"));

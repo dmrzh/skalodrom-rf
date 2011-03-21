@@ -60,6 +60,8 @@ public class WicketApplication extends WebApplication{
         mountBookmarkablePage("/FileNotFound.html", FileNotFoundPage.class);
         mount(new IndexedParamUrlCodingStrategy("/users",ProfileViewPage.class));
         getMarkupSettings().setDefaultMarkupEncoding("UTF-8");
+        getMarkupSettings().setStripWicketTags(true);
+        getDebugSettings().setAjaxDebugModeEnabled(false);
     }
 
     @Override

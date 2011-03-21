@@ -2,11 +2,13 @@ package ru.skalodrom_rf.web.pages;
 
 import org.apache.wicket.PageParameters;
 import org.apache.wicket.RequestCycle;
+import org.apache.wicket.ajax.AjaxRequestTarget;
+import org.apache.wicket.ajax.markup.html.form.AjaxButton;
 import org.apache.wicket.datetime.StyleDateConverter;
 import org.apache.wicket.datetime.markup.html.form.DateTextField;
 import org.apache.wicket.extensions.yui.calendar.DatePicker;
+import org.apache.wicket.markup.html.WebMarkupContainer;
 import org.apache.wicket.markup.html.basic.Label;
-import org.apache.wicket.markup.html.form.Button;
 import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
@@ -19,8 +21,10 @@ import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import ru.skalodrom_rf.dao.ProfileDao;
 import ru.skalodrom_rf.dao.ScalodromDao;
+import ru.skalodrom_rf.model.ClimbLevel;
 import ru.skalodrom_rf.model.Profile;
 import ru.skalodrom_rf.model.Scalodrom;
+import ru.skalodrom_rf.web.EnumRendererer;
 import ru.skalodrom_rf.web.HibernateModel;
 import ru.skalodrom_rf.web.HibernateModelList;
 
@@ -34,21 +38,23 @@ public class IndexPage extends BasePage{
     @SpringBean
     ProfileDao profileDao;
     @SpringBean
-    ScalodromDao scalodromDao;
+    private ScalodromDao scalodromDao;
 
+    private final HibernateModel<Scalodrom,Long> skalModel = new HibernateModel<Scalodrom,Long>();
+
+    private final Model<Date> dateModel = new Model<Date>(new Date());
+    WebMarkupContainer resultContainer=new WebMarkupContainer("wrapper");
     public IndexPage() {
+        this(new PageParameters());
+    }
 
-        final Model dateModel = new Model(new Date());
+    public IndexPage(PageParameters parameters) {
+        super(parameters);
+
         final List<Scalodrom> list = scalodromDao.findAll();
-        final HibernateModel<Scalodrom,Long> skalModel = new HibernateModel<Scalodrom,Long>(list.get(0));
 
-        final Form form = new Form("form"){
-            @Override
-            protected void onSubmit() {
-                RequestCycle.get().setResponsePage(IndexPage.class);
-            }
-        };
-
+        skalModel.setObject(list.get(0));
+        final Form form = new Form("form");
 
         add(form);
 
@@ -66,17 +72,25 @@ public class IndexPage extends BasePage{
         dateTextField.add(datePicker);
         form.add(dateTextField);
 
-        form.add(new Button("submit"));
+        form.add(new AjaxButton("submit"){
+            @Override
+            protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
+                System.out.println("skalModel = " + skalModel.getObject().getName());
+                System.out.println("dateModel = " + dateModel.getObject());
+                target.addComponent(resultContainer);
+            }
+        });
 
-        final DataView profilesTable = createResults();
-        add(profilesTable);
+        resultContainer.setOutputMarkupId(true);
+        resultContainer.add(createResults());
+        add(resultContainer);
 
 
     }
 
     private DataView createResults() {
         List<HibernateModel<Profile,Long>> hibernateModels= new ArrayList<HibernateModel<Profile,Long>>();
-        for(Profile pe:profileDao.findAll()){
+        for(Profile pe:skalModel.getObject().getWhoClimb()){
             hibernateModels.add(new HibernateModel<Profile,Long>(pe));
         }
 
@@ -88,7 +102,8 @@ public class IndexPage extends BasePage{
                 final Profile profile = model.getObject();
                 hibernateModelItem.add(new Label("fio",profile.getFio()));
                 hibernateModelItem.add(new Label("weight",profile.getWeight()==null?"":""+profile.getWeight()));
-                hibernateModelItem.add(new Label("level",profile.getClimbLevel().name()));
+                final EnumRendererer climbLevelRenderer = new EnumRendererer(ClimbLevel.class);
+                hibernateModelItem.add(new Label("level", climbLevelRenderer.getDisplayValue(profile.getClimbLevel())));
 
                 final PageParameters pageParameters = new PageParameters("0="+profile.getUser().getLogin());
                 hibernateModelItem.add(new BookmarkablePageLink("viewProfile", ProfileViewPage.class, pageParameters));

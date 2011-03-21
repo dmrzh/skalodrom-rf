@@ -8,7 +8,7 @@
 <body>
 <wicket:extend>
 <p>
-<form wicket:id="form" >
+<form wicket:id="form" method="GET">
 <table width="100%" border="1">
     <tr>
         <td>Выберите скалодром
@@ -19,14 +19,23 @@
                 <option>Южная</option>
                 <option>Бауманская</option>
             </select>
-            Описание скалодрома <a href="skalodrom.html?dds">Подробнее</a>
+
         </td>
         <td>дата <input type="text" maxlength="10" wicket:id="date"></td>
+        <td>время <select>
+            <option>утро</option>
+            <option>день</option>
+            <option>вечер</option>            
+        </select>
+
+        </td>
         <td><input type="submit" wicket:id="submit" value="Найти"></td>
     </tr>
 </table>
  </form>
 </p>
+<div wicket:id="wrapper">
+    Результаты поиска:
 <table width="100%" border="1">
     <thead>
    <tr>
@@ -43,7 +52,7 @@
         <td><a href="#" wicket:id="viewProfile">посмотреть</a> <a wicket:id="sendMessage" href="#">написать</a></td>
     </tr>
 </table>
-
+</div>
     <a href="subscribe.html">Подписаться на этот запрос</a>
 
 </wicket:extend>
