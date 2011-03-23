@@ -43,4 +43,9 @@ public class DaoFinder<T extends PersistentEntity<K>, K extends Serializable> im
         }
         return null;
     }
+    public Dao<T, K> findDaoByClass(Class<Dao<T, K>> tClass) {
+        final Collection<Dao<T, K>> daoCollection = applicationContext.getBeansOfType(tClass).values();
+        return daoCollection.iterator().next();
+    }
+
 }

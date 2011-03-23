@@ -16,9 +16,10 @@ import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.markup.repeater.data.DataView;
-import org.apache.wicket.markup.repeater.data.ListDataProvider;
+import org.apache.wicket.markup.repeater.data.IDataProvider;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.joda.time.LocalDate;
 import ru.skalodrom_rf.dao.ProfileDao;
 import ru.skalodrom_rf.dao.ScalodromDao;
 import ru.skalodrom_rf.model.ClimbLevel;
@@ -26,10 +27,10 @@ import ru.skalodrom_rf.model.Profile;
 import ru.skalodrom_rf.model.Scalodrom;
 import ru.skalodrom_rf.model.Time;
 import ru.skalodrom_rf.web.EnumRendererer;
-import ru.skalodrom_rf.web.HibernateModel;
-import ru.skalodrom_rf.web.HibernateModelList;
+import ru.skalodrom_rf.web.hibernate.HibernateModel;
+import ru.skalodrom_rf.web.hibernate.HibernateModelList;
+import ru.skalodrom_rf.web.hibernate.HibernateQueryDataProvider;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -45,6 +46,8 @@ public class IndexPage extends BasePage{
     private final HibernateModel<Scalodrom,Long> skalModel = new HibernateModel<Scalodrom,Long>();
 
     private final Model<Date> dateModel = new Model<Date>(new Date());
+    private final Model<LocalDate> localDateModel = new Model<LocalDate>(new LocalDate());
+
     WebMarkupContainer resultContainer=new WebMarkupContainer("wrapper");
     public IndexPage() {
         this(new PageParameters());
@@ -75,6 +78,7 @@ public class IndexPage extends BasePage{
         form.add(dateTextField);
 
         final Model<Time> timeModel = new Model<Time>(Time.EVENING);
+
         final EnumRendererer<Time> timeRenderer = new EnumRendererer<Time>(Time.class);
         form.add(new  DropDownChoice<Time>("time",timeModel, Arrays.asList(Time.values()), timeRenderer));
 
@@ -83,31 +87,27 @@ public class IndexPage extends BasePage{
             protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
                 System.out.println("skalModel = " + skalModel.getObject().getName());
                 System.out.println("dateModel = " + dateModel.getObject());
-                System.out.println("timeModel = " + timeModel.getObject());
-
+                System.out.println("timeModel = " + localDateModel.getObject());
+                final LocalDate localDate = LocalDate.fromDateFields(dateModel.getObject());
+                localDateModel.setObject(localDate);
                 target.addComponent(resultContainer);
             }
         });
 
         resultContainer.setOutputMarkupId(true);
-        resultContainer.add(createResults());
+        final HibernateQueryDataProvider dataProvider = new HibernateQueryDataProvider(ProfileDao.class, "findByScalodromAndDate",skalModel,localDateModel,timeModel);
+        resultContainer.add(createResults(dataProvider));
         add(resultContainer);
 
 
     }
 
-    private DataView createResults() {
-        List<HibernateModel<Profile,Long>> hibernateModels= new ArrayList<HibernateModel<Profile,Long>>();
-        for(Profile pe:skalModel.getObject().getWhoClimb()){
-            hibernateModels.add(new HibernateModel<Profile,Long>(pe));
-        }
-
-        final ListDataProvider<HibernateModel<Profile,Long>> dataProvider = new ListDataProvider(hibernateModels);
-        final DataView profilesTable = new DataView<HibernateModel<Profile,Long>>("profilesTable",dataProvider ){
+    private DataView createResults(IDataProvider dataProvider) {
+        final DataView profilesTable = new DataView<Profile>("profilesTable",dataProvider ){
             @Override
-            protected void populateItem(final Item<HibernateModel<Profile, Long>> hibernateModelItem) {
-                final HibernateModel<Profile, Long> model = hibernateModelItem.getModelObject();
-                final Profile profile = model.getObject();
+            protected void populateItem(final Item<Profile> hibernateModelItem) {
+                final Profile profile = hibernateModelItem.getModelObject();
+                final HibernateModel model = new HibernateModel(profile);
                 hibernateModelItem.add(new Label("fio",profile.getFio()));
                 hibernateModelItem.add(new Label("weight",profile.getWeight()==null?"":""+profile.getWeight()));
                 final EnumRendererer climbLevelRenderer = new EnumRendererer(ClimbLevel.class);

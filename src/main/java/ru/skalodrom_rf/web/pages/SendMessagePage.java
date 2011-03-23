@@ -11,7 +11,7 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import ru.skalodrom_rf.EmailSender;
 import ru.skalodrom_rf.model.Profile;
 import ru.skalodrom_rf.model.User;
-import ru.skalodrom_rf.web.HibernateModel;
+import ru.skalodrom_rf.web.hibernate.HibernateModel;
 
 /**
  */

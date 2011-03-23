@@ -2,7 +2,7 @@ package ru.skalodrom_rf.web.pages;
 
 import org.apache.wicket.markup.html.image.resource.DynamicImageResource;
 import ru.skalodrom_rf.model.Profile;
-import ru.skalodrom_rf.web.HibernateModel;
+import ru.skalodrom_rf.web.hibernate.HibernateModel;
 
 /**.*/
 class AvatarImageResource extends DynamicImageResource {

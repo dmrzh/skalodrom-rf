@@ -5,19 +5,24 @@ import org.apache.wicket.RequestCycle;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.markup.html.image.resource.DynamicImageResource;
+import org.apache.wicket.markup.html.list.ListItem;
+import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.markup.repeater.data.DataView;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+import ru.skalodrom_rf.dao.PrefferedWeekDayDao;
 import ru.skalodrom_rf.dao.UserDao;
 import ru.skalodrom_rf.model.ClimbLevel;
 import ru.skalodrom_rf.model.ClimbTime;
+import ru.skalodrom_rf.model.PrefferedWeekDay;
 import ru.skalodrom_rf.model.Profile;
 import ru.skalodrom_rf.model.Scalodrom;
 import ru.skalodrom_rf.model.Time;
 import ru.skalodrom_rf.model.User;
 import ru.skalodrom_rf.web.EnumRendererer;
-import ru.skalodrom_rf.web.HibernateFieldDataProvider;
-import ru.skalodrom_rf.web.HibernateModel;
+import ru.skalodrom_rf.web.hibernate.HibernateFieldDataProvider;
+import ru.skalodrom_rf.web.hibernate.HibernateModel;
+import ru.skalodrom_rf.web.hibernate.HibernateModelList;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -27,6 +32,11 @@ import java.util.Date;
 public class ProfileViewPage extends BasePage{
     @SpringBean
     UserDao userDao;
+
+    @SpringBean
+    private PrefferedWeekDayDao prefferedWeekDayDao;
+
+
     public ProfileViewPage(PageParameters parameters) {
         super(parameters);
         String login = (String)parameters.get("0");
@@ -64,7 +74,17 @@ public class ProfileViewPage extends BasePage{
             }
         };
         add(skalodromsView);
-        
+
+        final HibernateModelList<PrefferedWeekDay, Long> prefWeekDaysModel = new HibernateModelList<PrefferedWeekDay, Long>(p.getPrefferedWeekDay());
+        add(new ListView<PrefferedWeekDay>("prefferedWeekDay",prefWeekDaysModel){
+            WeekdaysRenderer rdr=new WeekdaysRenderer();
+            @Override
+            protected void populateItem(ListItem<PrefferedWeekDay> listItem) {
+                final PrefferedWeekDay prefferedWeekDay = listItem.getModelObject();
+                final String value = (String)rdr.getDisplayValue(prefferedWeekDay);
+                listItem.add(new Label("day", value+" | "));                
+            }
+        });
 
         final HibernateFieldDataProvider<Profile,Long,ClimbTime> whenProvider = new HibernateFieldDataProvider<Profile,Long,ClimbTime>(p,"whenClimb");
         final DateFormat dateFormat = SimpleDateFormat.getDateInstance(SimpleDateFormat.LONG,getRequest().getLocale());

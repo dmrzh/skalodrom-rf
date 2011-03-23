@@ -6,6 +6,7 @@ import org.apache.wicket.protocol.http.WebRequestCycleProcessor;
 import org.apache.wicket.request.IRequestCodingStrategy;
 import org.apache.wicket.request.IRequestCycleProcessor;
 import org.apache.wicket.request.RequestParameters;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
 /**
@@ -27,19 +28,20 @@ class TransactionalRequestCycleProcessor implements IRequestCycleProcessor {
     }
 
     @Override
-    @Transactional(readOnly = false)
+    @Transactional(readOnly = false,propagation = Propagation.REQUIRES_NEW)
     public void processEvents(RequestCycle requestCycle) {
         rcp.processEvents(requestCycle);
+        requestCycle.detach();
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true, propagation = Propagation.REQUIRES_NEW)
     public void respond(RequestCycle requestCycle) {
         rcp.respond(requestCycle);
     }
 
     @Override
-    @Transactional(readOnly = true)
+    @Transactional(readOnly = true, propagation = Propagation.REQUIRES_NEW)
     public void respond(RuntimeException e, RequestCycle requestCycle) {
         rcp.respond(e,requestCycle);
     }

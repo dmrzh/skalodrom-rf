@@ -22,7 +22,7 @@ import ru.skalodrom_rf.model.ClimbTime;
 import ru.skalodrom_rf.model.Profile;
 import ru.skalodrom_rf.model.Time;
 import ru.skalodrom_rf.web.EnumRendererer;
-import ru.skalodrom_rf.web.HibernateFieldDataProvider;
+import ru.skalodrom_rf.web.hibernate.HibernateFieldDataProvider;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

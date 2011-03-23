@@ -1,7 +1,7 @@
 package ru.skalodrom_rf.web.pages;
 
 import org.apache.wicket.extensions.markup.html.form.palette.Palette;
-import org.apache.wicket.markup.html.form.CheckBox;
+import org.apache.wicket.markup.html.form.CheckBoxMultipleChoice;
 import org.apache.wicket.markup.html.form.ChoiceRenderer;
 import org.apache.wicket.markup.html.form.DropDownChoice;
 import org.apache.wicket.markup.html.form.Form;
@@ -17,19 +17,21 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.util.lang.Bytes;
+import ru.skalodrom_rf.dao.PrefferedWeekDayDao;
 import ru.skalodrom_rf.dao.ProfileDao;
 import ru.skalodrom_rf.dao.ScalodromDao;
 import ru.skalodrom_rf.dao.UserDao;
 import ru.skalodrom_rf.dao.Utils;
 import ru.skalodrom_rf.model.ClimbLevel;
 import ru.skalodrom_rf.model.ClimbTime;
+import ru.skalodrom_rf.model.PrefferedWeekDay;
 import ru.skalodrom_rf.model.Profile;
 import ru.skalodrom_rf.model.Scalodrom;
 import ru.skalodrom_rf.web.EnumRendererer;
-import ru.skalodrom_rf.web.HibernateFieldDataProvider;
-import ru.skalodrom_rf.web.HibernateModel;
-import ru.skalodrom_rf.web.HibernateModelList;
 import ru.skalodrom_rf.web.components.DatesPanel;
+import ru.skalodrom_rf.web.hibernate.HibernateFieldDataProvider;
+import ru.skalodrom_rf.web.hibernate.HibernateModel;
+import ru.skalodrom_rf.web.hibernate.HibernateModelList;
 
 import java.util.Arrays;
 import java.util.List;
@@ -45,6 +47,9 @@ public class ProfileEditPage extends BasePage{
         @SpringBean
         ScalodromDao scalodromDao;
 
+    @SpringBean
+    private PrefferedWeekDayDao prefferedWeekDayDao;
+
     public ProfileEditPage() {
 
         final FileUploadField avatarFi = new FileUploadField("avatarFi", new Model<FileUpload>());
@@ -54,7 +59,7 @@ public class ProfileEditPage extends BasePage{
 
         
         final Profile pe = Utils.getCurrntUser(userDao).getProfile();
-        final HibernateModel<Profile,Long> model = new  HibernateModel<Profile,Long>(pe);
+        final HibernateModel<Profile,Long> model = new HibernateModel<Profile,Long>(pe);
         final HibernateModelList<Scalodrom, Long> selectedScalodroms = new HibernateModelList<Scalodrom, Long>(pe.getWhereClimb());
         final Form<Profile> form = new Form<Profile>("form", new CompoundPropertyModel<Profile>(model)){
             @Override
@@ -90,13 +95,9 @@ public class ProfileEditPage extends BasePage{
         addSkalodromForm(form,selectedScalodroms );
 
 
-        form.add(new CheckBox("prefferedWeekDays.monday"));
-        form.add(new CheckBox("prefferedWeekDays.tuesday"));
-        form.add(new CheckBox("prefferedWeekDays.wednesday"));
-        form.add(new CheckBox("prefferedWeekDays.thursday"));
-        form.add(new CheckBox("prefferedWeekDays.friday"));
-        form.add(new CheckBox("prefferedWeekDays.saturday"));
-        form.add(new CheckBox("prefferedWeekDays.sunday"));
+        final HibernateModelList<PrefferedWeekDay, Long> allWeekDaysModel = new HibernateModelList<PrefferedWeekDay, Long>(prefferedWeekDayDao.findAll());
+        CheckBoxMultipleChoice<PrefferedWeekDay> weekDaysChoice = new CheckBoxMultipleChoice<PrefferedWeekDay>("prefferedWeekDay", allWeekDaysModel, new WeekdaysRenderer());
+        form.add(weekDaysChoice);
 
         form.add(new DatesPanel("whenClimb", new HibernateFieldDataProvider<Profile,Long, ClimbTime>(pe,"whenClimb")));
 

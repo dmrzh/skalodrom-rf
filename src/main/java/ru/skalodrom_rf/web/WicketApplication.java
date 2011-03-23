@@ -1,10 +1,17 @@
 package ru.skalodrom_rf.web;
 
 import org.apache.wicket.Page;
+import org.apache.wicket.Request;
+import org.apache.wicket.RequestCycle;
+import org.apache.wicket.Response;
 import org.apache.wicket.protocol.http.WebApplication;
+import org.apache.wicket.protocol.http.WebRequest;
+import org.apache.wicket.protocol.http.WebResponse;
 import org.apache.wicket.request.IRequestCycleProcessor;
 import org.apache.wicket.request.target.coding.IndexedParamUrlCodingStrategy;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
+import org.springframework.orm.hibernate3.HibernateTransactionManager;
+import ru.skalodrom_rf.web.hibernate.TransactionalWebRequestCycle;
 import ru.skalodrom_rf.web.pages.ActivateUserPage;
 import ru.skalodrom_rf.web.pages.FileNotFoundPage;
 import ru.skalodrom_rf.web.pages.IndexPage;
@@ -24,9 +31,10 @@ import javax.annotation.Resource;
  * @see ru.skalodrom_rf.Start#main(String[])
  */
 public class WicketApplication extends WebApplication{
-
     @Resource
     IRequestCycleProcessor openSessionInView;
+    @Resource
+    HibernateTransactionManager transactionManager;
 
     /**
      * Constructor
@@ -64,9 +72,13 @@ public class WicketApplication extends WebApplication{
         getDebugSettings().setAjaxDebugModeEnabled(false);
     }
 
-    @Override
-    protected IRequestCycleProcessor newRequestCycleProcessor() {
-        return openSessionInView;
-    }
+//    @Override
+//    protected IRequestCycleProcessor newRequestCycleProcessor() {
+//        return openSessionInView;
+//    }
 
+    @Override
+    public RequestCycle newRequestCycle(Request request, Response response) {
+        return new TransactionalWebRequestCycle(transactionManager, this, (WebRequest)request, (WebResponse)response);
+    }
 }

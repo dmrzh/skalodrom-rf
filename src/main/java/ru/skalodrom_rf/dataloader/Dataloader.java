@@ -1,11 +1,17 @@
 package ru.skalodrom_rf.dataloader;
 
+import org.joda.time.LocalDate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
+import ru.skalodrom_rf.dao.ClimbTimeDao;
+import ru.skalodrom_rf.dao.PrefferedWeekDayDao;
 import ru.skalodrom_rf.dao.ScalodromDao;
 import ru.skalodrom_rf.dao.UserDao;
+import ru.skalodrom_rf.model.ClimbTime;
+import ru.skalodrom_rf.model.PrefferedWeekDay;
 import ru.skalodrom_rf.model.Scalodrom;
+import ru.skalodrom_rf.model.Time;
 import ru.skalodrom_rf.model.User;
 
 import javax.annotation.Resource;
@@ -21,17 +27,39 @@ public class Dataloader {
     @Resource
     ScalodromDao scalodromDao;
 
+
+    @Resource
+    PrefferedWeekDayDao prefferedWeekDayDao;
+
+    @Resource
+    ClimbTimeDao climbTimeDao;
+
     @Transactional
     public  void initializeDatabase(){
         LOG.debug("start database initialization");
-        
+        prefferedWeekDayDao.create(new PrefferedWeekDay(1L,"monday"));
+        final PrefferedWeekDay tuesday = new PrefferedWeekDay(2L, "tuesday");
+        prefferedWeekDayDao.create(tuesday);
+        prefferedWeekDayDao.create(new PrefferedWeekDay(3L,"wednesday"));
+        prefferedWeekDayDao.create(new PrefferedWeekDay(4L,"thursday"));
+        prefferedWeekDayDao.create(new PrefferedWeekDay(5L,"friday"));
+        prefferedWeekDayDao.create(new PrefferedWeekDay(6L,"saturday"));
+        prefferedWeekDayDao.create(new PrefferedWeekDay(7L,"sunday"));
+        final ClimbTime climbTime = new ClimbTime();
+        climbTime.setDate(new LocalDate());
+        climbTime.setTime(Time.DAY);
+        climbTimeDao.create(climbTime);
+
+
+
         final User user = new User();
         user.setLogin("dima");
         user.getProfile().setFio("Дима");
 
         user.setPassword("");
         user.getProfile().setEmail("dima@rzhevskiy.info");
-        //user.getProfile().getWhenClimb().add(new Date());
+        user.getProfile().getWhenClimb().add(climbTime);
+        user.getProfile().getPrefferedWeekDay().add(tuesday);
         userDao.create(user);
 
 

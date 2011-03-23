@@ -1,4 +1,4 @@
-package ru.skalodrom_rf.web;
+package ru.skalodrom_rf.web.hibernate;
 
 import net.sf.autodao.PersistentEntity;
 import org.apache.wicket.model.IModel;
