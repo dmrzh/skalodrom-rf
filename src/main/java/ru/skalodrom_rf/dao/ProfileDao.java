@@ -31,4 +31,8 @@ public interface ProfileDao extends Dao<Profile, Long> {
              "inner join p.prefferedWeekDay as weekDay  " +
              "where s1=:s and weekDay=:wd")
      List<Profile> findByScalodromAndWeekDay(@Named("s")Scalodrom s, @Named("wd") PrefferedWeekDay prefferedWeekDay);
+
+     @Finder(query = "select p from Profile p where p.email=:email")
+     List<Profile> findByEmail(@Named("email")String email);
+
 }

@@ -17,6 +17,8 @@ import org.apache.wicket.model.CompoundPropertyModel;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.util.lang.Bytes;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.skalodrom_rf.dao.PrefferedWeekDayDao;
 import ru.skalodrom_rf.dao.ProfileDao;
 import ru.skalodrom_rf.dao.ScalodromDao;
@@ -40,6 +42,8 @@ import java.util.TreeSet;
 /**
  */
 public class ProfileEditPage extends BasePage{
+    private static final Logger LOG= LoggerFactory.getLogger(ProfileEditPage .class);
+
     @SpringBean
     private UserDao userDao;
     @SpringBean
@@ -71,7 +75,7 @@ public class ProfileEditPage extends BasePage{
                     p.getAvatar().setImageData(fileUpload.getBytes());
                 }
                 profileDao.saveOrUpdate(p);
-                System.out.println("profile saved "+model.getObject());
+                LOG.debug("profile saved "+model.getObject()); 
             }
         };
         form.add(new RequiredTextField("fio"));

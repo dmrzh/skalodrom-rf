@@ -20,6 +20,8 @@ import org.apache.wicket.markup.repeater.data.IDataProvider;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.joda.time.LocalDate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import ru.skalodrom_rf.dao.PrefferedWeekDayDao;
 import ru.skalodrom_rf.dao.ProfileDao;
 import ru.skalodrom_rf.dao.ScalodromDao;
@@ -39,6 +41,7 @@ import java.util.List;
 /**
  */
 public class IndexPage extends BasePage{
+    private static final Logger LOG= LoggerFactory.getLogger(IndexPage.class);
     @SpringBean
     ProfileDao profileDao;
     @SpringBean
@@ -89,9 +92,9 @@ public class IndexPage extends BasePage{
         form.add(new AjaxButton("submit"){
             @Override
             protected void onSubmit(AjaxRequestTarget target, Form<?> form) {
-                System.out.println("skalModel = " + skalModel.getObject().getName());
-                System.out.println("dateModel = " + dateModel.getObject());
-                System.out.println("timeModel = " + localDateModel.getObject());
+                LOG.debug("skalModel = {}" , skalModel.getObject().getName());
+                LOG.debug("dateModel = {}" , dateModel.getObject());
+                LOG.debug("timeModel = {}" , localDateModel.getObject());
                 final LocalDate localDate = LocalDate.fromDateFields(dateModel.getObject());
                 localDateModel.setObject(localDate);
                 target.addComponent(resultContainer);

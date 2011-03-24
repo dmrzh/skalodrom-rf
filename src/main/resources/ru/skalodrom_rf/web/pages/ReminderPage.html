@@ -8,8 +8,10 @@
 <body>
 <wicket:extend>
 <p>Пароль отправится на e-mail. проверьте почту через несколько минут.</p>
-  email <input type="text"> <br/>
-<input type="submit" value="напомнить пароль">
+<form wicket:id="form">
+    email <input type="text" wicket:id="email"> <br/>
+    <input type="submit" value="напомнить пароль" wicket:id="submit">
+</form>
 </wicket:extend>
 </body>
 </html>
