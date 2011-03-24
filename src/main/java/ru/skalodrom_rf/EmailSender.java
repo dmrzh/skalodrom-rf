@@ -39,6 +39,8 @@ public class EmailSender {
             message.setFrom(new InternetAddress("info@skalodrom-rf.ru"));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to.getProfile().getEmail()));
             message.setSubject(subject);
+            message.setHeader("Content-Type","text/plain; charset=\"utf-8\"");
+            message.setHeader("Content-Transfer-Encoding", "quoted-printable");
 
             message.setText(text);
 
