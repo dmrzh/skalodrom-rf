@@ -61,7 +61,7 @@ public class HibernateQueryDataProvider <E extends PersistentEntity<EK>,
 
     @Override
     public Iterator<? extends E> iterator(int first, int count) {
-        return new ArrayList(getFullList()).subList(first,first+count).iterator();
+        return new ArrayList<E>(getFullList()).subList(first,first+count).iterator();
     }
 
     @Override

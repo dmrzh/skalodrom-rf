@@ -20,6 +20,7 @@ import org.apache.wicket.markup.repeater.data.IDataProvider;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.joda.time.LocalDate;
+import ru.skalodrom_rf.dao.PrefferedWeekDayDao;
 import ru.skalodrom_rf.dao.ProfileDao;
 import ru.skalodrom_rf.dao.ScalodromDao;
 import ru.skalodrom_rf.model.ClimbLevel;
@@ -42,6 +43,8 @@ public class IndexPage extends BasePage{
     ProfileDao profileDao;
     @SpringBean
     private ScalodromDao scalodromDao;
+    @SpringBean
+    PrefferedWeekDayDao prefferedWeekDayDao;
 
     private final HibernateModel<Scalodrom,Long> skalModel = new HibernateModel<Scalodrom,Long>();
 
@@ -49,6 +52,7 @@ public class IndexPage extends BasePage{
     private final Model<LocalDate> localDateModel = new Model<LocalDate>(new LocalDate());
 
     WebMarkupContainer resultContainer=new WebMarkupContainer("wrapper");
+    WebMarkupContainer resultContainer2=new WebMarkupContainer("wrapper2");
     public IndexPage() {
         this(new PageParameters());
     }
@@ -91,19 +95,26 @@ public class IndexPage extends BasePage{
                 final LocalDate localDate = LocalDate.fromDateFields(dateModel.getObject());
                 localDateModel.setObject(localDate);
                 target.addComponent(resultContainer);
+                target.addComponent(resultContainer2);
             }
         });
 
         resultContainer.setOutputMarkupId(true);
         final HibernateQueryDataProvider dataProvider = new HibernateQueryDataProvider(ProfileDao.class, "findByScalodromAndDate",skalModel,localDateModel,timeModel);
-        resultContainer.add(createResults(dataProvider));
+        resultContainer.add(createResults("profilesTable",dataProvider));
         add(resultContainer);
+
+        final WeekDayModelWrapper weekModel = new WeekDayModelWrapper(localDateModel);
+        final HibernateQueryDataProvider dataProvider2 = new HibernateQueryDataProvider(ProfileDao.class, "findByScalodromAndWeekDay",skalModel, weekModel);
+        resultContainer2.setOutputMarkupId(true);
+        resultContainer2.add(createResults("profilesTable2",dataProvider2));
+        add(resultContainer2);
 
 
     }
 
-    private DataView createResults(IDataProvider dataProvider) {
-        final DataView profilesTable = new DataView<Profile>("profilesTable",dataProvider ){
+    private DataView createResults(String id, IDataProvider dataProvider) {
+        final DataView profilesTable = new DataView<Profile>(id,dataProvider ){
             @Override
             protected void populateItem(final Item<Profile> hibernateModelItem) {
                 final Profile profile = hibernateModelItem.getModelObject();

@@ -53,7 +53,28 @@
     </tr>
 </table>
 </div>
-    <a href="subscribe.html">Подписаться на этот запрос</a>
+
+    <div wicket:id="wrapper2">
+    Результаты поиска по дням недели:
+<table width="100%" border="1">
+    <thead>
+   <tr>
+        <th>Имя</th>
+        <th>Вес, кг</th>
+        <th>Уровень</th>
+        <th>Действия</th>
+    </tr>
+    </thead>
+    <tr wicket:id="profilesTable2">
+        <td><span wicket:id="fio">fio</span> </td>
+        <td><span wicket:id="weight"></span></td>
+        <td> <span wicket:id="level"></span></td>
+        <td><a href="#" wicket:id="viewProfile">посмотреть</a> <a wicket:id="sendMessage" href="#">написать</a></td>
+    </tr>
+</table>
+</div>
+
+
 
 </wicket:extend>
 </body>

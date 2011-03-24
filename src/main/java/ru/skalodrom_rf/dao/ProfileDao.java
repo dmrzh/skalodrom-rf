@@ -5,6 +5,7 @@ import net.sf.autodao.Dao;
 import net.sf.autodao.Finder;
 import net.sf.autodao.Named;
 import org.joda.time.LocalDate;
+import ru.skalodrom_rf.model.PrefferedWeekDay;
 import ru.skalodrom_rf.model.Profile;
 import ru.skalodrom_rf.model.Scalodrom;
 import ru.skalodrom_rf.model.Time;
@@ -17,9 +18,17 @@ import java.util.List;
 public interface ProfileDao extends Dao<Profile, Long> {
      @Finder(query = "from Profile")
      List<Profile> findAll();
-    @Finder(query = "select p from Profile p inner join p.whereClimb  as s1 inner join p.whenClimb as climbTime  where s1=:s and climbTime.date=:d and climbTime.time=:t")
+    @Finder(query = "select p " +
+            "from Profile p " +
+            "inner join p.whereClimb  as s1 " +
+            "inner join p.whenClimb as climbTime  " +
+            "where s1=:s and climbTime.date=:d and climbTime.time=:t")
      List<Profile> findByScalodromAndDate(@Named("s")Scalodrom s, @Named("d")LocalDate date, @Named("t")Time time);
 
-//     @Finder(query = "select p from Profile p inner join p.whereClimb  as s1 inner join p.weekDays as weekDay  where s1=:s and weekDay=:wd")
-//     List<Profile> findByScalodromAndWeekDay(@Named("s")Scalodrom s, @Named("wd") PrefferedWeekDay prefferedWeekDay);
+     @Finder(query = "select p " +
+             "from Profile p " +
+             "inner join p.whereClimb  as s1 " +
+             "inner join p.prefferedWeekDay as weekDay  " +
+             "where s1=:s and weekDay=:wd")
+     List<Profile> findByScalodromAndWeekDay(@Named("s")Scalodrom s, @Named("wd") PrefferedWeekDay prefferedWeekDay);
 }
