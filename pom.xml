@@ -225,15 +225,10 @@
                 <directory>src/main/resources</directory>
             </resource>
             <resource>
-                <filtering>false</filtering>
-                <directory>src/main/java</directory>
-                <includes>
-                    <include>**</include>
-                </includes>
-                <excludes>
-                    <exclude>**/*.java</exclude>
-                </excludes>
+                <filtering>true</filtering>
+                <directory>profiles/${profile.selected}</directory>
             </resource>
+
         </resources>
         <testResources>
             <testResource>
@@ -275,6 +270,37 @@
 
         </plugins>
     </build>
+    <profiles>
+        <profile>
+            <id>development</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <profile.selected>development</profile.selected>
+            </properties>
+        </profile>
+        <profile>
+        <id>testing</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <profile.selected>testing</profile.selected>
+            </properties>
+        </profile>
+        <profile>
+            <id>production</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <profile.selected>production</profile.selected>
+            </properties>
+        </profile>
+
+
+    </profiles>
     <repositories>
         <repository>
             <id>autodao</id>

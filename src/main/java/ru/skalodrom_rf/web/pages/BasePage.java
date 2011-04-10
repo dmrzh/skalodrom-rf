@@ -15,6 +15,7 @@ import java.util.Calendar;
 
 /**.*/
 public class BasePage extends WebPage{
+
     public BasePage() {
         init();        
     }
@@ -42,7 +43,7 @@ public class BasePage extends WebPage{
 
     private void addStatisticLabel() {
         final DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.FULL);
-        final Calendar cal = Calendar.getInstance();
+        final Calendar cal = Calendar.getInstance(getLocale());
         cal.add(Calendar.DAY_OF_WEEK,1);
         final String s = dateFormat.format(cal.getTime());
         add(new Label("nextDate", s));

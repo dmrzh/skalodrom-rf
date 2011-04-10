@@ -1,13 +1,7 @@
 package ru.skalodrom_rf.web.pages;
 
 import org.apache.wicket.extensions.markup.html.form.palette.Palette;
-import org.apache.wicket.markup.html.form.CheckBoxMultipleChoice;
-import org.apache.wicket.markup.html.form.ChoiceRenderer;
-import org.apache.wicket.markup.html.form.DropDownChoice;
-import org.apache.wicket.markup.html.form.Form;
-import org.apache.wicket.markup.html.form.RequiredTextField;
-import org.apache.wicket.markup.html.form.TextArea;
-import org.apache.wicket.markup.html.form.TextField;
+import org.apache.wicket.markup.html.form.*;
 import org.apache.wicket.markup.html.form.upload.FileUpload;
 import org.apache.wicket.markup.html.form.upload.FileUploadField;
 import org.apache.wicket.markup.html.image.Image;
@@ -19,16 +13,8 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.util.lang.Bytes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.skalodrom_rf.dao.PrefferedWeekDayDao;
-import ru.skalodrom_rf.dao.ProfileDao;
-import ru.skalodrom_rf.dao.ScalodromDao;
-import ru.skalodrom_rf.dao.UserDao;
-import ru.skalodrom_rf.dao.Utils;
-import ru.skalodrom_rf.model.ClimbLevel;
-import ru.skalodrom_rf.model.ClimbTime;
-import ru.skalodrom_rf.model.PrefferedWeekDay;
-import ru.skalodrom_rf.model.Profile;
-import ru.skalodrom_rf.model.Scalodrom;
+import ru.skalodrom_rf.dao.*;
+import ru.skalodrom_rf.model.*;
 import ru.skalodrom_rf.web.EnumRendererer;
 import ru.skalodrom_rf.web.components.DatesPanel;
 import ru.skalodrom_rf.web.hibernate.HibernateFieldDataProvider;
@@ -48,8 +34,8 @@ public class ProfileEditPage extends BasePage{
     private UserDao userDao;
     @SpringBean
     private ProfileDao profileDao;
-        @SpringBean
-        ScalodromDao scalodromDao;
+    @SpringBean
+    ScalodromDao scalodromDao;
 
     @SpringBean
     private PrefferedWeekDayDao prefferedWeekDayDao;
