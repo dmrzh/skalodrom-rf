@@ -6,11 +6,9 @@ import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 
 
 @Entity()
-@Table(name = "User")
 public class User implements PersistentEntity<String>{
     public String getPrimaryKey() {
         return login;
