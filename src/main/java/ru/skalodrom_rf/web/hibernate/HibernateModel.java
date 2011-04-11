@@ -10,10 +10,11 @@ import org.slf4j.LoggerFactory;
 
 import java.io.Serializable;
 
-/**.*/
-public class HibernateModel<T extends PersistentEntity>
-        extends LoadableDetachableModel<T>  {
-    private static final Logger LOG= LoggerFactory.getLogger(HibernateModel.class);
+/**
+ * .
+ */
+public class HibernateModel<T extends PersistentEntity> extends LoadableDetachableModel<T> {
+    private static final Logger LOG = LoggerFactory.getLogger(HibernateModel.class);
     @SpringBean
     DaoFinder daoFinder;
     Serializable id;
@@ -22,7 +23,6 @@ public class HibernateModel<T extends PersistentEntity>
     public HibernateModel() {
         init();
     }
-
 
     public HibernateModel(T pe) {
         super(pe);
@@ -36,17 +36,15 @@ public class HibernateModel<T extends PersistentEntity>
     @Override
     protected void onDetach() {
         T pe = getObject();
-        id=pe.getPrimaryKey();
-        tClass=(Class<T>)pe.getClass();
+        id = pe.getPrimaryKey();
+        tClass = (Class<T>) pe.getClass();
     }
 
-
-
     @Override
-    protected T load() {        
+    protected T load() {
         final Dao dao = daoFinder.findDao(tClass);
-        LOG.trace("dao={}",dao);
-        return (T)dao.get(id);
+        LOG.trace("dao={}", dao);
+        return (T) dao.get(id);
     }
 
     public DaoFinder getDaoFinder() {
