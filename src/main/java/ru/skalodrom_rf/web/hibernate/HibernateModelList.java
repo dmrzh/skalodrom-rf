@@ -3,28 +3,27 @@ package ru.skalodrom_rf.web.hibernate;
 import net.sf.autodao.PersistentEntity;
 import org.apache.wicket.model.LoadableDetachableModel;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
 /**.*/
-public class HibernateModelList<P extends PersistentEntity<K>,  K extends Serializable> 
+public class HibernateModelList<P extends PersistentEntity>
                             extends LoadableDetachableModel<List<P>> {
-    List<HibernateModel<P,K>> list;
+    List<HibernateModel<P>> list;
      public HibernateModelList(Set<P> hList) {
         super(new ArrayList<P>(hList));
-        this.list = new ArrayList<HibernateModel<P,K>>(hList.size());
+        this.list = new ArrayList<HibernateModel<P>>(hList.size());
         for(P pe:hList){
-            list.add(new HibernateModel<P,K>(pe));
+            list.add(new HibernateModel<P>(pe));
         }
     }
 
     public HibernateModelList(List<P> hList) {
         super(hList);
-        this.list = new ArrayList<HibernateModel<P,K>>(hList.size());
+        this.list = new ArrayList<HibernateModel<P>>(hList.size());
         for(P pe:hList){
-            list.add(new HibernateModel<P,K>(pe));
+            list.add(new HibernateModel<P>(pe));
         }
     }
        @Override
@@ -38,7 +37,7 @@ public class HibernateModelList<P extends PersistentEntity<K>,  K extends Serial
     @Override
     protected List<P> load() {
         List<P> hList= new ArrayList<P>(list.size());
-        for(HibernateModel<P,K> obj: list){
+        for(HibernateModel<P> obj: list){
             obj.load();
             hList.add(obj.getObject());
         }

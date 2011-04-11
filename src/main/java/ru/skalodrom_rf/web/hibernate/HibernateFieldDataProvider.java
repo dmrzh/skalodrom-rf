@@ -14,16 +14,14 @@ import java.util.Collection;
 import java.util.Iterator;
 
 /**.*/
-public class HibernateFieldDataProvider<E extends PersistentEntity<EK>,
-                                    EK extends Serializable,
-                                    F>
+public class HibernateFieldDataProvider<E extends PersistentEntity,  F>
                                                                         implements IDataProvider<F>{
     private static final Logger LOG= LoggerFactory.getLogger(HibernateFieldDataProvider.class);
-    private HibernateModel<E, EK> rootHibernateModel;
+    private HibernateModel<E> rootHibernateModel;
     private String field;
 
     public HibernateFieldDataProvider(E entity,String field) {
-        this.rootHibernateModel = new HibernateModel<E, EK>(entity);
+        this.rootHibernateModel = new HibernateModel<E>(entity);
         rootHibernateModel.detach();
         this.field=field;
     }
@@ -64,7 +62,7 @@ public class HibernateFieldDataProvider<E extends PersistentEntity<EK>,
         }
 
     }
-    public HibernateModel<E, EK> getRootModel(){
+    public HibernateModel<E> getRootModel(){
         return rootHibernateModel;
 
     }

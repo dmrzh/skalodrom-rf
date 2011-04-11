@@ -49,7 +49,7 @@ public class IndexPage extends BasePage{
     @SpringBean
     PrefferedWeekDayDao prefferedWeekDayDao;
 
-    private final HibernateModel<Scalodrom,Long> skalModel = new HibernateModel<Scalodrom,Long>();
+    private final HibernateModel<Scalodrom> skalModel = new HibernateModel<Scalodrom>();
 
     private final Model<Date> dateModel = new Model<Date>(new Date());
     private final Model<LocalDate> localDateModel = new Model<LocalDate>(new LocalDate());
@@ -72,7 +72,7 @@ public class IndexPage extends BasePage{
 
         ChoiceRenderer<Scalodrom> choiceRenderer = new ChoiceRenderer<Scalodrom>("name", "name");
 
-        final HibernateModelList<Scalodrom, Long> modelList = new HibernateModelList<Scalodrom, Long>(list);
+        final HibernateModelList<Scalodrom> modelList = new HibernateModelList<Scalodrom>(list);
         final DropDownChoice dropDownChoice = new DropDownChoice<Scalodrom>("scalodrom", modelList, choiceRenderer);
 
         dropDownChoice.setModel(skalModel);

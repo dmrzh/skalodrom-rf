@@ -6,9 +6,9 @@ import ru.skalodrom_rf.web.hibernate.HibernateModel;
 
 /**.*/
 class AvatarImageResource extends DynamicImageResource {
-    private final HibernateModel<Profile, Long> model;
+    private final HibernateModel<Profile> model;
 
-    public AvatarImageResource(HibernateModel<Profile, Long> model) {
+    public AvatarImageResource(HibernateModel<Profile> model) {
         this.model = model;
     }
 

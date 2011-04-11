@@ -49,8 +49,8 @@ public class ProfileEditPage extends BasePage{
 
         
         final Profile pe = Utils.getCurrntUser(userDao).getProfile();
-        final HibernateModel<Profile,Long> model = new HibernateModel<Profile,Long>(pe);
-        final HibernateModelList<Scalodrom, Long> selectedScalodroms = new HibernateModelList<Scalodrom, Long>(pe.getWhereClimb());
+        final HibernateModel<Profile> model = new HibernateModel<Profile>(pe);
+        final HibernateModelList<Scalodrom> selectedScalodroms = new HibernateModelList<Scalodrom>(pe.getWhereClimb());
         final Form<Profile> form = new Form<Profile>("form", new CompoundPropertyModel<Profile>(model)){
             @Override
             protected void onSubmit() {
@@ -85,11 +85,11 @@ public class ProfileEditPage extends BasePage{
         addSkalodromForm(form,selectedScalodroms );
 
 
-        final HibernateModelList<PrefferedWeekDay, Long> allWeekDaysModel = new HibernateModelList<PrefferedWeekDay, Long>(prefferedWeekDayDao.findAll());
+        final HibernateModelList<PrefferedWeekDay> allWeekDaysModel = new HibernateModelList<PrefferedWeekDay>(prefferedWeekDayDao.findAll());
         CheckBoxMultipleChoice<PrefferedWeekDay> weekDaysChoice = new CheckBoxMultipleChoice<PrefferedWeekDay>("prefferedWeekDay", allWeekDaysModel, new WeekdaysRenderer());
         form.add(weekDaysChoice);
 
-        form.add(new DatesPanel("whenClimb", new HibernateFieldDataProvider<Profile,Long, ClimbTime>(pe,"whenClimb")));
+        form.add(new DatesPanel("whenClimb", new HibernateFieldDataProvider<Profile, ClimbTime>(pe,"whenClimb")));
 
 
         
@@ -97,12 +97,12 @@ public class ProfileEditPage extends BasePage{
 
     }
 
-    private void addSkalodromForm(Form<Profile> form,HibernateModelList<Scalodrom, Long> selectedScalodroms ) {
+    private void addSkalodromForm(Form<Profile> form,HibernateModelList<Scalodrom> selectedScalodroms ) {
         Profile profile=Utils.getCurrntUser(userDao).getProfile();
-        final HibernateModel<Profile,Long> profileModel=new HibernateModel<Profile,Long>(profile);
+        final HibernateModel<Profile> profileModel=new HibernateModel<Profile>(profile);
 
         final List<Scalodrom> scalodroms = scalodromDao.findAll();
-        final HibernateModelList<Scalodrom, Long> scalodromsModel = new HibernateModelList<Scalodrom, Long>(scalodroms);
+        final HibernateModelList<Scalodrom> scalodromsModel = new HibernateModelList<Scalodrom>(scalodroms);
          final ChoiceRenderer<Scalodrom> rendererer = new ChoiceRenderer<Scalodrom>("name", "id");
 
 

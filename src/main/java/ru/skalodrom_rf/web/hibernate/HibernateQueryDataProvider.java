@@ -6,7 +6,6 @@ import org.apache.wicket.injection.web.InjectorHolder;
 import org.apache.wicket.markup.repeater.data.IDataProvider;
 import org.apache.wicket.model.IModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
-import ru.skalodrom_rf.dao.DaoFinder;
 
 import java.io.Serializable;
 import java.lang.reflect.Method;
@@ -71,6 +70,6 @@ public class HibernateQueryDataProvider <E extends PersistentEntity<EK>,
 
     @Override
     public IModel<E> model(E object) {
-        return new HibernateModel<E,EK>(object);
+        return new HibernateModel<E>(object);
     }
 }

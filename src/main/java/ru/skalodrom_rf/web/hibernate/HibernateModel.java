@@ -7,17 +7,16 @@ import org.apache.wicket.model.LoadableDetachableModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import ru.skalodrom_rf.dao.DaoFinder;
 
 import java.io.Serializable;
 
 /**.*/
-public class HibernateModel<T extends PersistentEntity<K>, K extends Serializable>
+public class HibernateModel<T extends PersistentEntity>
         extends LoadableDetachableModel<T>  {
     private static final Logger LOG= LoggerFactory.getLogger(HibernateModel.class);
     @SpringBean
     DaoFinder daoFinder;
-    K id;
+    Serializable id;
     Class<T> tClass;
 
     public HibernateModel() {
@@ -45,9 +44,9 @@ public class HibernateModel<T extends PersistentEntity<K>, K extends Serializabl
 
     @Override
     protected T load() {        
-        final Dao<T,K> dao = daoFinder.findDao(tClass);
+        final Dao dao = daoFinder.findDao(tClass);
         LOG.trace("dao={}",dao);
-        return dao.get(id);
+        return (T)dao.get(id);
     }
 
     public DaoFinder getDaoFinder() {

@@ -18,7 +18,7 @@ import ru.skalodrom_rf.web.hibernate.HibernateModel;
 public class SendMessagePage extends BasePage{
     @SpringBean
     EmailSender emailSender;
-    public SendMessagePage(final HibernateModel<Profile,Long> whomModel) {
+    public SendMessagePage(final HibernateModel<Profile> whomModel) {
         add(new Label("whom", toProfileString(whomModel.getObject())));
         final Form form = new Form("form");
         add(form);

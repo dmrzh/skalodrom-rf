@@ -12,13 +12,7 @@ import org.apache.wicket.markup.repeater.data.DataView;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import ru.skalodrom_rf.dao.PrefferedWeekDayDao;
 import ru.skalodrom_rf.dao.UserDao;
-import ru.skalodrom_rf.model.ClimbLevel;
-import ru.skalodrom_rf.model.ClimbTime;
-import ru.skalodrom_rf.model.PrefferedWeekDay;
-import ru.skalodrom_rf.model.Profile;
-import ru.skalodrom_rf.model.Scalodrom;
-import ru.skalodrom_rf.model.Time;
-import ru.skalodrom_rf.model.User;
+import ru.skalodrom_rf.model.*;
 import ru.skalodrom_rf.web.EnumRendererer;
 import ru.skalodrom_rf.web.hibernate.HibernateFieldDataProvider;
 import ru.skalodrom_rf.web.hibernate.HibernateModel;
@@ -56,7 +50,7 @@ public class ProfileViewPage extends BasePage{
         add(new Label("email", p.getEmail()));
         add(new Label("phone", p.getPhone()));
 
-        final HibernateModel<Profile,Long> model = new HibernateModel<Profile,Long>(p);
+        final HibernateModel<Profile> model = new HibernateModel<Profile>(p);
         final DynamicImageResource avatarImageResource = new AvatarImageResource(model);
         add(new Image("avatar", avatarImageResource));
         add(new Label("about", p.getAbout()));
@@ -65,7 +59,7 @@ public class ProfileViewPage extends BasePage{
         add(new Label("level", climbLevelRenderer.getDisplayValue(p.getClimbLevel())));
         add(new Label("weight", p.getWeight()==null?"":""+p.getWeight()));
 
-        final HibernateFieldDataProvider<Profile,Long,Scalodrom> provider = new HibernateFieldDataProvider<Profile,Long,Scalodrom>(p,"whereClimb");
+        final HibernateFieldDataProvider<Profile,Scalodrom> provider = new HibernateFieldDataProvider<Profile,Scalodrom>(p,"whereClimb");
         final DataView<Scalodrom> skalodromsView= new DataView<Scalodrom>("skalodromsView", provider){
             @Override
             protected void populateItem(Item<Scalodrom> scalodromItem) {
@@ -75,7 +69,7 @@ public class ProfileViewPage extends BasePage{
         };
         add(skalodromsView);
 
-        final HibernateModelList<PrefferedWeekDay, Long> prefWeekDaysModel = new HibernateModelList<PrefferedWeekDay, Long>(p.getPrefferedWeekDay());
+        final HibernateModelList<PrefferedWeekDay> prefWeekDaysModel = new HibernateModelList<PrefferedWeekDay>(p.getPrefferedWeekDay());
         add(new ListView<PrefferedWeekDay>("prefferedWeekDay",prefWeekDaysModel){
             WeekdaysRenderer rdr=new WeekdaysRenderer();
             @Override
@@ -86,7 +80,7 @@ public class ProfileViewPage extends BasePage{
             }
         });
 
-        final HibernateFieldDataProvider<Profile,Long,ClimbTime> whenProvider = new HibernateFieldDataProvider<Profile,Long,ClimbTime>(p,"whenClimb");
+        final HibernateFieldDataProvider<Profile,ClimbTime> whenProvider = new HibernateFieldDataProvider<Profile,ClimbTime>(p,"whenClimb");
         final DateFormat dateFormat = SimpleDateFormat.getDateInstance(SimpleDateFormat.LONG,getRequest().getLocale());
         final DataView<ClimbTime> whenView= new DataView<ClimbTime>("whenView", whenProvider){
             @Override
