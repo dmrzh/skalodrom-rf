@@ -8,11 +8,7 @@ import ru.skalodrom_rf.dao.ClimbTimeDao;
 import ru.skalodrom_rf.dao.PrefferedWeekDayDao;
 import ru.skalodrom_rf.dao.ScalodromDao;
 import ru.skalodrom_rf.dao.UserDao;
-import ru.skalodrom_rf.model.ClimbTime;
-import ru.skalodrom_rf.model.PrefferedWeekDay;
-import ru.skalodrom_rf.model.Scalodrom;
-import ru.skalodrom_rf.model.Time;
-import ru.skalodrom_rf.model.User;
+import ru.skalodrom_rf.model.*;
 
 import javax.annotation.Resource;
 
@@ -53,7 +49,7 @@ public class Dataloader {
 
 
         final User user = new User();
-        user.setLogin("dima");
+        user.setLogin("http://rzhevskiy.info/journal/dima/");
         user.getProfile().setFio("Дима");
 
         user.setPassword("");

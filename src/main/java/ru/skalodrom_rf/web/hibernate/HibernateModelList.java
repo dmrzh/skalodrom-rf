@@ -12,11 +12,7 @@ public class HibernateModelList<P extends PersistentEntity>
                             extends LoadableDetachableModel<List<P>> {
     List<HibernateModel<P>> list;
      public HibernateModelList(Set<P> hList) {
-        super(new ArrayList<P>(hList));
-        this.list = new ArrayList<HibernateModel<P>>(hList.size());
-        for(P pe:hList){
-            list.add(new HibernateModel<P>(pe));
-        }
+        this(new ArrayList<P>(hList));
     }
 
     public HibernateModelList(List<P> hList) {
