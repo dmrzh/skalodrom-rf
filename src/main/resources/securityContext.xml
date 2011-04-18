@@ -15,11 +15,16 @@
         <intercept-url pattern="/favicon.ico"  access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <intercept-url pattern="/img/*"  access="IS_AUTHENTICATED_ANONYMOUSLY"/>
 
-        <intercept-url pattern="/" access="IS_AUTHENTICATED_ANONYMOUSLY"/>        
+        <intercept-url pattern="/" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <intercept-url pattern="/register.html*/**"  access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <intercept-url pattern="/**"          access="ROLE_USER" />
         <form-login login-page="/login.html" authentication-failure-url="/login.html?wrongPassword=true"/>
-        <openid-login/>
+        <openid-login>
+            <attribute-exchange>
+                <openid-attribute name="email" type="http://schema.openid.net/contact/email" required="true" count="2"/>
+                <openid-attribute name="name" type="http://schema.openid.net/namePerson/friendly"/>
+            </attribute-exchange>
+        </openid-login>
     </http>
     <authentication-manager>
         <authentication-provider user-service-ref='userDetailsService'/>
@@ -28,6 +33,6 @@
 
   <beans:bean id="userDetailsService" class="ru.skalodrom_rf.security.HibernateUserDetailsService"/>
 
-    
+
 
 </beans:beans>

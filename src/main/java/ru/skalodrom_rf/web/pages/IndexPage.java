@@ -1,5 +1,8 @@
 package ru.skalodrom_rf.web.pages;
 
+import net.sf.wicketautodao.model.HibernateModel;
+import net.sf.wicketautodao.model.HibernateModelList;
+import net.sf.wicketautodao.model.HibernateQueryDataProvider;
 import org.apache.wicket.PageParameters;
 import org.apache.wicket.RequestCycle;
 import org.apache.wicket.ajax.AjaxRequestTarget;
@@ -30,9 +33,6 @@ import ru.skalodrom_rf.model.Profile;
 import ru.skalodrom_rf.model.Scalodrom;
 import ru.skalodrom_rf.model.Time;
 import ru.skalodrom_rf.web.EnumRendererer;
-import ru.skalodrom_rf.web.hibernate.HibernateModel;
-import ru.skalodrom_rf.web.hibernate.HibernateModelList;
-import ru.skalodrom_rf.web.hibernate.HibernateQueryDataProvider;
 
 import java.util.Arrays;
 import java.util.Date;

@@ -53,7 +53,7 @@
 
     <dao:hibernateScan base-package="ru.skalodrom_rf.dao" transaction-manager="transactionManager"/>
 
-    <bean class="ru.skalodrom_rf.web.hibernate.DaoFinder"/>
+    <bean class="net.sf.wicketautodao.model.DaoFinder"/>
     <bean class="ru.skalodrom_rf.EmailSender"/>
 
 

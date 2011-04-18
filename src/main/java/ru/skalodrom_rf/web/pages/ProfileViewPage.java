@@ -1,5 +1,8 @@
 package ru.skalodrom_rf.web.pages;
 
+import net.sf.wicketautodao.model.HibernateFieldDataProvider;
+import net.sf.wicketautodao.model.HibernateModel;
+import net.sf.wicketautodao.model.HibernateModelList;
 import org.apache.wicket.PageParameters;
 import org.apache.wicket.RequestCycle;
 import org.apache.wicket.markup.html.basic.Label;
@@ -14,9 +17,6 @@ import ru.skalodrom_rf.dao.PrefferedWeekDayDao;
 import ru.skalodrom_rf.dao.UserDao;
 import ru.skalodrom_rf.model.*;
 import ru.skalodrom_rf.web.EnumRendererer;
-import ru.skalodrom_rf.web.hibernate.HibernateFieldDataProvider;
-import ru.skalodrom_rf.web.hibernate.HibernateModel;
-import ru.skalodrom_rf.web.hibernate.HibernateModelList;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

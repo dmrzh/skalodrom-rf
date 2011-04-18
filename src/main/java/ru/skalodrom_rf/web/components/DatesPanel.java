@@ -1,5 +1,6 @@
 package ru.skalodrom_rf.web.components;
 
+import net.sf.wicketautodao.model.HibernateFieldDataProvider;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.AjaxLink;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
@@ -22,7 +23,6 @@ import ru.skalodrom_rf.model.ClimbTime;
 import ru.skalodrom_rf.model.Profile;
 import ru.skalodrom_rf.model.Time;
 import ru.skalodrom_rf.web.EnumRendererer;
-import ru.skalodrom_rf.web.hibernate.HibernateFieldDataProvider;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

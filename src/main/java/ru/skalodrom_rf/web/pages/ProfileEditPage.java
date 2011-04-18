@@ -1,5 +1,8 @@
 package ru.skalodrom_rf.web.pages;
 
+import net.sf.wicketautodao.model.HibernateFieldDataProvider;
+import net.sf.wicketautodao.model.HibernateModel;
+import net.sf.wicketautodao.model.HibernateModelList;
 import org.apache.wicket.extensions.markup.html.form.palette.Palette;
 import org.apache.wicket.markup.html.form.*;
 import org.apache.wicket.markup.html.form.upload.FileUpload;
@@ -17,9 +20,6 @@ import ru.skalodrom_rf.dao.*;
 import ru.skalodrom_rf.model.*;
 import ru.skalodrom_rf.web.EnumRendererer;
 import ru.skalodrom_rf.web.components.DatesPanel;
-import ru.skalodrom_rf.web.hibernate.HibernateFieldDataProvider;
-import ru.skalodrom_rf.web.hibernate.HibernateModel;
-import ru.skalodrom_rf.web.hibernate.HibernateModelList;
 
 import java.util.Arrays;
 import java.util.List;

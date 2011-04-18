@@ -1,5 +1,6 @@
 package ru.skalodrom_rf.web.pages;
 
+import net.sf.wicketautodao.model.HibernateModel;
 import org.apache.wicket.RequestCycle;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.form.Button;
@@ -11,7 +12,7 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import ru.skalodrom_rf.EmailSender;
 import ru.skalodrom_rf.model.Profile;
 import ru.skalodrom_rf.model.User;
-import ru.skalodrom_rf.web.hibernate.HibernateModel;
+
 
 /**
  */

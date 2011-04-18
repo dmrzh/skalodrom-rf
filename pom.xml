@@ -8,20 +8,8 @@
     <!-- TODO project name  -->
     <name>skalodrom-rf</name>
     <description>web application for partner finding.</description>
-    <!--
-         TODO <organization> <name>company name</name> <url>company url</url>
-         </organization>
-     -->
-    <licenses>
-        <license>
-            <name>The Apache Software License, Version 2.0</name>
-            <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
-            <distribution>repo</distribution>
-        </license>
-    </licenses>
     <dependencies>
         <!--  WICKET DEPENDENCIES -->
-
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
@@ -163,6 +151,11 @@
             <groupId>net.sf.autodao</groupId>
             <artifactId>autodao</artifactId>
             <version>0.10-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+              <groupId>net.sf.wicket-autodao</groupId>
+              <artifactId>wicket-autodao</artifactId>
+              <version>0.1</version>
         </dependency>
         <dependency>
             <groupId>commons-dbcp</groupId>
