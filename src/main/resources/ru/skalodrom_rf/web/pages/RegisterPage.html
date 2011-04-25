@@ -8,31 +8,34 @@
 </head>
 <body>
     <wicket:extend>
-    <p>
-    <font color="red">
-        <div wicket:id="feedback">[Feedback Panel]</div>       
-    </font>
-</p>
-    <form wicket:id="form" >
-        <table>
-            <tr>
-                <td>Логин</td>
-                <td><input wicket:id="login" type="text"> </td>
-            </tr>
-            <tr>
-                <td>Email</td>
-                <td><input wicket:id="profile.email" type="text"> </td>
-            </tr>
-             <tr>
-                <td>password</td>
-                <td><input wicket:id="password" type="password"> </td>
-            </tr>
-            <tr>
-                <td><img wicket:id="captchaImage" src="#" alt="captcha"></td>
-                <td><input wicket:id="captchaText" type="text"> </td>
-            </tr>
-        </table>
-        <input wicket:id="submit" type="submit" value="Отправить код подтверждения">
+        <p>
+            <font color="red">
+                <div wicket:id="feedback">[Feedback Panel]</div>
+            </font>
+        </p>
+        <form wicket:id="form" >
+        	<div class="login-form">
+					<div class="line">
+						<div class="label"><label>Логин</label></div>
+						<input type="text"  wicket:id="login">
+					</div>
+					<div class="line">
+						<div class="label"><label>Email</label></div>
+						<input type="text" wicket:id="profile.email">
+					</div>
+					<div class="line">
+						<div class="label"><label>Пароль</label></div>
+						<input type="password" wicket:id="password">
+					</div>
+					<div class="line captha">
+						<div class="label"><img  wicket:id="captchaImage" src="#" alt="captcha"></div>
+						<input type="text" wicket:id="captchaText">
+					</div>
+					<div class="submit">
+						<input type="submit" value="Отправить код подтверждения" wicket:id="submit">
+					</div>
+
+				</div>
     </form>
     </wicket:extend>
 </body>

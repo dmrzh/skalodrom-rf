@@ -14,21 +14,31 @@
 </p>
 
 <form action="j_spring_security_check" method="POST">
-<table>
-    <tr>
-        <td>Логин</td>
-        <td><input type="text" name='j_username'> </td>
-    </tr>
-    <tr>
-        <td>Пароль</td>
-        <td><input type="password" name='j_password'> </td>
-    </tr>
-    <tr>
-        <td><input type="checkbox" name="_spring_security_remember_me"></td>
-        <td>Don't ask for my password for two weeks</td>
-    </tr>
-</table>
 <input type="submit" value="Войти">
+    	<div class="login-form">
+					<div class="line">
+						<div class="label"><label>Логин</label></div>
+						<input type="text" name='j_username'>
+					</div>
+					<div class="line">
+						<div class="label"><label>Пароль</label></div>
+						<input type="text" name='j_password'>
+					</div>
+					<div class="line checkbox">
+						<div class="label"><input type="checkbox" name="_spring_security_remember_me"></div>
+						<label>Запомнить меня на 2 недели</label>
+					</div>
+					<div class="submit-ent">
+						<input type="submit" value="Войти">
+					</div>
+					<div class="links">
+						<span>Забыли пароль?</span><a href="reminder.html">Напомнить?</a>
+					</div>
+					<div class="reg-link">
+						<a href="register.html">Зарегестрироваться</a>
+					</div>
+
+				</div>
 </form>
 
 
