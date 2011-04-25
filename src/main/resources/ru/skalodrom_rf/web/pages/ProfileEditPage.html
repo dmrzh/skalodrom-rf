@@ -9,63 +9,83 @@
 <wicket:extend>
 <font color="red"> <span wicket:id="feedback">feedbackmessages will be put here</span></font>
 <form wicket:id="form">
-    <table>
-        <tr>
-            <td>Имя</td>
-            <td><input type="text" wicket:id="fio"></td>
-        </tr>
-        <tr>
-            <td>email</td>
-            <td><input  type="text" wicket:id="email"></td>
-        </tr>
-        <tr>
-            <td>телефон</td>
-            <td><input type="text" wicket:id="phone"></td>
-        </tr>
-        <tr>
-            <td>аватар</td>
-            <td><img height="150" wicket:id="avatar"><input type="file" wicket:id="avatarFi"></td>
-        </tr>
-        <tr>
-            <td>о себе</td>
-            <td><textarea rows="7" cols="30" wicket:id="about"> О себе</textarea></td>
-        </tr>
-        <tr>
-            <td>уровень лазания</td>
-            <td>
-                <select wicket:id="climbLevel">
-                    <option>Новичёк</option>
-                    <option>5a</option>
-                    <option>5b</option>
-                    <option>5c</option>
-                </select>
-            </td>
-        </tr>
-        <tr>
-            <td>вес, кг</td>
-            <td><input type="text" wicket:id="weight"></td>
-        </tr>
-        <tr>
-            <td>Где лазаю</td>
-            <td>
-              <span wicket:id="palette">scalodroms</span>
+    			<h1>Редактирование профиля</h1>
+				<div class="main-info">
+					<div class="left">
+						<img width="94"  height="141" alt="avatar" wicket:id="avatar">
+						<div class="input">
+							<label>Имя</label>
+							<input type="text" wicket:id="fio">
+						</div>
+						<div class="input">
+							<label>E-mail</label>
+							<input type="text" wicket:id="email">
+						</div>
+						<div class="input">
+							<label>Телефон</label>
+							<input type="text" wicket:id="phone">
+						</div>
+						<div class="input-file">
+							<input type="file" wicket:id="avatarFi">
+						</div>
+					</div>
+					<div class="right">
+						<label>О себе</label>
+						<textarea cols="30" rows="5"  wicket:id="about"></textarea>
+					</div>
+				</div>
+				<div class="form-data">
+					<div class="line">
+						<div class="label">Уровень лазания </div>
+						<select wicket:id="climbLevel">
+							<option>6a</option>
+							<option>6b</option>
+						</select>
+					</div>
+					<div class="line">
+						<div class="label">Вес, кг</div>
+						<input type="text" wicket:id="weight">
+					</div>
+					<div class="line">
+						<div class="label">Где лазаю</div>
+						<!--<div class="sl_inp">-->
+							<!--<div class="left_s">-->
+								<!--<p class="title">Остальные скалодромы</p>-->
+								<!--<select size="5">-->
+									<!--<option>Скаласити</option>-->
+									<!--<option>Экстрим</option>-->
+									<!--<option>Южная</option>-->
+									<!--<option>Бауманская</option>-->
+									<!--<option>Скалатория</option>-->
+								<!--</select>-->
+							<!--</div>-->
+							<!--<div class="center_s">-->
+								<!--<input type="button" class="next-b" value="">-->
+								<!--<input type="button" class="prev-b" value="">-->
+							<!--</div>-->
+							<!--<div class="right_s">-->
+								<!--<p class="title">Я хочу ходить в </p>-->
+								<!--<select size="5">-->
+									<!--<option>ДДС</option>-->
+								<!--</select>-->
+							<!--</div>-->
+						<!--</div>-->
+                        <span wicket:id="palette">scalodroms</span>
+					</div>
+					<div class="line checkbox">
+						<div class="label">Когда могу по дням недели</div>
+                        <span wicket:id="prefferedWeekDay">Пн., Вт.</span>
+					</div>
+					<div class="line">
+						<div class="label">Когда могу<br> по отдельным дням</div>
+                        <div wicket:id="whenClimb"></div>
+					</div>
+					<div class="line send">
+						<input type="submit" value="Сохранить">
+					</div>
 
-            </td>
-        </tr>
-        <tr>
-            <td>Когда могу<br/>по дням недели</td>
-            <td>                       
-               <span wicket:id="prefferedWeekDay">Пн., Вт.</span> 
-            </td>
-        </tr>
-        <tr>
-            <td>Когда могу<br/>по отдельным дням</td>
-            <td>
-                <div wicket:id="whenClimb"></div>
-            </td>
-        </tr>
-    </table>
-    <input type="submit" value="Сохранить">
+
+				</div>
 </form>
 </wicket:extend>
 </body>

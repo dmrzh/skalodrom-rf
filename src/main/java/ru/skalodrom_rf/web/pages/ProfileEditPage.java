@@ -87,7 +87,7 @@ public class ProfileEditPage extends BasePage{
 
         final HibernateModelList<PrefferedWeekDay> allWeekDaysModel = new HibernateModelList<PrefferedWeekDay>(prefferedWeekDayDao.findAll());
         CheckBoxMultipleChoice<PrefferedWeekDay> weekDaysChoice = new CheckBoxMultipleChoice<PrefferedWeekDay>("prefferedWeekDay", allWeekDaysModel, new WeekdaysRenderer());
-        form.add(weekDaysChoice);
+        form.add(weekDaysChoice.setSuffix(""));
 
         form.add(new DatesPanel("whenClimb", new HibernateFieldDataProvider<Profile, ClimbTime>(pe,"whenClimb")));
 

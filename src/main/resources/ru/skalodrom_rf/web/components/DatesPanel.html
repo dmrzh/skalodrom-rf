@@ -7,30 +7,28 @@
 </head>
 <body>
 <wicket:panel>
-    <table border="1">
+    <table border="0" cellpadding="0" cellspacing="0" class="day-table">
         <tr wicket:id="dataView">
             <td><div wicket:id="dateLabel">15.01.2011</div></td>
             <td><div wicket:id="timeLabel">вечер</div></td>
             <td><a wicket:id="removeLink" href="#">удалить</a></td>
         </tr>
         <tr>
-            <td><input type="text" wicket:id="dateText"></td>
+            <td>27 Март 2011г.</td>
+            <td>Утро</td>
+            <td><a href="#">Удалить</a></td>
+        </tr>
+        <tr>
+            <td class="date"><input type="text"  wicket:id="dateText"></td>
             <td>
-                <select wicket:id="timeText">
-                <option>утро</option>
-                <option>день</option>
-                </select>
+               <select wicket:id="timeText">
+                    <option>утро</option>
+                    <option>день</option>
+               </select>
             </td>
-            <td>
-                <input type="submit" wicket:id="submit" value="добавить">
-            </td>
+            <td class="submit"><input type="submit" wicket:id="submit" value="Добавить"></td>
         </tr>
     </table>
-
-
-
-
 </wicket:panel>
-
 </body>
 </html>
