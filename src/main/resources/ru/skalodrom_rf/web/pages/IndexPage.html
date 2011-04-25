@@ -2,78 +2,117 @@
         "http://www.w3.org/TR/html4/loose.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
 <head>
-     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Скалодром.рф. Поиск напарника по скалолазанию.</title>
 </head>
 <body>
 <wicket:extend>
-<p>
-<form wicket:id="form" method="GET">
-<table width="100%" border="1">
-    <tr>
-        <td>Выберите скалодром
-            <select wicket:id="scalodrom">
-                <option>КС ДДС</option>
-                <option>Скаласити</option>
-                <option>Экстрим</option>
-                <option>Южная</option>
-                <option>Бауманская</option>
-            </select>
-
-        </td>
-        <td>дата <input type="text" maxlength="10" wicket:id="date"></td>
-        <td>время <select wicket:id="time">
-            <option>утро</option>
-            <option>день</option>
-            <option>вечер</option>            
-        </select>
-
-        </td>
-        <td><input type="submit" wicket:id="submit" value="Найти"></td>
-    </tr>
-</table>
- </form>
-</p>
-<div wicket:id="wrapper">
-    Результаты поиска:
-<table width="100%" border="1">
-    <thead>
-   <tr>
-        <th>Имя</th>
-        <th>Вес, кг</th>
-        <th>Уровень</th>
-        <th>Действия</th>
-    </tr>
-    </thead>
-    <tr wicket:id="profilesTable">
-        <td><span wicket:id="fio">fio</span> </td>
-        <td><span wicket:id="weight"></span></td>
-        <td> <span wicket:id="level"></span></td>
-        <td><a href="#" wicket:id="viewProfile">посмотреть</a> <a wicket:id="sendMessage" href="#">написать</a></td>
-    </tr>
-</table>
-</div>
-
+    <h1>Поиск напарника по скалолазанию:</h1>
+    <form wicket:id="form" method="GET">
+        <table border="0" cellpadding="0" cellspacing="0" class="search-form">
+            <tr>
+                <td>
+                    <label>Выберите скалодром</label>
+                    <select wicket:id="scalodrom">
+                        <option>ДДС</option>
+                        <option>ДДС1</option>
+                        <option>ДДС2</option>
+                    </select>
+                </td>
+                <td>
+                    <div class="date-box">
+                        <label>Дата</label>
+                        <input type="text" wicket:id="date">
+                    </div>
+                </td>
+                <td>
+                    <label>Время</label>
+                    <select wicket:id="time">
+                        <option>Утро</option>
+                        <option>День</option>
+                        <option>Вечер</option>
+                    </select>
+                </td>
+                <td><input type="submit" class="search-submit" value="НАЙТИ" wicket:id="submit"></td>
+            </tr>
+        </table>
+    </form>
+    <div wicket:id="wrapper">
+        <h2>Результаты поиска</h2>
+        <table border="0" cellpadding="0" cellspacing="0" class="search-result">
+            <tr>
+                <th>ИМЯ</th>
+                <th>ВЕС, кг</th>
+                <th>УРОВЕНЬ</th>
+                <th>ДЕЙСТВИЕ</th>
+            </tr>
+            <tr wicket:id="profilesTable">
+                <td wicket:id="fio">Дима</td>
+                <td wicket:id="weight">78</td>
+                <td><span wicket:id="level"></span></td>
+                <td>
+                    <a href="#" class="write" wicket:id="sendMessage">Написать</a>
+                    <a href="#" class="see" wicket:id="viewProfile">Посмотреть</a>
+                </td>
+            </tr>
+            <tr>
+                <td>Дима</td>
+                <td>78</td>
+                <td>ББ</td>
+                <td>
+                    <a href="#" class="write">Написать</a>
+                    <a href="#" class="see">Посмотреть</a>
+                </td>
+            </tr>
+            <tr>
+                <td>Дима</td>
+                <td>78</td>
+                <td>ББ</td>
+                <td>
+                    <a href="#" class="write">Написать</a>
+                    <a href="#" class="see">Посмотреть</a>
+                </td>
+            </tr>
+        </table>
+    </div>
     <div wicket:id="wrapper2">
-    Результаты поиска по дням недели:
-<table width="100%" border="1">
-    <thead>
-   <tr>
-        <th>Имя</th>
-        <th>Вес, кг</th>
-        <th>Уровень</th>
-        <th>Действия</th>
-    </tr>
-    </thead>
-    <tr wicket:id="profilesTable2">
-        <td><span wicket:id="fio">fio</span> </td>
-        <td><span wicket:id="weight"></span></td>
-        <td> <span wicket:id="level"></span></td>
-        <td><a href="#" wicket:id="viewProfile">посмотреть</a> <a wicket:id="sendMessage" href="#">написать</a></td>
-    </tr>
-</table>
-</div>
-
+        <h2>Результаты поиска по дням недели</h2>
+        <table border="0" cellpadding="0" cellspacing="0" class="search-result">
+            <tr>
+                <th>ИМЯ</th>
+                <th>ВЕС, кг</th>
+                <th>УРОВЕНЬ</th>
+                <th>ДЕЙСТВИЕ</th>
+            </tr>
+            <tr wicket:id="profilesTable2">
+                <td wicket:id="fio">Дима</td>
+                <td wicket:id="weight">78</td>
+                <td><span wicket:id="level"></span></td>
+                <td>
+                    <a href="#" class="write" wicket:id="sendMessage">Написать</a>
+                    <a href="#" class="see" wicket:id="viewProfile">Посмотреть</a>
+                </td>
+            </tr>
+            <tr>
+                <td>Дима</td>
+                <td>78</td>
+                <td>ББ</td>
+                <td>
+                    <a href="#" class="write">Написать</a>
+                    <a href="#" class="see">Посмотреть</a>
+                </td>
+            </tr>
+            <tr>
+                <td>Дима</td>
+                <td>78</td>
+                <td>ББ</td>
+                <td>
+                    <a href="#" class="write">Написать</a>
+                    <a href="#" class="see">Посмотреть</a>
+                </td>
+            </tr>
+        </table>
+    </div>
 
 
 </wicket:extend>

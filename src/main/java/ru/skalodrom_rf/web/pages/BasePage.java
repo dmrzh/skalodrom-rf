@@ -3,6 +3,7 @@ package ru.skalodrom_rf.web.pages;
 import org.apache.wicket.PageParameters;
 import org.apache.wicket.markup.html.WebPage;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.link.BookmarkablePageLink;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -25,6 +26,7 @@ public class BasePage extends WebPage{
     }
 
     private void init() {
+        add(new BookmarkablePageLink<Void>("indexLink", IndexPage.class));
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if(authentication!=null){
             final GrantedAuthority grantedAuthority = authentication.getAuthorities().iterator().next();//todo

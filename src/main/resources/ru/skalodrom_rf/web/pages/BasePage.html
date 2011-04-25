@@ -1,24 +1,49 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-        "http://www.w3.org/TR/html4/loose.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html  xmlns="http://www.w3.org/1999/xhtml" xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
 <head>
-     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title>Скалодром.рф. Поиск напарника по скалолазанию.</title>
-    <script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>    
+
+
+<link rel="stylesheet" href="css/style.css" type="text/css" media="screen, projection">
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <!--[if IE 6]>
+    <script type="text/javascript" src="js/DD_belatedPNG_0.0.8a.js"></script>
+    <script type="text/javascript">
+        DD_belatedPNG.fix('*');
+    </script>
+    <![endif]-->
+    <script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
 </head>
 <body>
-<div>
-   <a href="index.html">Главная страница</a>
-   &nbsp;&nbsp; <span wicket:id="loginPanel">login/logou/register/profile elements there</span>
-   <br/>
-   Зарегистрированно на  <span wicket:id="nextDate">ближайшее число.</span> <a href="index.html">33 человека</a>
-   <br/>
-    <wicket:child/>
-</div>
-<div>
-    <script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
-    <div class="yashare-auto-init" data-yashareType="button" data-yashareQuickServices="yaru,vkontakte,facebook,twitter,odnoklassniki,moimir,friendfeed,lj"></div>
-</div>
+	<div class="wrap">
+	<div class="zasep">
+	<div class="all">
+	<div class="head"><a href="index.html" class="home_link"></a></div>
+		<div class="content">
+			<div class="content-t">
+			<div class="content-b">
+				<p class="link"><a href="#">skalodrom-rf.ru</a></p>
+                <div class="menu">
+					<a href="#" wicket:id="indexLink"><img src="images/link1.png" alt="" class="link1"></a>
+					<span wicket:id="loginPanel">login/logou/register/profile elements there</span>   <br/>
+				</div>
 
+                 Зарегистрированно на  <span wicket:id="nextDate">ближайшее число.</span> <a href="index.html">33 человека</a>
+
+				<wicket:child/>
+
+				<div class="cont_footer">
+					<div>
+                        <script type="text/javascript" src="//yandex.st/share/share.js" charset="utf-8"></script>
+                        <div class="yashare-auto-init" data-yashareType="button" data-yashareQuickServices="yaru,vkontakte,facebook,twitter,odnoklassniki,moimir,friendfeed,lj"></div>
+                    </div>
+				</div>
+			</div>
+			</div>
+		</div>
+		<div class="footer"></div>
+	</div>
+	</div>
+	</div>
 </body>
 </html>
