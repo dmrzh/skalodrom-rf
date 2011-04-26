@@ -7,11 +7,19 @@
 </head>
 <body>
 <wicket:extend>
-<p>Пароль отправится на e-mail. проверьте почту через несколько минут.</p>
-<form wicket:id="form">
-    email <input type="text" wicket:id="email"> <br/>
-    <input type="submit" value="напомнить пароль" wicket:id="submit">
-</form>
+    <p class="text">Пароль отправится на e-mail. Проверьте почту через несколько минут.</p>
+    <form wicket:id="form">
+				<div class="login-form">
+					<div class="line">
+						<div class="label"><label>E-mail</label></div>
+						<input type="text" wicket:id="email">
+					</div>
+					<div class="submit-pass">
+						<input type="submit" value="Напомнить пароль"  wicket:id="submit">
+					</div>
+
+				</div>
+        </form>
 </wicket:extend>
 </body>
 </html>

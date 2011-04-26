@@ -7,72 +7,94 @@
 </head>
 <body>
 <wicket:extend>
- <table>
-     <tr>
-         <td>Имя</td>
-         <td><span wicket:id="login"></span></td>
-     </tr>
-     <tr>
-         <td>Имя</td>
-         <td><span wicket:id="fio"></span></td>
-     </tr>
-     <tr>
-         <td>email</td>
-         <td><span wicket:id="email"></span></td>
-     </tr>
-     <tr>
-         <td>телефон</td>
-         <td><span wicket:id="phone"></span></td>
-     </tr>
-     <tr>
-         <td>аватар</td>
-         <td><img src="#" alt="Avatar" height="150" wicket:id="avatar"></td>
-     </tr>
-     <tr>
-         <td>о себе</td>
-         <td><span wicket:id="about"></span></td>
-     </tr>
-     <tr>
-         <td>уровень лазания</td>
-         <td><span wicket:id="level"></span></td>
-     </tr>
-     <tr>
-            <td>вес, кг</td>
-            <td><div wicket:id="weight"></div></td>
-        </tr>
-     <tr>
-         <td>Где лазаю</td>
-         <td>
-             <table border="1">
-                 <tr wicket:id="skalodromsView">
-                     <td><div wicket:id="skaladromName">ДДС</div></td>
-                 </tr>
-             </table>
-         </td>
-     </tr>
-     <tr>
-            <td>Когда могу<br/>по дням недели</td>
-            <td>
-               <span wicket:id="prefferedWeekDay">
-                   <span wicket:id="day">Пн. </span>
-               </span>
-            </td>
-     </tr>
-     <tr>
-         <td>Когда могу</td>
-         <td>
-             <table border="1">
-                 <tr wicket:id="whenView">
-                     <td><div wicket:id="date">15.01.2011</div></td>
-                     <td><div wicket:id="time">день</div></td>
-                 </tr>
-             </table>
-         </td>
-     </tr>
-     <br/>
 
- </table>
-         <a href="index.html">найти напарника</a>
+
+    <div class="data-details">
+						<img src="#"  width="94"  height="141" alt="Аватар" wicket:id="avatar">
+						<table border="0" cellpadding="0" cellspacing="0">
+							<tr class="first">
+								<td class="zag">Логин</td>
+								<td><span wicket:id="login"></span></td>
+							</tr>
+							<tr>
+								<td class="zag">Имя</td>
+								<td><span wicket:id="fio"></span></td>
+							</tr>
+							<tr>
+								<td class="zag">E-mail</td>
+								<td><span wicket:id="email"><a href="#">dima@rzhevskiy.info</a></span></td>
+							</tr>
+							<tr>
+								<td class="zag">Телефон</td>
+								<td><span wicket:id="phone"></span></td>
+							</tr>
+						</table>
+					</div>
+					<div class="data-value">
+						<div class="line">
+							<div class="left">
+							    <h3>О себе</h3>
+							</div>
+                            <div class="right">
+							    <span wicket:id="about"></span>
+							</div>
+						</div>
+						<div class="line">
+							<div class="left">
+							Уровень лазания
+							</div>
+							<div class="right">
+							    <span wicket:id="level">5а</span>
+							</div>
+						</div>
+						<div class="line">
+							<div class="left">
+							Вес, кг
+							</div>
+							<div class="right">
+							<div wicket:id="weight">75</div>
+							</div>
+						</div>
+                        <div class="line">
+							<div class="left">
+							Где лазаю
+							</div>
+							<div class="right">
+                             <span wicket:id="skalodromsView">
+                                 <span wicket:id="skaladromName">ДДС</span>
+                             </span>
+
+                             </div>
+						</div>
+						<div class="line">
+							<div class="left">
+							Когда могу по дням недели
+							</div>
+							<div class="right">
+                             <span wicket:id="prefferedWeekDay">
+                                <span wicket:id="day">Пн. </span>
+                             </span>
+							</div>
+						</div>
+						<div class="line">
+							<div class="left">
+							Когда могу
+							</div>
+							<div class="right">
+
+
+							<table border="0" cellpadding="0" cellspacing="0">
+								<tr wicket:id="whenView">
+									<td><div wicket:id="date">15.01.2011</div></td>
+									<td><div wicket:id="time">день</div></td>
+								</tr>
+							</table>
+							</div>
+						</div>
+					</div>
+					<div class="find_nap">
+						<a href="index.html">Найти напарника</a>
+					</div>
 </wicket:extend>
 </body>
 </html>

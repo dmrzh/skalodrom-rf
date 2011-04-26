@@ -76,7 +76,7 @@ public class ProfileViewPage extends BasePage{
             protected void populateItem(ListItem<PrefferedWeekDay> listItem) {
                 final PrefferedWeekDay prefferedWeekDay = listItem.getModelObject();
                 final String value = (String)rdr.getDisplayValue(prefferedWeekDay);
-                listItem.add(new Label("day", value+" | "));                
+                listItem.add(new Label("day", value));
             }
         });
 

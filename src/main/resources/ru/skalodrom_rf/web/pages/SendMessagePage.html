@@ -5,23 +5,28 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <title></title>
 </head>
-    <body>
-    <wicket:extend>
-        <p>Кому: <span wicket:id="whom"> Иванов Иван Иванович</span></p>
-        <form wicket:id="form">
-            <table width="100%">
-              <tr>
-                  <td>Тема:</td>
-                  <td><input type="text" size="131" wicket:id="subject"></td>
-              </tr>
+<body>
+<wicket:extend>
+    <div class="svaz-form">
 
-              <tr>
-                  <td>Текст: </td>
-                  <td><textarea wicket:id="text" rows="20" cols="150"></textarea></td>
-              </tr>
-            </table>
-            <input type="submit" value="Отправить" wicket:id="submit">
+        <div class="line">
+            <div class="label">Кому:</div>
+            <span wicket:id="whom"> Иванов Иван Иванович</span>
+        </div>
+        <form wicket:id="form">
+            <div class="line">
+                <div class="label">Тема</div>
+                <input type="text" wicket:id="subject">
+            </div>
+            <div class="line">
+                <div class="label">Текст</div>
+                <textarea cols="10" rows="11" wicket:id="text"></textarea>
+            </div>
+            <div class="submit">
+                <input type="submit" wicket:id="submit" value="Отправить">
+            </div>
         </form>
-    </wicket:extend>
-    </body>
+    </div>
+</wicket:extend>
+</body>
 </html>
