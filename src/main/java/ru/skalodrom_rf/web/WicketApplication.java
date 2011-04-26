@@ -6,22 +6,12 @@ import org.apache.wicket.RequestCycle;
 import org.apache.wicket.Response;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.protocol.http.WebRequest;
-import org.apache.wicket.protocol.http.WebResponse;
 import org.apache.wicket.request.IRequestCycleProcessor;
 import org.apache.wicket.request.target.coding.IndexedParamUrlCodingStrategy;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import org.springframework.orm.hibernate3.HibernateTransactionManager;
 import ru.skalodrom_rf.web.hibernate.TransactionalWebRequestCycle;
-import ru.skalodrom_rf.web.pages.ActivateUserPage;
-import ru.skalodrom_rf.web.pages.FileNotFoundPage;
-import ru.skalodrom_rf.web.pages.IndexPage;
-import ru.skalodrom_rf.web.pages.LoginPage;
-import ru.skalodrom_rf.web.pages.ProfileEditPage;
-import ru.skalodrom_rf.web.pages.ProfileViewPage;
-import ru.skalodrom_rf.web.pages.RegisterPage;
-import ru.skalodrom_rf.web.pages.ReminderPage;
-import ru.skalodrom_rf.web.pages.SendMessagePage;
-import ru.skalodrom_rf.web.pages.SkalodromPage;
+import ru.skalodrom_rf.web.pages.*;
 
 import javax.annotation.Resource;
 
@@ -70,6 +60,8 @@ public class WicketApplication extends WebApplication{
         getMarkupSettings().setDefaultMarkupEncoding("UTF-8");
         getMarkupSettings().setStripWicketTags(true);
         getDebugSettings().setAjaxDebugModeEnabled(false);
+//        Path resourceFinder = new Path(new Folder("src/main/resources"));
+//        getResourceSettings().setResourceFinder(resourceFinder);
     }
 
 //    @Override
@@ -79,6 +71,6 @@ public class WicketApplication extends WebApplication{
 
     @Override
     public RequestCycle newRequestCycle(Request request, Response response) {
-        return new TransactionalWebRequestCycle(transactionManager, this, (WebRequest)request, (WebResponse)response);
+        return new TransactionalWebRequestCycle(transactionManager, this, (WebRequest)request,response);
     }
 }
