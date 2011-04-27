@@ -4,11 +4,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.skalodrom_rf.model.User;
 
-import javax.mail.Authenticator;
-import javax.mail.Message;
-import javax.mail.PasswordAuthentication;
-import javax.mail.Session;
-import javax.mail.Transport;
+import javax.mail.*;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 import java.io.InputStream;
@@ -45,7 +41,7 @@ public class EmailSender {
             message.setText(text);
 
             Transport.send(message);
-                    LOG.info("email message to "+to.getProfile().getEmail()+" sended");
+            LOG.info("email message to "+to.getProfile().getEmail()+" sended");
         }catch(Exception ex){
             String msg="email not sended to ["+to.getLogin()+"] with subject=["+subject+"] with text=["+text+"]";
             LOG.error(msg,ex);

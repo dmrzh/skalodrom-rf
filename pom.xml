@@ -115,6 +115,13 @@
 
 
         <dependency>
+            <groupId>org.hsqldb</groupId>
+            <artifactId>hsqldb</artifactId>
+            <version>2.0.0</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
             <version>3.3.2.GA</version>
@@ -225,12 +232,11 @@
                 <filtering>true</filtering>
                 <directory>profiles/${profile.selected}</directory>
             </resource>
-
         </resources>
         <testResources>
             <testResource>
                 <filtering>false</filtering>
-                <directory>src/test/java</directory>
+                <directory>src/test/resources</directory>
                 <includes>
                     <include>**</include>
                 </includes>

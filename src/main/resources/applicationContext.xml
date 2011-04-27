@@ -56,10 +56,7 @@
     <bean class="net.sf.wicketautodao.model.DaoFinder"/>
     <bean class="ru.skalodrom_rf.EmailSender"/>
 
-
-    <bean class="ru.skalodrom_rf.dataloader.DataloaderInit"/>
-    <bean class="ru.skalodrom_rf.dataloader.Dataloader"/>
-
     <import resource="securityContext.xml"/>
+    <import resource="profileContext.xml"/>
 
 </beans>
