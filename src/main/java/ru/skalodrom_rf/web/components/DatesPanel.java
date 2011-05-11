@@ -89,7 +89,6 @@ public class DatesPanel extends Panel {
                 climbTime.setTime(timeModel.getObject());
                 climbTimeDao.create(climbTime);
                 object.getWhenClimb().add(climbTime);
-                profileDao.saveOrUpdate(object);
                 target.addComponent(DatesPanel.this);
             }
         });
