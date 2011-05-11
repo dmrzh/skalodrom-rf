@@ -34,11 +34,11 @@ public class EmailSender {
             MimeMessage message = new MimeMessage(mailSession);
             message.setFrom(new InternetAddress("info@skalodrom-rf.ru"));
             message.addRecipient(Message.RecipientType.TO, new InternetAddress(to.getProfile().getEmail()));
-            message.setSubject(subject);
-            message.setHeader("Content-Type","text/plain; charset=\"utf-8\"");
+            message.setSubject(subject,"UTF-8");
+            message.setHeader("Content-Type","text/plain; charset=UTF-8");
             message.setHeader("Content-Transfer-Encoding", "quoted-printable");
 
-            message.setText(text);
+            message.setText(text, "UTF-8");
 
             Transport.send(message);
             LOG.info("email message to "+to.getProfile().getEmail()+" sended");

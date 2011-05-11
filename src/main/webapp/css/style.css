@@ -257,6 +257,10 @@ h2 {
 	padding:4px 10px;
 	text-align:center;
 	}	
+
+.search-result .sec td {
+	background-color:#f1eee8;
+	}
 	
 .search-result th {	
 	background-color:#d1c6ac;
@@ -267,6 +271,7 @@ h2 {
 .search-result td {	
 	color:#c53a09;
 	font-size:16px;
+	background-color:#ebe1cc;
 	}	
 
 .search-result .write {	
@@ -610,7 +615,7 @@ h2 {
 	}	
 
 .day-table {
-	width:370px;
+	width:270px;
 	}
 	
 .day-table, .day-table td  {

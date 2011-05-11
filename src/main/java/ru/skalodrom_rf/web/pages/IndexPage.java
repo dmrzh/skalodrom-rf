@@ -3,6 +3,7 @@ package ru.skalodrom_rf.web.pages;
 import net.sf.wicketautodao.model.HibernateModel;
 import net.sf.wicketautodao.model.HibernateModelList;
 import net.sf.wicketautodao.model.HibernateQueryDataProvider;
+import org.apache.wicket.AttributeModifier;
 import org.apache.wicket.PageParameters;
 import org.apache.wicket.RequestCycle;
 import org.apache.wicket.ajax.AjaxRequestTarget;
@@ -120,6 +121,10 @@ public class IndexPage extends BasePage{
         final DataView profilesTable = new DataView<Profile>(id,dataProvider ){
             @Override
             protected void populateItem(final Item<Profile> hibernateModelItem) {
+
+                if (hibernateModelItem.getIndex()%2==0){
+                    hibernateModelItem.add(new AttributeModifier("class", true, new Model("sec")));
+                }
                 final Profile profile = hibernateModelItem.getModelObject();
                 final HibernateModel model = new HibernateModel(profile);
                 hibernateModelItem.add(new Label("fio",profile.getFio()));

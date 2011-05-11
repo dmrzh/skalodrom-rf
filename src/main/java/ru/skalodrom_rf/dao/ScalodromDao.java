@@ -11,6 +11,6 @@ import java.util.List;
  */
 @AutoDAO
 public interface ScalodromDao extends Dao<Scalodrom, Long> {
-    @Finder(query = "from Scalodrom")
+    @Finder(query = "from Scalodrom order by name")
     List<Scalodrom> findAll();     
 }
