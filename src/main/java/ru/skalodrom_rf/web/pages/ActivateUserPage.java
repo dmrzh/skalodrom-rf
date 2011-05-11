@@ -20,12 +20,9 @@ public class ActivateUserPage extends BasePage {
             if (user == null) {
                 throwExeption();
             }
-            if (user.getActivationCode() == null) {
-                throwExeption();
-            }
 
             String activationCode = extractParam(parameters, "activationCode");
-            if (!activationCode.equals(user.getActivationCode().toString())) {
+            if (user.getActivationCode()!=null &&!activationCode.equals(user.getActivationCode().toString())) {
                 throwExeption();
             }
             add(new Label("resultMessage", "Аккаунт активирован!"));
