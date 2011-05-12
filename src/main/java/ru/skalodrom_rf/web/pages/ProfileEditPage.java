@@ -68,6 +68,14 @@ public class ProfileEditPage extends BasePage{
         form.add(new RequiredTextField("email"));
         form.add(new TextField("phone"));
 
+
+        RadioGroup group = new RadioGroup("sex");
+        form.add(group);
+
+        group.add(new Radio<Sex>("MALE", new Model<Sex>(Sex.MALE)));
+        group.add(new Radio<Sex>("FEMALE", new Model<Sex>(Sex.FEMALE)));
+
+
         form.setMultiPart(true);
 
         form.add(avatarFi);

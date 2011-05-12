@@ -56,7 +56,7 @@ public class RegisterPage extends BasePage{
         };
         final StatelessForm form = new StatelessForm("form", new CompoundPropertyModel(newUserModel));
 
-            form.add(new RequiredTextField<String>("login").add(new PatternValidator("[a-zA-Z0-9]{1,32}")));
+            form.add(new RequiredTextField<String>("login").add(new PatternValidator("[a-z0-9]{1,32}")));
             form.add(new PasswordTextField("password"));
             form.add(new RequiredTextField<String>("profile.email").add(EmailAddressValidator.getInstance()));
             captchaImageResource = new CaptchaImageResource(captchaPassword);

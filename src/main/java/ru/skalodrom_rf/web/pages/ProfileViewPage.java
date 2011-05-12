@@ -54,6 +54,8 @@ public class ProfileViewPage extends BasePage{
         final DynamicImageResource avatarImageResource = new AvatarImageResource(model);
         add(new Image("avatar", avatarImageResource));
         add(new Label("about", p.getAbout()));
+         final EnumRendererer<Sex> sexRenderer = new EnumRendererer<Sex>(Sex.class);
+        add(new Label("sex",sexRenderer.getDisplayValue(p.getSex())));
         final EnumRendererer<ClimbLevel> climbLevelRenderer = new EnumRendererer<ClimbLevel>(ClimbLevel.class);
 
         add(new Label("level", climbLevelRenderer.getDisplayValue(p.getClimbLevel())));
@@ -86,7 +88,7 @@ public class ProfileViewPage extends BasePage{
             @Override
             protected void populateItem(Item<ClimbTime> climbTimeItem) {
                 final ClimbTime when = climbTimeItem.getModelObject();
-                final EnumRendererer timeRendererer = new EnumRendererer(Time.class);
+                final EnumRendererer timeRendererer = new EnumRendererer<Time>(Time.class);
                 final Date date = when.getDate().toDateTimeAtStartOfDay().toDate();
                 climbTimeItem.add(new Label("date", dateFormat.format(date)));
                 climbTimeItem.add(new Label("time", timeRendererer.getDisplayValue(when.getTime())));
