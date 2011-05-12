@@ -28,7 +28,7 @@ public class Profile  implements PersistentEntity<Long>{
     private Set<Scalodrom> whereClimb= new TreeSet<Scalodrom>();
 
     @ManyToMany()
-    private Set<PrefferedWeekDay> prefferedWeekDay=new TreeSet();
+    private Set<WeekDay> prefferedWeekDay=new TreeSet();
 
     @OneToMany( cascade = CascadeType.ALL)
     private Set<ClimbTime> whenClimb=new TreeSet<ClimbTime>();
@@ -126,11 +126,11 @@ public class Profile  implements PersistentEntity<Long>{
         this.about = about;
     }
 
-    public Set<PrefferedWeekDay> getPrefferedWeekDay() {
+    public Set<WeekDay> getPrefferedWeekDay() {
         return prefferedWeekDay;
     }
 
-    public void setPrefferedWeekDay(Set<PrefferedWeekDay> prefferedWeekDay) {
+    public void setPrefferedWeekDay(Set<WeekDay> prefferedWeekDay) {
         this.prefferedWeekDay = prefferedWeekDay;
     }
 

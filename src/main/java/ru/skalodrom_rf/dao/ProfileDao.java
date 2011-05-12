@@ -5,10 +5,10 @@ import net.sf.autodao.Dao;
 import net.sf.autodao.Finder;
 import net.sf.autodao.Named;
 import org.joda.time.LocalDate;
-import ru.skalodrom_rf.model.PrefferedWeekDay;
 import ru.skalodrom_rf.model.Profile;
 import ru.skalodrom_rf.model.Scalodrom;
 import ru.skalodrom_rf.model.Time;
+import ru.skalodrom_rf.model.WeekDay;
 
 import java.util.List;
 
@@ -30,7 +30,7 @@ public interface ProfileDao extends Dao<Profile, Long> {
              "inner join p.whereClimb  as s1 " +
              "inner join p.prefferedWeekDay as weekDay  " +
              "where s1=:s and weekDay=:wd")
-     List<Profile> findByScalodromAndWeekDay(@Named("s")Scalodrom s, @Named("wd") PrefferedWeekDay prefferedWeekDay);
+     List<Profile> findByScalodromAndWeekDay(@Named("s")Scalodrom s, @Named("wd") WeekDay prefferedWeekDay);
 
      @Finder(query = "select p from Profile p where p.email=:email")
      List<Profile> findByEmail(@Named("email")String email);

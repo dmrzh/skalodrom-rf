@@ -71,13 +71,13 @@ public class ProfileViewPage extends BasePage{
         };
         add(skalodromsView);
 
-        final HibernateModelList<PrefferedWeekDay> prefWeekDaysModel = new HibernateModelList<PrefferedWeekDay>(p.getPrefferedWeekDay());
-        add(new ListView<PrefferedWeekDay>("prefferedWeekDay",prefWeekDaysModel){
+        final HibernateModelList<WeekDay> prefWeekDaysModel = new HibernateModelList<WeekDay>(p.getPrefferedWeekDay());
+        add(new ListView<WeekDay>("prefferedWeekDay",prefWeekDaysModel){
             WeekdaysRenderer rdr=new WeekdaysRenderer();
             @Override
-            protected void populateItem(ListItem<PrefferedWeekDay> listItem) {
-                final PrefferedWeekDay prefferedWeekDay = listItem.getModelObject();
-                final String value = (String)rdr.getDisplayValue(prefferedWeekDay);
+            protected void populateItem(ListItem<WeekDay> listItem) {
+                final WeekDay weekDay = listItem.getModelObject();
+                final String value = (String)rdr.getDisplayValue(weekDay);
                 listItem.add(new Label("day", value));
             }
         });

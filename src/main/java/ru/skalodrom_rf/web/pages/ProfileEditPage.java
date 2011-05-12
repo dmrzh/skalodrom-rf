@@ -93,8 +93,8 @@ public class ProfileEditPage extends BasePage{
         addSkalodromForm(form,selectedScalodroms );
 
 
-        final HibernateModelList<PrefferedWeekDay> allWeekDaysModel = new HibernateModelList<PrefferedWeekDay>(prefferedWeekDayDao.findAll());
-        CheckBoxMultipleChoice<PrefferedWeekDay> weekDaysChoice = new CheckBoxMultipleChoice<PrefferedWeekDay>("prefferedWeekDay", allWeekDaysModel, new WeekdaysRenderer());
+        final HibernateModelList<WeekDay> allWeekDaysModel = new HibernateModelList<WeekDay>(prefferedWeekDayDao.findAll());
+        CheckBoxMultipleChoice<WeekDay> weekDaysChoice = new CheckBoxMultipleChoice<WeekDay>("prefferedWeekDay", allWeekDaysModel, new WeekdaysRenderer());
         form.add(weekDaysChoice.setSuffix(""));
 
         form.add(new DatesPanel("whenClimb", new HibernateFieldDataProvider<Profile, ClimbTime>(pe,"whenClimb")));

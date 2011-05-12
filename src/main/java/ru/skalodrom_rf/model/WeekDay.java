@@ -9,11 +9,11 @@ import javax.persistence.Id;
  * .
  */
 @Entity
-public class PrefferedWeekDay implements PersistentEntity<Long> {
-    public PrefferedWeekDay() {
+public class WeekDay implements PersistentEntity<Long> {
+    public WeekDay() {
     }
 
-    public PrefferedWeekDay(Long id, String name) {
+    public WeekDay(Long id, String name) {
         this.id = id;
         this.name = name;
     }

@@ -5,10 +5,10 @@ import org.apache.wicket.model.IModel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.joda.time.LocalDate;
 import ru.skalodrom_rf.dao.PrefferedWeekDayDao;
-import ru.skalodrom_rf.model.PrefferedWeekDay;
+import ru.skalodrom_rf.model.WeekDay;
 
 /**.*/
-public class WeekDayModelWrapper implements IModel<PrefferedWeekDay>{
+public class WeekDayModelWrapper implements IModel<WeekDay>{
     @SpringBean
     PrefferedWeekDayDao prefferedWeekDayDao;
 
@@ -24,13 +24,13 @@ public class WeekDayModelWrapper implements IModel<PrefferedWeekDay>{
     }
 
     @Override
-    public PrefferedWeekDay getObject() {
+    public WeekDay getObject() {
         final LocalDate.Property property = localDateModel.getObject().dayOfWeek();
         return prefferedWeekDayDao.get(new Long(property.get()));
     }
 
     @Override
-    public void setObject(PrefferedWeekDay object) {
+    public void setObject(WeekDay object) {
         throw new RuntimeException("not implemented");
     }
 }

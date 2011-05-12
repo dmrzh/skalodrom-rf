@@ -33,14 +33,14 @@ public class Dataloader {
     @Transactional
     public  void initializeDatabase(){
         LOG.debug("start database initialization");
-        prefferedWeekDayDao.create(new PrefferedWeekDay(1L,"monday"));
-        final PrefferedWeekDay tuesday = new PrefferedWeekDay(2L, "tuesday");
+        prefferedWeekDayDao.create(new WeekDay(1L,"monday"));
+        final WeekDay tuesday = new WeekDay(2L, "tuesday");
         prefferedWeekDayDao.create(tuesday);
-        prefferedWeekDayDao.create(new PrefferedWeekDay(3L,"wednesday"));
-        prefferedWeekDayDao.create(new PrefferedWeekDay(4L,"thursday"));
-        prefferedWeekDayDao.create(new PrefferedWeekDay(5L,"friday"));
-        prefferedWeekDayDao.create(new PrefferedWeekDay(6L,"saturday"));
-        prefferedWeekDayDao.create(new PrefferedWeekDay(7L,"sunday"));
+        prefferedWeekDayDao.create(new WeekDay(3L,"wednesday"));
+        prefferedWeekDayDao.create(new WeekDay(4L,"thursday"));
+        prefferedWeekDayDao.create(new WeekDay(5L,"friday"));
+        prefferedWeekDayDao.create(new WeekDay(6L,"saturday"));
+        prefferedWeekDayDao.create(new WeekDay(7L,"sunday"));
         final ClimbTime climbTime = new ClimbTime();
         climbTime.setDate(new LocalDate());
         climbTime.setTime(Time.DAY);
