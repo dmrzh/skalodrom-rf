@@ -9,7 +9,7 @@ import org.springframework.orm.hibernate3.HibernateTransactionManager;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
 
-/**.*/
+/**OpenSessionInView implementation.*/
 public class TransactionalWebRequestCycle extends WebRequestCycle {
 
     private final HibernateTransactionManager transactionManager;

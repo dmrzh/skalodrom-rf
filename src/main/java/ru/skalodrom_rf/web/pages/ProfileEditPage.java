@@ -50,12 +50,12 @@ public class ProfileEditPage extends BasePage{
         
         final Profile pe = Utils.getCurrntUser(userDao).getProfile();
         final HibernateModel<Profile> model = new HibernateModel<Profile>(pe);
-        final HibernateModelList<Scalodrom> selectedScalodroms = new HibernateModelList<Scalodrom>(pe.getWhereClimb());
+        final HibernateModelList<Skalodrom> selectedScalodroms = new HibernateModelList<Skalodrom>(pe.getWhereClimb());
         final Form<Profile> form = new Form<Profile>("form", new CompoundPropertyModel<Profile>(model)){
             @Override
             protected void onSubmit() {
                 final Profile p = model.getObject();
-                p.setWhereClimb(new TreeSet<Scalodrom>(selectedScalodroms.getObject()));
+                p.setWhereClimb(new TreeSet<Skalodrom>(selectedScalodroms.getObject()));
                 final FileUpload fileUpload = avatarFi.getFileUpload();
                 if(fileUpload!=null){
                     p.getAvatar().setImageData(fileUpload.getBytes());
@@ -105,13 +105,13 @@ public class ProfileEditPage extends BasePage{
 
     }
 
-    private void addSkalodromForm(Form<Profile> form,HibernateModelList<Scalodrom> selectedScalodroms ) {
+    private void addSkalodromForm(Form<Profile> form,HibernateModelList<Skalodrom> selectedScalodroms ) {
         Profile profile=Utils.getCurrntUser(userDao).getProfile();
         final HibernateModel<Profile> profileModel=new HibernateModel<Profile>(profile);
 
-        final List<Scalodrom> scalodroms = scalodromDao.findAll();
-        final HibernateModelList<Scalodrom> scalodromsModel = new HibernateModelList<Scalodrom>(scalodroms);
-         final ChoiceRenderer<Scalodrom> rendererer = new ChoiceRenderer<Scalodrom>("name", "id");
+        final List<Skalodrom> skalodroms = scalodromDao.findAll();
+        final HibernateModelList<Skalodrom> scalodromsModel = new HibernateModelList<Skalodrom>(skalodroms);
+         final ChoiceRenderer<Skalodrom> rendererer = new ChoiceRenderer<Skalodrom>("name", "id");
 
 
 

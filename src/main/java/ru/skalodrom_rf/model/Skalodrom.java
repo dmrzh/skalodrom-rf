@@ -15,14 +15,14 @@ import java.util.Set;
  *
  */
 @Entity
-public class Scalodrom implements PersistentEntity<Long> , Comparable{
-    public Scalodrom() {
+public class Skalodrom implements PersistentEntity<Long> , Comparable{
+    public Skalodrom() {
     }
-    public Scalodrom(String name) {
+    public Skalodrom(String name) {
         this.name = name;
     }
 
-    public Scalodrom(String description, String name) {
+    public Skalodrom(String description, String name) {
         this.description = description;
         this.name = name;
     }
@@ -77,6 +77,6 @@ public class Scalodrom implements PersistentEntity<Long> , Comparable{
 
     @Override
     public int compareTo(Object o) {
-        return getName().compareTo(((Scalodrom)o).getName());
+        return getName().compareTo(((Skalodrom)o).getName());
     }
 }

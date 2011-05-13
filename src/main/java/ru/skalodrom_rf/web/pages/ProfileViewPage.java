@@ -61,10 +61,10 @@ public class ProfileViewPage extends BasePage{
         add(new Label("level", climbLevelRenderer.getDisplayValue(p.getClimbLevel())));
         add(new Label("weight", p.getWeight()==null?"":""+p.getWeight()));
 
-        final HibernateFieldDataProvider<Profile,Scalodrom> provider = new HibernateFieldDataProvider<Profile,Scalodrom>(p,"whereClimb");
-        final DataView<Scalodrom> skalodromsView= new DataView<Scalodrom>("skalodromsView", provider){
+        final HibernateFieldDataProvider<Profile,Skalodrom> provider = new HibernateFieldDataProvider<Profile,Skalodrom>(p,"whereClimb");
+        final DataView<Skalodrom> skalodromsView= new DataView<Skalodrom>("skalodromsView", provider){
             @Override
-            protected void populateItem(Item<Scalodrom> scalodromItem) {
+            protected void populateItem(Item<Skalodrom> scalodromItem) {
                 final String skaladromName = scalodromItem.getModelObject().getName();
                 scalodromItem.add(new Label("skaladromName", skaladromName));
             }

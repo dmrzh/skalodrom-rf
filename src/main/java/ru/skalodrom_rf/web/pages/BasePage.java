@@ -31,7 +31,7 @@ public class BasePage extends WebPage{
     }
 
     private void init() {
-        add(new BookmarkablePageLink<Void>("indexLink", IndexPage.class));
+        add(new BookmarkablePageLink<Void>("indexLink", IndexPage.class)); //link to home page
         add(new Label("users",userDao.getUserCount().toString()));
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if(authentication!=null){

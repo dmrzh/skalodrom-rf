@@ -59,7 +59,7 @@ public class Dataloader {
         userDao.create(user);
 
 
-        final Scalodrom dds = new Scalodrom("ДДС");
+        final Skalodrom dds = new Skalodrom("ДДС");
         scalodromDao.create(dds);
 
         user.getProfile().getWhereClimb().add(dds);
@@ -68,11 +68,11 @@ public class Dataloader {
         userDao.saveOrUpdate(user);
         scalodromDao.saveOrUpdate(dds);
 
-        scalodromDao.create(new Scalodrom("Скаласити"));
-        scalodromDao.create(new Scalodrom("Экстрим"));
-        scalodromDao.create(new Scalodrom("Южная"));
-        scalodromDao.create(new Scalodrom("Бауманская"));
-        scalodromDao.create(new Scalodrom("Скалатория"));
+        scalodromDao.create(new Skalodrom("Скаласити"));
+        scalodromDao.create(new Skalodrom("Экстрим"));
+        scalodromDao.create(new Skalodrom("Южная"));
+        scalodromDao.create(new Skalodrom("Бауманская"));
+        scalodromDao.create(new Skalodrom("Скалатория"));
 
         LOG.debug("database initialized");
 

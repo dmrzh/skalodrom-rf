@@ -16,9 +16,7 @@ import ru.skalodrom_rf.web.pages.*;
 import javax.annotation.Resource;
 
 /**
- * Application object for your web application. If you want to run this application without deploying, run the Start class.
- * 
- * @see ru.skalodrom_rf.Start#main(String[])
+ * Application object for your web application.
  */
 public class WicketApplication extends WebApplication{
     @Resource
@@ -57,17 +55,16 @@ public class WicketApplication extends WebApplication{
         mountBookmarkablePage("/profileEdit.html", ProfileEditPage.class);
         mountBookmarkablePage("/FileNotFound.html", FileNotFoundPage.class);
         mount(new IndexedParamUrlCodingStrategy("/users",ProfileViewPage.class));
+
         getMarkupSettings().setDefaultMarkupEncoding("UTF-8");
         getMarkupSettings().setStripWicketTags(true);
         getDebugSettings().setAjaxDebugModeEnabled(false);
+
 //        Path resourceFinder = new Path(new Folder("src/main/resources"));
 //        getResourceSettings().setResourceFinder(resourceFinder);
     }
 
-//    @Override
-//    protected IRequestCycleProcessor newRequestCycleProcessor() {
-//        return openSessionInView;
-//    }
+
 
     @Override
     public RequestCycle newRequestCycle(Request request, Response response) {

@@ -25,7 +25,7 @@ public class Profile  implements PersistentEntity<Long>{
     @NotNull
     private ClimbLevel climbLevel=ClimbLevel.newbie;
     @ManyToMany(cascade = CascadeType.ALL)
-    private Set<Scalodrom> whereClimb= new TreeSet<Scalodrom>();
+    private Set<Skalodrom> whereClimb= new TreeSet<Skalodrom>();
 
     @ManyToMany()
     private Set<WeekDay> prefferedWeekDay=new TreeSet();
@@ -110,11 +110,11 @@ public class Profile  implements PersistentEntity<Long>{
         this.whenClimb = whenClimb;
     }
 
-    public Set<Scalodrom> getWhereClimb() {
+    public Set<Skalodrom> getWhereClimb() {
         return whereClimb;
     }
 
-    public void setWhereClimb(Set<Scalodrom> whereClimb) {
+    public void setWhereClimb(Set<Skalodrom> whereClimb) {
         this.whereClimb = whereClimb;
     }
 

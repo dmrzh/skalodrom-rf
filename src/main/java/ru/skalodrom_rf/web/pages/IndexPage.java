@@ -31,7 +31,7 @@ import ru.skalodrom_rf.dao.ProfileDao;
 import ru.skalodrom_rf.dao.ScalodromDao;
 import ru.skalodrom_rf.model.ClimbLevel;
 import ru.skalodrom_rf.model.Profile;
-import ru.skalodrom_rf.model.Scalodrom;
+import ru.skalodrom_rf.model.Skalodrom;
 import ru.skalodrom_rf.model.Time;
 import ru.skalodrom_rf.web.EnumRendererer;
 
@@ -50,13 +50,13 @@ public class IndexPage extends BasePage{
     @SpringBean
     PrefferedWeekDayDao prefferedWeekDayDao;
 
-    private final HibernateModel<Scalodrom> skalModel = new HibernateModel<Scalodrom>();
+    private final HibernateModel<Skalodrom> skalModel = new HibernateModel<Skalodrom>();
 
     private final Model<Date> dateModel = new Model<Date>(new Date());
     private final Model<LocalDate> localDateModel = new Model<LocalDate>(new LocalDate());
 
-    WebMarkupContainer resultContainer=new WebMarkupContainer("wrapper");
-    WebMarkupContainer resultContainer2=new WebMarkupContainer("wrapper2");
+    WebMarkupContainer resultContainer=new WebMarkupContainer("wrapper");//container for ajax update of result table
+    WebMarkupContainer resultContainer2=new WebMarkupContainer("wrapper2");  //container for ajax update of result table
     public IndexPage() {
         this(new PageParameters());
     }
@@ -64,17 +64,17 @@ public class IndexPage extends BasePage{
     public IndexPage(PageParameters parameters) {
         super(parameters);
 
-        final List<Scalodrom> list = scalodromDao.findAll();
+        final List<Skalodrom> list = scalodromDao.findAll();
 
         skalModel.setObject(list.get(0));
         final Form form = new Form("form");
 
         add(form);
 
-        ChoiceRenderer<Scalodrom> choiceRenderer = new ChoiceRenderer<Scalodrom>("name", "name");
+        ChoiceRenderer<Skalodrom> scalodromRenderer = new ChoiceRenderer<Skalodrom>("name", "name");
 
-        final HibernateModelList<Scalodrom> modelList = new HibernateModelList<Scalodrom>(list);
-        final DropDownChoice dropDownChoice = new DropDownChoice<Scalodrom>("scalodrom", modelList, choiceRenderer);
+        final HibernateModelList<Skalodrom> modelList = new HibernateModelList<Skalodrom>(list);
+        final DropDownChoice dropDownChoice = new DropDownChoice<Skalodrom>("scalodrom", modelList, scalodromRenderer);
 
         dropDownChoice.setModel(skalModel);
         form.add(dropDownChoice);
