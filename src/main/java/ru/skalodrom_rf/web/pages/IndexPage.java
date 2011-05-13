@@ -117,19 +117,19 @@ public class IndexPage extends BasePage{
 
     }
 
-    private DataView createResults(String id, IDataProvider dataProvider) {
-        final DataView profilesTable = new DataView<Profile>(id,dataProvider ){
+    private DataView createResults(String id, IDataProvider<Profile> dataProvider) {
+        return new DataView<Profile>(id,dataProvider ){
             @Override
             protected void populateItem(final Item<Profile> hibernateModelItem) {
 
                 if (hibernateModelItem.getIndex()%2==0){
-                    hibernateModelItem.add(new AttributeModifier("class", true, new Model("sec")));
+                    hibernateModelItem.add(new AttributeModifier("class", true, new Model<String>("sec")));
                 }
                 final Profile profile = hibernateModelItem.getModelObject();
                 final HibernateModel model = new HibernateModel(profile);
                 hibernateModelItem.add(new Label("fio",profile.getFio()));
                 hibernateModelItem.add(new Label("weight",profile.getWeight()==null?"":""+profile.getWeight()));
-                final EnumRendererer climbLevelRenderer = new EnumRendererer(ClimbLevel.class);
+                final EnumRendererer climbLevelRenderer = new EnumRendererer<ClimbLevel>(ClimbLevel.class);
                 hibernateModelItem.add(new Label("level", climbLevelRenderer.getDisplayValue(profile.getClimbLevel())));
 
                 final PageParameters pageParameters = new PageParameters("0="+profile.getUser().getLogin());
@@ -144,6 +144,5 @@ public class IndexPage extends BasePage{
             }
 
         };
-        return profilesTable;
     }
 }
