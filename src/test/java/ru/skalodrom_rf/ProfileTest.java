@@ -32,7 +32,7 @@ public class ProfileTest {
 
     @Test @Transactional
     public void testConstraint(){
-        final Skalodrom skalodrom = skalodromDao.findAll().get(0);
+        final Skalodrom skalodrom = skalodromDao.findAll().get(1);
         final List<Profile> profileList = profileDao.findByScalodromAndDate(skalodrom, new LocalDate(), Time.DAY);
         Assert.assertEquals(1,profileList.size());
     }
