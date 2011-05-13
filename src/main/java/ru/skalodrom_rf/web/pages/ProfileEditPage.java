@@ -35,7 +35,7 @@ public class ProfileEditPage extends BasePage{
     @SpringBean
     private ProfileDao profileDao;
     @SpringBean
-    ScalodromDao scalodromDao;
+    SkalodromDao skalodromDao;
 
     @SpringBean
     private PrefferedWeekDayDao prefferedWeekDayDao;
@@ -109,7 +109,7 @@ public class ProfileEditPage extends BasePage{
         Profile profile=Utils.getCurrntUser(userDao).getProfile();
         final HibernateModel<Profile> profileModel=new HibernateModel<Profile>(profile);
 
-        final List<Skalodrom> skalodroms = scalodromDao.findAll();
+        final List<Skalodrom> skalodroms = skalodromDao.findAll();
         final HibernateModelList<Skalodrom> scalodromsModel = new HibernateModelList<Skalodrom>(skalodroms);
          final ChoiceRenderer<Skalodrom> rendererer = new ChoiceRenderer<Skalodrom>("name", "id");
 

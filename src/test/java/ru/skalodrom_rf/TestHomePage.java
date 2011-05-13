@@ -11,7 +11,7 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.transaction.annotation.Transactional;
-import ru.skalodrom_rf.dao.ScalodromDao;
+import ru.skalodrom_rf.dao.SkalodromDao;
 import ru.skalodrom_rf.web.pages.IndexPage;
 
 import javax.annotation.Resource;
@@ -24,7 +24,7 @@ import javax.annotation.Resource;
 public class TestHomePage extends TestCase{
 
     @Resource
-    ScalodromDao scalodromDao;
+    SkalodromDao skalodromDao;
 	private WicketTester tester;
 
 	@Override @Before
@@ -42,7 +42,7 @@ public class TestHomePage extends TestCase{
 	public void testRenderMyPage()
 	{
 		//start and render the test page
-        //tester.startPage(new IndexPage(scalodromDao));
+        //tester.startPage(new IndexPage(skalodromDao));
 
 		//assert rendered page class
 		//tester.assertRenderedPage(IndexPage.class);

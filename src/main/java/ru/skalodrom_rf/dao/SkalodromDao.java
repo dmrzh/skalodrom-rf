@@ -10,7 +10,7 @@ import java.util.List;
 /**
  */
 @AutoDAO
-public interface ScalodromDao extends Dao<Skalodrom, Long> {
+public interface SkalodromDao extends Dao<Skalodrom, Long> {
     @Finder(query = "from Skalodrom order by name")
     List<Skalodrom> findAll();
 }

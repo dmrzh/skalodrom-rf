@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 import ru.skalodrom_rf.dao.ClimbTimeDao;
 import ru.skalodrom_rf.dao.PrefferedWeekDayDao;
-import ru.skalodrom_rf.dao.ScalodromDao;
+import ru.skalodrom_rf.dao.SkalodromDao;
 import ru.skalodrom_rf.dao.UserDao;
 import ru.skalodrom_rf.model.*;
 
@@ -21,7 +21,7 @@ public class Dataloader {
     UserDao userDao;
 
     @Resource
-    ScalodromDao scalodromDao;
+    SkalodromDao skalodromDao;
 
 
     @Resource
@@ -60,19 +60,19 @@ public class Dataloader {
 
 
         final Skalodrom dds = new Skalodrom("ДДС");
-        scalodromDao.create(dds);
+        skalodromDao.create(dds);
 
         user.getProfile().getWhereClimb().add(dds);
         dds.getWhoClimb().add(user.getProfile());
         
         userDao.saveOrUpdate(user);
-        scalodromDao.saveOrUpdate(dds);
+        skalodromDao.saveOrUpdate(dds);
 
-        scalodromDao.create(new Skalodrom("Скаласити"));
-        scalodromDao.create(new Skalodrom("Экстрим"));
-        scalodromDao.create(new Skalodrom("Южная"));
-        scalodromDao.create(new Skalodrom("Бауманская"));
-        scalodromDao.create(new Skalodrom("Скалатория"));
+        skalodromDao.create(new Skalodrom("Скаласити"));
+        skalodromDao.create(new Skalodrom("Экстрим"));
+        skalodromDao.create(new Skalodrom("Южная"));
+        skalodromDao.create(new Skalodrom("Бауманская"));
+        skalodromDao.create(new Skalodrom("Скалатория"));
 
         LOG.debug("database initialized");
 

@@ -28,7 +28,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.skalodrom_rf.dao.PrefferedWeekDayDao;
 import ru.skalodrom_rf.dao.ProfileDao;
-import ru.skalodrom_rf.dao.ScalodromDao;
+import ru.skalodrom_rf.dao.SkalodromDao;
 import ru.skalodrom_rf.model.ClimbLevel;
 import ru.skalodrom_rf.model.Profile;
 import ru.skalodrom_rf.model.Skalodrom;
@@ -46,7 +46,7 @@ public class IndexPage extends BasePage{
     @SpringBean
     ProfileDao profileDao;
     @SpringBean
-    private ScalodromDao scalodromDao;
+    private SkalodromDao skalodromDao;
     @SpringBean
     PrefferedWeekDayDao prefferedWeekDayDao;
 
@@ -64,7 +64,7 @@ public class IndexPage extends BasePage{
     public IndexPage(PageParameters parameters) {
         super(parameters);
 
-        final List<Skalodrom> list = scalodromDao.findAll();
+        final List<Skalodrom> list = skalodromDao.findAll();
 
         skalModel.setObject(list.get(0));
         final Form form = new Form("form");
@@ -118,7 +118,7 @@ public class IndexPage extends BasePage{
     }
 
     private DataView createResults(String id, IDataProvider<Profile> dataProvider) {
-        return new DataView<Profile>(id,dataProvider ){
+        return new DataView<Profile>(id,dataProvider){
             @Override
             protected void populateItem(final Item<Profile> hibernateModelItem) {
 

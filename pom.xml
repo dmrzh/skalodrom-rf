@@ -5,11 +5,9 @@
     <artifactId>skalodrom</artifactId>
     <packaging>war</packaging>
     <version>1.0</version>
-    <!-- TODO project name  -->
     <name>skalodrom-rf</name>
     <description>web application for partner finding.</description>
     <dependencies>
-        <!--  WICKET DEPENDENCIES -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-test</artifactId>
