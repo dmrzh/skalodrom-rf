@@ -1,6 +1,7 @@
 package ru.skalodrom_rf.model;
 
 import net.sf.autodao.PersistentEntity;
+import org.hibernate.annotations.Index;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -34,6 +35,7 @@ public class Skalodrom implements PersistentEntity<Long> , Comparable{
     @Id @GeneratedValue
     private Long id;
 
+     @Index(name ="skalodrom_name_indx")
     @NotNull @Size(min = 2, max = 100)
     private String name;
 
@@ -41,7 +43,7 @@ public class Skalodrom implements PersistentEntity<Long> , Comparable{
     private String description;
 
     @ManyToMany(mappedBy = "whereClimb")
-    private Set<Profile> whoClimb=new HashSet();
+    private Set<Profile> whoClimb=new HashSet<Profile>();
 
     public String getDescription() {
         return description;

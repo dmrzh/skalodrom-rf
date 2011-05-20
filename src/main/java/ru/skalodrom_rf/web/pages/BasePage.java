@@ -9,7 +9,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import ru.skalodrom_rf.dao.UserDao;
-import ru.skalodrom_rf.web.components.ActivatePanel;
 import ru.skalodrom_rf.web.components.LoginPanel;
 import ru.skalodrom_rf.web.components.LogoutPanel;
 
@@ -38,9 +37,7 @@ public class BasePage extends WebPage{
             final GrantedAuthority grantedAuthority = authentication.getAuthorities().iterator().next();//todo
             if("ROLE_ANONYMOUS".equals(grantedAuthority.getAuthority())){
                 add(new LoginPanel("loginPanel"));
-            }else if("ROLE_NOT_ACTIVATED_USER".equals(grantedAuthority.getAuthority())){
-                 add(new ActivatePanel("loginPanel"));
-            }else{ 
+            }else{
                 add(new LogoutPanel("loginPanel"));
             }
         }else{

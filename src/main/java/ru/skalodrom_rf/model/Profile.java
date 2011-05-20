@@ -1,6 +1,7 @@
 package ru.skalodrom_rf.model;
 
 import net.sf.autodao.PersistentEntity;
+import org.hibernate.annotations.Index;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
@@ -15,6 +16,7 @@ public class Profile  implements PersistentEntity<Long>{
     @OneToOne(mappedBy = "profile")
     private User user;
 
+    @Index(name ="email_indx")
     private String email;
     private String fio;
     private String phone;

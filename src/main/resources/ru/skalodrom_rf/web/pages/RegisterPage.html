@@ -17,19 +17,19 @@
         	<div class="login-form">
 					<div class="line">
 						<div class="label"><label>Логин</label></div>
-						<input type="text"  wicket:id="login">
+						<input type="text"  wicket:id="login" maxlength="32">
 					</div>
 					<div class="line">
 						<div class="label"><label>Email</label></div>
-						<input type="text" wicket:id="profile.email">
+						<input type="text" wicket:id="profile.email" maxlength="32">
 					</div>
 					<div class="line">
 						<div class="label"><label>Пароль</label></div>
-						<input type="password" wicket:id="password">
+						<input type="password" wicket:id="password" maxlength="32">
 					</div>
 					<div class="line captha">
 						<div class="label"><img  wicket:id="captchaImage" src="#" alt="captcha"></div>
-						<input type="text" wicket:id="captchaText">
+						<input type="text" wicket:id="captchaText" maxlength="16">
 					</div>
 					<div class="submit">
 						<input type="submit" value="Отправить код подтверждения" wicket:id="submit">

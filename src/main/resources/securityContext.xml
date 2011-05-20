@@ -10,6 +10,7 @@
         <intercept-url pattern="/register.html*/**"  access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <intercept-url pattern="/resources/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
 
+         <intercept-url pattern="/message.html*"  access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <intercept-url pattern="/reminder.html"  access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <intercept-url pattern="/index.html*"  access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <intercept-url pattern="/activate.html"  access="IS_AUTHENTICATED_ANONYMOUSLY"/>
@@ -21,7 +22,8 @@
         <intercept-url pattern="/" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
 
         <intercept-url pattern="/**"          access="ROLE_USER" />
-        <form-login login-page="/login.html" authentication-failure-url="/login.html?wrongPassword=true"/>
+        <form-login login-page="/login.html" authentication-failure-url="/login.html?wrongPassword=true" authentication-failure-handler-ref="needActivateHandler"/>
+
 
         <openid-login>
             <attribute-exchange>
@@ -36,6 +38,7 @@
 
 
   <beans:bean id="userDetailsService" class="ru.skalodrom_rf.security.HibernateUserDetailsService"/>
+    <beans:bean class="ru.skalodrom_rf.security.NeedActivateHandler" name="needActivateHandler"/>
 
 
 

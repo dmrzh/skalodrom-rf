@@ -32,14 +32,13 @@ public class HibernateUserDetailsService implements UserDetailsService {
         }
 
         final GrantedAuthority[] userRole = {new GrantedAuthorityImpl("ROLE_USER")};
-        final GrantedAuthority[] notActivatedRole = {new GrantedAuthorityImpl("ROLE_NOT_ACTIVATED_USER")};
 
 
 
         if(user.getActivationCode()==null){
             springSecurityUser = new User(username, user.getPassword(), true, true, true, true, userRole);
         }else{
-            springSecurityUser = new User(username, user.getPassword(), true, true, true, true, notActivatedRole);
+            throw new NotActivatedException( "HibernateUserDetailsService.notFound Username "+ username+ " not activated");
         }
 
 

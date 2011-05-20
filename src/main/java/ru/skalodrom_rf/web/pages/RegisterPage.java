@@ -16,6 +16,7 @@ import org.apache.wicket.protocol.http.RequestUtils;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.validation.validator.EmailAddressValidator;
 import org.apache.wicket.validation.validator.PatternValidator;
+import org.apache.wicket.validation.validator.StringValidator;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import ru.skalodrom_rf.EmailSender;
@@ -56,8 +57,8 @@ public class RegisterPage extends BasePage{
         };
         final StatelessForm form = new StatelessForm("form", new CompoundPropertyModel(newUserModel));
 
-            form.add(new RequiredTextField<String>("login").add(new PatternValidator("[a-z0-9]{1,32}")));
-            form.add(new PasswordTextField("password"));
+            form.add(new RequiredTextField<String>("login").add(new StringValidator.LengthBetweenValidator(2,32)).add(new PatternValidator("[a-z0-9]*")));
+            form.add(new PasswordTextField("password").add(new StringValidator.LengthBetweenValidator(5,32)));
             form.add(new RequiredTextField<String>("profile.email").add(EmailAddressValidator.getInstance()));
             captchaImageResource = new CaptchaImageResource(captchaPassword);
 

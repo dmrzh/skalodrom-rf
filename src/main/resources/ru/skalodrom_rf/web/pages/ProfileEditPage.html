@@ -14,7 +14,7 @@
 					<div class="left">
 						<img width="94"  alt="avatar" wicket:id="avatar">
 						<div class="input">
-							<label>Имя</label>
+							<label>Имя<sup>*</sup></label>
 							<input type="text" wicket:id="fio">
 						</div>
 						<div class="input">
@@ -26,6 +26,7 @@
 							<input type="text" wicket:id="phone">
 						</div>
 						<div class="input-file">
+                            <label>Аватар</label>
 							<input type="file" wicket:id="avatarFi">
 						</div>
 					</div>
@@ -50,7 +51,7 @@
 						</div>
 					</div>
 					<div class="line">
-						<div class="label">Вес, кг</div>
+						<div class="label">Вес, кг<sup>*</sup></div>
 						<input type="text" wicket:id="weight">
 					</div>
 					<div class="line">
@@ -90,10 +91,9 @@
 					<div class="line send">
 						<input type="submit" value="Сохранить">
 					</div>
-
-
 				</div>
 </form>
+<font color="red"> <span wicket:id="feedback2">feedbackmessages will be put here</span></font>
 </wicket:extend>
 </body>
 </html>

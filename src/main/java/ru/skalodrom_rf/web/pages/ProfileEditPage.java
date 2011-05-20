@@ -44,8 +44,7 @@ public class ProfileEditPage extends BasePage{
 
         final FileUploadField avatarFi = new FileUploadField("avatarFi", new Model<FileUpload>());
 
-        FeedbackPanel feedbackPanel = new FeedbackPanel("feedback");
-        add(feedbackPanel);
+        add(new FeedbackPanel("feedback"));
 
         
         final Profile pe = Utils.getCurrntUser(userDao).getProfile();
@@ -102,6 +101,7 @@ public class ProfileEditPage extends BasePage{
 
         
         add(form);
+        add(new FeedbackPanel("feedback2"));
 
     }
 
