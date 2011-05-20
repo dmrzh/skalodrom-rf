@@ -54,6 +54,7 @@ public class WicketApplication extends WebApplication{
         mountBookmarkablePage("/profileView.html", ProfileViewPage.class);
         mountBookmarkablePage("/profileEdit.html", ProfileEditPage.class);
         mountBookmarkablePage("/FileNotFound.html", FileNotFoundPage.class);
+        mountBookmarkablePage("/message.html", MessagePage.class);
         mount(new IndexedParamUrlCodingStrategy("/users",ProfileViewPage.class));
 
         getMarkupSettings().setDefaultMarkupEncoding("UTF-8");
