@@ -17,6 +17,11 @@ public class EmailSender {
     private static final Logger LOG = LoggerFactory.getLogger(EmailSender.class);
 
     public void sendMessage(User to, String subject, String text) {
+        String email = to.getProfile().getEmail();
+        sendMessage(email, subject, text);
+    }
+
+    public void sendMessage(String email, String subject, String text ) {
         try {
             final Properties props = new Properties();
             final InputStream stream = getClass().getClassLoader().getResourceAsStream("mail.properties");
@@ -36,7 +41,8 @@ public class EmailSender {
 
             MimeMessage message = new MimeMessage(mailSession);
             message.setFrom(new InternetAddress("info@skalodrom-rf.ru"));
-            message.addRecipient(Message.RecipientType.TO, new InternetAddress(to.getProfile().getEmail()));
+
+            message.addRecipient(Message.RecipientType.TO, new InternetAddress(email));
             message.setSubject(subject, "UTF-8");
             message.setHeader("Content-Type", "text/plain; charset=UTF-8");
             message.setHeader("Content-Transfer-Encoding", "quoted-printable");
@@ -44,9 +50,9 @@ public class EmailSender {
             message.setText(text, "UTF-8");
 
             Transport.send(message);
-            LOG.info("email message to " + to.getProfile().getEmail() + " sended");
+            LOG.info("email message to " + email + " sended");
         } catch (Exception ex) {
-            String msg = "email not sended to [" + to.getLogin() + "] with subject=[" + subject + "] with text=[" + text + "]";
+            String msg = "email not sended to [" + email + "] with subject=[" + subject + "] with text=[" + text + "]";
             LOG.error(msg, ex);
 
         }
