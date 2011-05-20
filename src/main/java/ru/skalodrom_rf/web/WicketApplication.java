@@ -9,6 +9,8 @@ import org.apache.wicket.protocol.http.WebRequest;
 import org.apache.wicket.request.IRequestCycleProcessor;
 import org.apache.wicket.request.target.coding.IndexedParamUrlCodingStrategy;
 import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
+import org.apache.wicket.util.file.Folder;
+import org.apache.wicket.util.file.Path;
 import org.springframework.orm.hibernate3.HibernateTransactionManager;
 import ru.skalodrom_rf.web.hibernate.TransactionalWebRequestCycle;
 import ru.skalodrom_rf.web.pages.*;
@@ -60,9 +62,10 @@ public class WicketApplication extends WebApplication{
         getMarkupSettings().setDefaultMarkupEncoding("UTF-8");
         getMarkupSettings().setStripWicketTags(true);
         getDebugSettings().setAjaxDebugModeEnabled(false);
-
-//        Path resourceFinder = new Path(new Folder("src/main/resources"));
-//        getResourceSettings().setResourceFinder(resourceFinder);
+        if (DEVELOPMENT.equalsIgnoreCase(getConfigurationType())){
+            Path resourceFinder = new Path(new Folder("src/main/resources"));
+            getResourceSettings().setResourceFinder(resourceFinder);
+        }
     }
 
 

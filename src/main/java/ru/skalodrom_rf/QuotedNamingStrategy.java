@@ -1,11 +1,11 @@
 package ru.skalodrom_rf;
 
-import org.hibernate.cfg.DefaultNamingStrategy;
+import org.hibernate.cfg.DefaultComponentSafeNamingStrategy;
 
 /**
  * NamingStrategy
  */
-public class QuotedNamingStrategy extends DefaultNamingStrategy{
+public class QuotedNamingStrategy extends DefaultComponentSafeNamingStrategy {
     @Override
     public String classToTableName(String className) {
         return "\""+super.classToTableName(className)+"\"";
