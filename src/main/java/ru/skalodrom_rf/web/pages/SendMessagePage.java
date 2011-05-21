@@ -9,6 +9,8 @@ import org.apache.wicket.markup.html.form.RequiredTextField;
 import org.apache.wicket.markup.html.form.TextArea;
 import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import ru.skalodrom_rf.EmailSender;
 import ru.skalodrom_rf.model.Profile;
 import ru.skalodrom_rf.model.User;
@@ -32,7 +34,9 @@ public class SendMessagePage extends BasePage{
             public void onSubmit() {
                 final String subjectText = "сообщение через сайт скалодром.рф[" + subject.getObject() + "]";
                 final User to = whomModel.getObject().getUser();
-                emailSender.sendMessage(to, subjectText,text.getObject());
+                 final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+                String s = "\n\n Письмо отправлено с сайта скалодром.рф  от http://скалодром.рф/users/"+authentication.getName();
+                emailSender.sendMessage(to, subjectText,text.getObject()+ s);
                 RequestCycle.get().setResponsePage(IndexPage.class);
             }
         };
