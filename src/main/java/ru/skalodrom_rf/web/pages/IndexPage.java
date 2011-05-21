@@ -8,7 +8,6 @@ import org.apache.wicket.PageParameters;
 import org.apache.wicket.RequestCycle;
 import org.apache.wicket.ajax.AjaxRequestTarget;
 import org.apache.wicket.ajax.markup.html.form.AjaxButton;
-import org.apache.wicket.datetime.StyleDateConverter;
 import org.apache.wicket.datetime.markup.html.form.DateTextField;
 import org.apache.wicket.extensions.yui.calendar.DatePicker;
 import org.apache.wicket.markup.html.WebMarkupContainer;
@@ -22,6 +21,8 @@ import org.apache.wicket.markup.repeater.Item;
 import org.apache.wicket.markup.repeater.data.DataView;
 import org.apache.wicket.markup.repeater.data.IDataProvider;
 import org.apache.wicket.model.Model;
+import org.apache.wicket.protocol.http.WebRequest;
+import org.apache.wicket.protocol.http.WebResponse;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.joda.time.LocalDate;
 import org.slf4j.Logger;
@@ -35,9 +36,11 @@ import ru.skalodrom_rf.model.Skalodrom;
 import ru.skalodrom_rf.model.Time;
 import ru.skalodrom_rf.web.EnumRendererer;
 
+import javax.servlet.http.Cookie;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.List;
 
 /**
  */
@@ -50,10 +53,10 @@ public class IndexPage extends BasePage{
     @SpringBean
     PrefferedWeekDayDao prefferedWeekDayDao;
 
-    private final HibernateModel<Skalodrom> skalModel = new HibernateModel<Skalodrom>();
+    private final HibernateModel<Skalodrom> skalModel = new HibernateModel<Skalodrom>(getDefaultSkalodrom());
 
-    private final Model<Date> dateModel = new Model<Date>(new Date());
-    private final Model<LocalDate> localDateModel = new Model<LocalDate>(new LocalDate());
+    private final Model<Date> dateModel = new Model<Date>(getDefaultDate());
+    private final Model<LocalDate> localDateModel = new Model<LocalDate>(LocalDate.fromDateFields(getDefaultDate()));
 
     WebMarkupContainer resultContainer=new WebMarkupContainer("wrapper");//container for ajax update of result table
     WebMarkupContainer resultContainer2=new WebMarkupContainer("wrapper2");  //container for ajax update of result table
@@ -64,28 +67,25 @@ public class IndexPage extends BasePage{
     public IndexPage(PageParameters parameters) {
         super(parameters);
 
-        final List<Skalodrom> list = skalodromDao.findAll();
-
-        skalModel.setObject(list.get(0));
         final Form form = new Form("form");
 
         add(form);
 
         ChoiceRenderer<Skalodrom> scalodromRenderer = new ChoiceRenderer<Skalodrom>("name", "name");
 
-        final HibernateModelList<Skalodrom> modelList = new HibernateModelList<Skalodrom>(list);
+        final HibernateModelList<Skalodrom> modelList = new HibernateModelList<Skalodrom>(skalodromDao.findAll());
         final DropDownChoice dropDownChoice = new DropDownChoice<Skalodrom>("scalodrom", modelList, scalodromRenderer);
 
         dropDownChoice.setModel(skalModel);
         form.add(dropDownChoice);
 
-        DateTextField dateTextField = new DateTextField("date",dateModel, new StyleDateConverter("S-", true));
+        DateTextField dateTextField = DateTextField.forShortStyle("date", dateModel);
         DatePicker datePicker = new DatePicker();
         datePicker.setShowOnFieldClick(true);
         dateTextField.add(datePicker);
         form.add(dateTextField);
 
-        final Model<Time> timeModel = new Model<Time>(Time.EVENING);
+        final Model<Time> timeModel =  new Model<Time>(getDefaultTime());
 
         final EnumRendererer<Time> timeRenderer = new EnumRendererer<Time>(Time.class);
         form.add(new  DropDownChoice<Time>("time",timeModel, Arrays.asList(Time.values()), timeRenderer));
@@ -100,6 +100,11 @@ public class IndexPage extends BasePage{
                 localDateModel.setObject(localDate);
                 target.addComponent(resultContainer);
                 target.addComponent(resultContainer2);
+                WebResponse response = (WebResponse) getRequestCycle().getResponse();
+                response.addCookie(new Cookie("defaultSkalodrom", URLEncoder.encode(skalModel.getObject().getName())));
+                response.addCookie(new Cookie("defaultTime", ""+timeModel.getObject().name()));
+                response.addCookie(new Cookie("defaultDate", ""+dateModel.getObject().getTime()));
+
             }
         });
 
@@ -117,8 +122,55 @@ public class IndexPage extends BasePage{
 
     }
 
+    private Date getDefaultDate() {
+         WebRequest request = (WebRequest) getRequestCycle().getRequest();
+        Cookie defaultDate = request.getCookie("defaultDate");
+        Date now = new Date();
+        try {
+            Date date = new Date(Long.parseLong(defaultDate.getValue()));
+            if(date.after(now)){
+                return date;
+            }else{
+                return now;
+            }
+
+        } catch (Exception e) {
+            return now;
+        }
+
+    }
+
+ private Time getDefaultTime() {
+         WebRequest request = (WebRequest) getRequestCycle().getRequest();
+        Cookie defaultTime = request.getCookie("defaultTime");
+        try {
+            Time time = Time.valueOf(defaultTime.getValue());
+            return time;
+        } catch (Exception e) {
+            return Time.EVENING;
+        }
+
+    }
+
+    private Skalodrom getDefaultSkalodrom() {
+        try {
+            WebRequest request = (WebRequest) getRequestCycle().getRequest();
+            Cookie defaultSkalodrom = request.getCookie("defaultSkalodrom");
+            String value = URLDecoder.decode(defaultSkalodrom.getValue());
+            Skalodrom skalodrom = skalodromDao.findByName(value);
+            if(skalodrom==null){
+                  return skalodromDao.findAll().get(0);
+            } else{
+                return skalodrom ;
+            }
+        } catch (Exception e) {
+            return skalodromDao.findAll().get(0);
+        }
+    }
+
     private DataView createResults(String id, IDataProvider<Profile> dataProvider) {
         return new DataView<Profile>(id,dataProvider){
+            final EnumRendererer climbLevelRenderer = new EnumRendererer<ClimbLevel>(ClimbLevel.class);
             @Override
             protected void populateItem(final Item<Profile> hibernateModelItem) {
 
@@ -129,7 +181,7 @@ public class IndexPage extends BasePage{
                 final HibernateModel model = new HibernateModel(profile);
                 hibernateModelItem.add(new Label("fio",profile.getFio()));
                 hibernateModelItem.add(new Label("weight",profile.getWeight()==null?"":""+profile.getWeight()));
-                final EnumRendererer climbLevelRenderer = new EnumRendererer<ClimbLevel>(ClimbLevel.class);
+
                 hibernateModelItem.add(new Label("level", climbLevelRenderer.getDisplayValue(profile.getClimbLevel())));
 
                 final PageParameters pageParameters = new PageParameters("0="+profile.getUser().getLogin());

@@ -47,32 +47,40 @@ public class Dataloader {
         climbTimeDao.create(climbTime);
 
 
-
-        final User user = new User();
-        user.setLogin("http://rzhevskiy.info/journal/dima/");
-        user.getProfile().setFio("Дима");
-
-        user.setPassword("");
-        user.getProfile().setEmail("dima@rzhevskiy.info");
-        user.getProfile().getWhenClimb().add(climbTime);
-        user.getProfile().getPrefferedWeekDay().add(tuesday);
-        userDao.create(user);
-
-
         final Skalodrom dds = new Skalodrom("ДДС");
         skalodromDao.create(dds);
-
-        user.getProfile().getWhereClimb().add(dds);
-        dds.getWhoClimb().add(user.getProfile());
-        
-        userDao.saveOrUpdate(user);
-        skalodromDao.saveOrUpdate(dds);
-
         skalodromDao.create(new Skalodrom("Скаласити"));
         skalodromDao.create(new Skalodrom("Экстрим"));
         skalodromDao.create(new Skalodrom("Южная"));
         skalodromDao.create(new Skalodrom("Бауманская"));
         skalodromDao.create(new Skalodrom("Скалатория"));
+
+
+         User user;
+        for(int i=0;i<1000;i++){
+             user = new User();
+            user.setLogin("dima"+i);
+            user.getProfile().setFio("Дима");
+
+            user.setPassword("");
+            user.getProfile().setEmail("dima@rzhevskiy.info");
+            //user.getProfile().getWhenClimb().add(climbTime);
+            user.getProfile().getPrefferedWeekDay().add(tuesday);
+            userDao.create(user);
+             user.getProfile().getWhereClimb().add(dds);
+           // dds.getWhoClimb().add(user.getProfile());
+             userDao.saveOrUpdate(user);
+        }
+
+
+
+
+
+        
+
+        skalodromDao.saveOrUpdate(dds);
+
+
 
         LOG.debug("database initialized");
 

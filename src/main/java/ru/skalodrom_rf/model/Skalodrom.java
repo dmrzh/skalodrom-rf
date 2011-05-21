@@ -3,10 +3,7 @@ package ru.skalodrom_rf.model;
 import net.sf.autodao.PersistentEntity;
 import org.hibernate.annotations.Index;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
@@ -35,8 +32,9 @@ public class Skalodrom implements PersistentEntity<Long> , Comparable{
     @Id @GeneratedValue
     private Long id;
 
-     @Index(name ="skalodrom_name_indx")
+    @Index(name ="skalodrom_name_indx")
     @NotNull @Size(min = 2, max = 100)
+    @Column(unique=true)
     private String name;
 
     @Size(min = 5, max = 1000)
