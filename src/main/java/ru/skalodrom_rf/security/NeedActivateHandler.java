@@ -14,6 +14,8 @@ public class NeedActivateHandler implements AuthenticationFailureHandler {
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
         if(exception instanceof NotActivatedException){
             response.sendRedirect("message.html?error=notactivated");
+        }else if (exception instanceof org.springframework.security.authentication.BadCredentialsException){
+            response.sendRedirect("login.html?wrongPassword=true");
         }
     }
 
