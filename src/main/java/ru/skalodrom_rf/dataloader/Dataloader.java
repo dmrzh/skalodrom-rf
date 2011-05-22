@@ -11,6 +11,8 @@ import ru.skalodrom_rf.dao.UserDao;
 import ru.skalodrom_rf.model.*;
 
 import javax.annotation.Resource;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Load initial data to database/
@@ -55,28 +57,26 @@ public class Dataloader {
         skalodromDao.create(new Skalodrom("Бауманская"));
         skalodromDao.create(new Skalodrom("Скалатория"));
 
-
+         Random rnd=new Random();
+         List<WeekDay> allWeeksDays = prefferedWeekDayDao.findAll();
+          List<Skalodrom> allSkal= skalodromDao.findAll();
          User user;
-        for(int i=0;i<1000;i++){
+        for(int i=0;i<0;i++){
              user = new User();
             user.setLogin("dima"+i);
-            user.getProfile().setFio("Дима");
+            user.getProfile().setFio("Дима "+i);
 
             user.setPassword("");
             user.getProfile().setEmail("dima@rzhevskiy.info");
             //user.getProfile().getWhenClimb().add(climbTime);
-            user.getProfile().getPrefferedWeekDay().add(tuesday);
+
+            user.getProfile().getPrefferedWeekDay().add(allWeeksDays.get(rnd.nextInt(7)));
             userDao.create(user);
-             user.getProfile().getWhereClimb().add(dds);
+
+            user.getProfile().getWhereClimb().add(allSkal.get(rnd.nextInt(6)));
            // dds.getWhoClimb().add(user.getProfile());
              userDao.saveOrUpdate(user);
         }
-
-
-
-
-
-        
 
         skalodromDao.saveOrUpdate(dds);
 
