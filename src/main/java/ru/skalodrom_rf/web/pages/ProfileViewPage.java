@@ -8,6 +8,7 @@ import org.apache.wicket.RequestCycle;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.markup.html.image.Image;
 import org.apache.wicket.markup.html.image.resource.DynamicImageResource;
+import org.apache.wicket.markup.html.link.Link;
 import org.apache.wicket.markup.html.list.ListItem;
 import org.apache.wicket.markup.html.list.ListView;
 import org.apache.wicket.markup.repeater.Item;
@@ -95,6 +96,13 @@ public class ProfileViewPage extends BasePage{
             }
         };
         add(whenView);
+        add(new Link("sendMessage"){
+                    @Override
+                    public void onClick() {
+                        RequestCycle.get().setResponsePage(new SendMessagePage(model));
+                    }
+           });
+
 
     }
 }

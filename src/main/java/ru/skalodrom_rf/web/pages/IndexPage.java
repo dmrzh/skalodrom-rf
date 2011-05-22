@@ -179,13 +179,21 @@ public class IndexPage extends BasePage{
                 }
                 final Profile profile = hibernateModelItem.getModelObject();
                 final HibernateModel model = new HibernateModel(profile);
-                hibernateModelItem.add(new Label("fio",profile.getFio()));
+                final PageParameters pageParameters = new PageParameters("0="+profile.getUser().getLogin());
+
+
+                BookmarkablePageLink a1 = new BookmarkablePageLink("viewProfile1", ProfileViewPage.class, pageParameters);;
+                BookmarkablePageLink a2 = new BookmarkablePageLink("viewProfile2", ProfileViewPage.class, pageParameters);
+                hibernateModelItem.add(a1);
+                hibernateModelItem.add(a2);
+                a1.add(new Label("fio",profile.getFio()));
+
+
+
                 hibernateModelItem.add(new Label("weight",profile.getWeight()==null?"":""+profile.getWeight()));
 
                 hibernateModelItem.add(new Label("level", climbLevelRenderer.getDisplayValue(profile.getClimbLevel())));
 
-                final PageParameters pageParameters = new PageParameters("0="+profile.getUser().getLogin());
-                hibernateModelItem.add(new BookmarkablePageLink("viewProfile", ProfileViewPage.class, pageParameters));
 
                 hibernateModelItem.add(new Link("sendMessage"){
                     @Override
