@@ -3,7 +3,7 @@
 
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
     <appender name="fileAppender" class="org.apache.log4j.FileAppender">
-        <param name="File" value="skalodrom-rf.log"/>
+        <param name="File" value="${catalina.home}/logs/skalodrom-rf.log"/>
         <layout class="org.apache.log4j.SimpleLayout"/>
     </appender>     
     <logger name="ru.skalodrom_rf">

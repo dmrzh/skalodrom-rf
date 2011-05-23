@@ -49,7 +49,7 @@ public class Dataloader {
 
 
         final User user = new User();
-        user.setLogin("http://rzhevskiy.info/journal/dima/");
+        user.setLogin("dima");
         user.getProfile().setFio("Дима");
 
         user.setPassword("");

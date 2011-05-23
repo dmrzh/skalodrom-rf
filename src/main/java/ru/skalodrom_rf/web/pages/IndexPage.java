@@ -37,6 +37,7 @@ import ru.skalodrom_rf.model.Time;
 import ru.skalodrom_rf.web.EnumRendererer;
 
 import javax.servlet.http.Cookie;
+import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.util.Arrays;
@@ -101,7 +102,13 @@ public class IndexPage extends BasePage{
                 target.addComponent(resultContainer);
                 target.addComponent(resultContainer2);
                 WebResponse response = (WebResponse) getRequestCycle().getResponse();
-                response.addCookie(new Cookie("defaultSkalodrom", URLEncoder.encode(skalModel.getObject().getName())));
+                String encodedSkalodrom = null;
+                try {
+                    encodedSkalodrom = URLEncoder.encode(skalModel.getObject().getName(), "UTF-8");
+                } catch (UnsupportedEncodingException e) {
+                    LOG.error("no UTF-8 encoding!!!",e);
+                }
+                response.addCookie(new Cookie("defaultSkalodrom", encodedSkalodrom));
                 response.addCookie(new Cookie("defaultTime", ""+timeModel.getObject().name()));
                 response.addCookie(new Cookie("defaultDate", ""+dateModel.getObject().getTime()));
 
@@ -156,7 +163,7 @@ public class IndexPage extends BasePage{
         try {
             WebRequest request = (WebRequest) getRequestCycle().getRequest();
             Cookie defaultSkalodrom = request.getCookie("defaultSkalodrom");
-            String value = URLDecoder.decode(defaultSkalodrom.getValue());
+            String value = URLDecoder.decode(defaultSkalodrom.getValue(),"UTF-8");
             Skalodrom skalodrom = skalodromDao.findByName(value);
             if(skalodrom==null){
                   return skalodromDao.findAll().get(0);
@@ -186,7 +193,7 @@ public class IndexPage extends BasePage{
                 BookmarkablePageLink a2 = new BookmarkablePageLink("viewProfile2", ProfileViewPage.class, pageParameters);
                 hibernateModelItem.add(a1);
                 hibernateModelItem.add(a2);
-                a1.add(new Label("fio",profile.getFio()));
+                a1.add(new Label("fio", profile.getFio()));
 
 
 

@@ -53,7 +53,6 @@ public class WicketApplication extends WebApplication{
         mountBookmarkablePage("/skalodrom.html", SkalodromPage.class);
         mountBookmarkablePage("/index.html", IndexPage.class);
         mountBookmarkablePage("/reminder.html", ReminderPage.class);
-        mountBookmarkablePage("/profileView.html", ProfileViewPage.class);
         mountBookmarkablePage("/profileEdit.html", ProfileEditPage.class);
         mountBookmarkablePage("/FileNotFound.html", FileNotFoundPage.class);
         mountBookmarkablePage("/message.html", MessagePage.class);
