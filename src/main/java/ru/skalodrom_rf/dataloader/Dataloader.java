@@ -11,8 +11,6 @@ import ru.skalodrom_rf.dao.UserDao;
 import ru.skalodrom_rf.model.*;
 
 import javax.annotation.Resource;
-import java.util.List;
-import java.util.Random;
 
 /**
  * Load initial data to database/
@@ -49,38 +47,32 @@ public class Dataloader {
         climbTimeDao.create(climbTime);
 
 
+
+        final User user = new User();
+        user.setLogin("http://rzhevskiy.info/journal/dima/");
+        user.getProfile().setFio("Дима");
+
+        user.setPassword("");
+        user.getProfile().setEmail("dima@rzhevskiy.info");
+        user.getProfile().getWhenClimb().add(climbTime);
+        user.getProfile().getPrefferedWeekDay().add(tuesday);
+        userDao.create(user);
+
+
         final Skalodrom dds = new Skalodrom("ДДС");
         skalodromDao.create(dds);
+
+        user.getProfile().getWhereClimb().add(dds);
+        dds.getWhoClimb().add(user.getProfile());
+        
+        userDao.saveOrUpdate(user);
+        skalodromDao.saveOrUpdate(dds);
+
         skalodromDao.create(new Skalodrom("Скаласити"));
         skalodromDao.create(new Skalodrom("Экстрим"));
         skalodromDao.create(new Skalodrom("Южная"));
         skalodromDao.create(new Skalodrom("Бауманская"));
         skalodromDao.create(new Skalodrom("Скалатория"));
-
-         Random rnd=new Random();
-         List<WeekDay> allWeeksDays = prefferedWeekDayDao.findAll();
-          List<Skalodrom> allSkal= skalodromDao.findAll();
-         User user;
-        for(int i=0;i<0;i++){
-             user = new User();
-            user.setLogin("dima"+i);
-            user.getProfile().setFio("Дима "+i);
-
-            user.setPassword("");
-            user.getProfile().setEmail("dima@rzhevskiy.info");
-            //user.getProfile().getWhenClimb().add(climbTime);
-
-            user.getProfile().getPrefferedWeekDay().add(allWeeksDays.get(rnd.nextInt(7)));
-            userDao.create(user);
-
-            user.getProfile().getWhereClimb().add(allSkal.get(rnd.nextInt(6)));
-           // dds.getWhoClimb().add(user.getProfile());
-             userDao.saveOrUpdate(user);
-        }
-
-        skalodromDao.saveOrUpdate(dds);
-
-
 
         LOG.debug("database initialized");
 
