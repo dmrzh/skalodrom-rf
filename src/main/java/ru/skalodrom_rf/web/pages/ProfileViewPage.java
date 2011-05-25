@@ -48,7 +48,7 @@ public class ProfileViewPage extends BasePage{
 
         add(new Label("login", p.getUser().getLogin()));
         add(new Label("fio", p.getFio()));
-        add(new Label("email", p.getEmail()));
+//        add(new Label("email", p.getEmail()));
         add(new Label("phone", p.getPhone()));
 
         final HibernateModel<Profile> model = new HibernateModel<Profile>(p);

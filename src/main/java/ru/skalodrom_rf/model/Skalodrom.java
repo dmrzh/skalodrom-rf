@@ -1,9 +1,11 @@
 package ru.skalodrom_rf.model;
 
-import net.sf.autodao.PersistentEntity;
 import org.hibernate.annotations.Index;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.util.HashSet;
@@ -13,7 +15,7 @@ import java.util.Set;
  *
  */
 @Entity
-public class Skalodrom implements PersistentEntity<Long> , Comparable{
+public class Skalodrom extends LongIdPersistenceEntity implements Comparable{
     public Skalodrom() {
     }
     public Skalodrom(String name) {
@@ -24,13 +26,6 @@ public class Skalodrom implements PersistentEntity<Long> , Comparable{
         this.description = description;
         this.name = name;
     }
-
-    @Override
-    public Long getPrimaryKey() {
-        return id;
-    }
-    @Id @GeneratedValue
-    private Long id;
 
     @Index(name ="skalodrom_name_indx")
     @NotNull @Size(min = 2, max = 100)
@@ -43,6 +38,9 @@ public class Skalodrom implements PersistentEntity<Long> , Comparable{
     @ManyToMany(mappedBy = "whereClimb")
     private Set<Profile> whoClimb=new HashSet<Profile>();
 
+    @ManyToOne
+    private City city;
+
     public String getDescription() {
         return description;
     }
@@ -51,13 +49,7 @@ public class Skalodrom implements PersistentEntity<Long> , Comparable{
         this.description = description;
     }
 
-    public Long getId() {
-        return id;
-    }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;
@@ -73,6 +65,14 @@ public class Skalodrom implements PersistentEntity<Long> , Comparable{
 
     public void setWhoClimb(Set<Profile> whoClimb) {
         this.whoClimb = whoClimb;
+    }
+
+    public City getCity() {
+        return city;
+    }
+
+    public void setCity(City city) {
+        this.city = city;
     }
 
     @Override
