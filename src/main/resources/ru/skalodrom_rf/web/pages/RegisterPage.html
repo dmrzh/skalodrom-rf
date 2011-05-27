@@ -16,8 +16,9 @@
         <form wicket:id="form" >
         	<div class="login-form">
 					<div class="line">
-						<div class="label"><label>Логин</label></div>
+						<div class="label"><label title="логин должен состоять из маленьких английских букв и цифр">Логин</label></div>
 						<input type="text"  wicket:id="login" maxlength="32">
+                        Логин должен состоять из маленьких английских букв и цифр
 					</div>
 					<div class="line">
 						<div class="label"><label>Email</label></div>
@@ -26,10 +27,12 @@
 					<div class="line">
 						<div class="label"><label>Пароль</label></div>
 						<input type="password" wicket:id="password" maxlength="32">
+                        Проверьте раскладку клавиатуры.
 					</div>
 					<div class="line captha">
 						<div class="label"><img  wicket:id="captchaImage" src="#" alt="captcha"></div>
 						<input type="text" wicket:id="captchaText" maxlength="16">
+                        Подтвердите что вы не робот
 					</div>
 					<div class="submit">
 						<input type="submit" value="Отправить код подтверждения" wicket:id="submit">

@@ -4,13 +4,8 @@ import net.sf.autodao.PersistentEntity;
 import org.hibernate.annotations.Type;
 import org.joda.time.LocalDate;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**.*/
@@ -28,6 +23,10 @@ public class ClimbTime implements PersistentEntity<Long> ,Comparable<ClimbTime> 
     private LocalDate date=new LocalDate();
     @Enumerated(EnumType.STRING)
     private Time time=Time.EVENING;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    private Status status=Status.OPEN;
 
 
 
