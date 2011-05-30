@@ -28,6 +28,8 @@ public class ClimbTime implements PersistentEntity<Long> ,Comparable<ClimbTime> 
     @Enumerated(EnumType.STRING)
     private Status status=Status.OPEN;
 
+    private String emailCode;
+
 
 
     @Override
@@ -77,5 +79,19 @@ public class ClimbTime implements PersistentEntity<Long> ,Comparable<ClimbTime> 
         this.id = id;
     }
 
+    public Status getStatus() {
+        return status;
+    }
 
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public String getEmailCode() {
+        return emailCode;
+    }
+
+    public void setEmailCode(String emailCode) {
+        this.emailCode = emailCode;
+    }
 }

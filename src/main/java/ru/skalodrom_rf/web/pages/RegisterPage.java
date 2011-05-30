@@ -102,6 +102,8 @@ public class RegisterPage extends BasePage{
             "\n url активации: " + RequestUtils.toAbsolutePath(prefixToWicketHandler)+
             "activate.html?login="+user.getLogin()+ "&activationCode="+user.getActivationCode();
 
+        str=str+"\n \n Чтобы вы были доступны в поиске, заполните свой профиль.";
+
         emailSender.sendMessage(user,"Регистрация",str);
 
     }
