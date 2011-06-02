@@ -3,14 +3,27 @@ package ru.skalodrom_rf.web.pages;
 import org.apache.wicket.PageParameters;
 import org.apache.wicket.markup.html.basic.Label;
 import org.apache.wicket.spring.injection.annot.SpringBean;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import ru.skalodrom_rf.dao.UserDao;
 import ru.skalodrom_rf.model.User;
+import ru.skalodrom_rf.security.HibernateUserDetailsService;
+import ru.skalodrom_rf.web.components.AfterActivationPanel;
+import ru.skalodrom_rf.web.components.EmptyPanel;
 
 /**
  */
 public class ActivateUserPage extends BasePage {
+
+    private static final Logger LOG= LoggerFactory.getLogger(ActivateUserPage.class);
+
     @SpringBean
     UserDao userDao;
+
 
     public ActivateUserPage(PageParameters parameters) {
         super(parameters);
@@ -28,9 +41,12 @@ public class ActivateUserPage extends BasePage {
             add(new Label("resultMessage", "Аккаунт активирован!"));
             user.setActivationCode(null);
             userDao.saveOrUpdate(user);
+            autoLogin(user);
+            add(new AfterActivationPanel("afterActivation"));
 
         } catch (IllegalArgumentException npe) {
             add(new Label("resultMessage", "Аккаунт НЕ активирован!"));
+            add(new EmptyPanel("afterActivation"));
         }
     }
 
@@ -54,6 +70,25 @@ public class ActivateUserPage extends BasePage {
             throwExeption();
         }
         return sa[0].trim();
+    }
+
+    /**
+     * Automatic login after successful registration.
+     *
+     * @param user
+     */
+    public boolean autoLogin(User user) {
+        try {
+            Authentication authentication = new UsernamePasswordAuthenticationToken(user.getLogin(),user.getPassword());
+
+            // Place the new Authentication object in the security context.
+            SecurityContextHolder.getContext().setAuthentication(authentication);
+        } catch (Exception e) {
+            SecurityContextHolder.getContext().setAuthentication(null);
+            LOG.error("Exception", e);
+            return false;
+        }
+        return true;
     }
 
 

@@ -25,10 +25,12 @@
         <form-login login-page="/login.html" authentication-failure-url="/login.html?wrongPassword=true" authentication-failure-handler-ref="needActivateHandler"/>
 
 
-        <openid-login>
+        <openid-login authentication-failure-url="/login.html?wrongPassword=true" authentication-failure-handler-ref="openIDAuthenticationFailureHandler">
             <attribute-exchange>
-                <openid-attribute name="email" type="http://schema.openid.net/contact/email" required="true" count="2"/>
-                <openid-attribute name="name" type="http://schema.openid.net/namePerson/friendly"/>
+                <openid-attribute name="email" type="http://schema.openid.net/contact/email" required="true"/>
+                <openid-attribute name="name"  type="http://schema.openid.net/namePerson" required="true"/>
+                <!--<openid-attribute name="email" type="http://axschema.org/contact/email" required="true" />-->
+                <!--<openid-attribute name="name" type="http://axschema.org/namePerson" />-->
             </attribute-exchange>
         </openid-login>
     </http>
@@ -38,8 +40,6 @@
 
 
   <beans:bean id="userDetailsService" class="ru.skalodrom_rf.security.HibernateUserDetailsService"/>
-    <beans:bean class="ru.skalodrom_rf.security.NeedActivateHandler" name="needActivateHandler"/>
-
-
-
+  <beans:bean class="ru.skalodrom_rf.security.NeedActivateHandler" name="needActivateHandler"/>
+  <beans:bean class="ru.skalodrom_rf.security.OpenIDAuthenticationFailureHandler" name="openIDAuthenticationFailureHandler"/>
 </beans:beans>

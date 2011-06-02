@@ -2,10 +2,13 @@ package ru.skalodrom_rf.model;
 
 import net.sf.autodao.PersistentEntity;
 import org.hibernate.annotations.Index;
+import org.hibernate.annotations.Sort;
+import org.hibernate.annotations.SortType;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
+import java.util.SortedSet;
 import java.util.TreeSet;
 
 @Entity
@@ -30,7 +33,8 @@ public class Profile  implements PersistentEntity<Long>{
     private Set<Skalodrom> whereClimb= new TreeSet<Skalodrom>();
 
     @ManyToMany()
-    private Set<WeekDay> prefferedWeekDay=new TreeSet();
+    @Sort(type = SortType.COMPARATOR, comparator = IdCompartor.class)
+    private SortedSet<WeekDay> prefferedWeekDay=new TreeSet<WeekDay>();
 
     @OneToMany( cascade = CascadeType.ALL)
     private Set<ClimbTime> whenClimb=new TreeSet<ClimbTime>();
@@ -128,11 +132,11 @@ public class Profile  implements PersistentEntity<Long>{
         this.about = about;
     }
 
-    public Set<WeekDay> getPrefferedWeekDay() {
+    public SortedSet<WeekDay> getPrefferedWeekDay() {
         return prefferedWeekDay;
     }
 
-    public void setPrefferedWeekDay(Set<WeekDay> prefferedWeekDay) {
+    public void setPrefferedWeekDay(SortedSet<WeekDay> prefferedWeekDay) {
         this.prefferedWeekDay = prefferedWeekDay;
     }
 

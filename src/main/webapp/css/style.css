@@ -847,3 +847,15 @@ h2 {
 	position:relative;
 	background:url('../images/bg.jpg') repeat 0 0;
 	}
+.afterRegistration{
+    font-size:20px;
+    color: #4B571B;
+}
+.resultMessage{
+    font-size:24px;
+    color:#DA4E15;
+}
+.resultMessage a{
+    font-size:24px;
+    color:#043574;
+}

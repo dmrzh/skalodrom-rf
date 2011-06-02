@@ -1,5 +1,6 @@
 package ru.skalodrom_rf.model;
 
+import net.sf.autodao.PersistentEntity;
 import org.hibernate.annotations.Index;
 
 import javax.persistence.Column;
@@ -15,7 +16,7 @@ import java.util.Set;
  *
  */
 @Entity
-public class Skalodrom extends LongIdPersistenceEntity implements Comparable{
+public class Skalodrom extends LongIdPersistenceEntity implements Comparable<LongIdPersistenceEntity>{
     public Skalodrom() {
     }
     public Skalodrom(String name) {
@@ -76,7 +77,7 @@ public class Skalodrom extends LongIdPersistenceEntity implements Comparable{
     }
 
     @Override
-    public int compareTo(Object o) {
-        return getName().compareTo(((Skalodrom)o).getName());
+    public int compareTo(LongIdPersistenceEntity o) {
+        return getName().compareTo(((Skalodrom) o).getName());
     }
 }
