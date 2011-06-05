@@ -80,7 +80,6 @@ public class ActivateUserPage extends BasePage {
     public boolean autoLogin(User user) {
         try {
             Authentication authentication = new UsernamePasswordAuthenticationToken(user.getLogin(),user.getPassword());
-
             // Place the new Authentication object in the security context.
             SecurityContextHolder.getContext().setAuthentication(authentication);
         } catch (Exception e) {

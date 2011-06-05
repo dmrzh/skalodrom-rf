@@ -24,8 +24,9 @@
 						<input type="password" name='j_password'>
 					</div>
 					<div class="line checkbox">
+                        <label>Запомнить меня на 2 недели</label>
 						<div class="label"><input type="checkbox" name="_spring_security_remember_me"></div>
-						<label>Запомнить меня на 2 недели</label>
+
 					</div>
 					<div class="submit-ent">
 						<input type="submit" value="Войти">
@@ -39,16 +40,24 @@
 
 				</div>
 </form>
-
+     <hr/>
+    <a name="OpenID"></a>
     <h1>Или войдите с помощью OpenID</h1>
 
-<form action="j_spring_openid_security_check" method="post">
-  <label for="openid_identifier">Login</label>:
-  <input id="openid_identifier" name="openid_identifier" size="20" maxlength="100" type="text"/>
-  <img src="images/OpenID_logo.png" alt="OpenID" height="30px"/>
-  <br />
-  <input type="submit" value="Login"/>
-</form>
+    <form action="j_spring_openid_security_check" method="post">
+        <div class="login-form">
+        <div class="line">
+                <label class="label" for="openid_identifier"><img src="images/OpenID_logo.png" alt="OpenID" height="30px"/></label>
+            <input id="openid_identifier" name="openid_identifier" size="40" maxlength="100" type="text"/>
+
+        </div>
+
+
+        <div class="submit-ent">
+            <input type="submit" value="Войти">
+        </div>
+            </div>
+    </form>
 
 
 

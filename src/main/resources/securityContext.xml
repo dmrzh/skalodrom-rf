@@ -25,7 +25,7 @@
         <form-login login-page="/login.html" authentication-failure-url="/login.html?wrongPassword=true" authentication-failure-handler-ref="needActivateHandler"/>
 
 
-        <openid-login authentication-failure-url="/login.html?wrongPassword=true" authentication-failure-handler-ref="openIDAuthenticationFailureHandler">
+        <openid-login authentication-failure-handler-ref="openIDAuthenticationFailureHandler">
             <attribute-exchange>
                 <openid-attribute name="email" type="http://schema.openid.net/contact/email" required="true"/>
                 <openid-attribute name="name"  type="http://schema.openid.net/namePerson" required="true"/>
