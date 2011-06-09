@@ -28,7 +28,7 @@ public class Profile  implements PersistentEntity<Long>{
     private Double weight;
     @Enumerated(EnumType.STRING)
     @NotNull
-    private ClimbLevel climbLevel=ClimbLevel.newbie;
+    private ClimbLevel climbLevel=ClimbLevel.UNKNOWN;
     @ManyToMany(cascade = CascadeType.ALL)
     private Set<Skalodrom> whereClimb= new TreeSet<Skalodrom>();
 
