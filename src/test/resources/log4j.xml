@@ -1,23 +1,26 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
-
 <log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
-
-  <appender name="console" class="org.apache.log4j.ConsoleAppender">
-    <param name="Target" value="System.out"/>
-    <layout class="org.apache.log4j.PatternLayout">
-      <param name="ConversionPattern" value="aa %p %c: %m%n"/>
-    </layout>
-  </appender>
-  <!--Корневой logger-->
-  <logger name="ru.skalodrom_rf">
-    <level value="info"/>
-  </logger>
-  <root>
-    <priority value ="WARN" />
-    <appender-ref ref="console" />
-  </root>
-
-
-
+    <appender name="console" class="org.apache.log4j.ConsoleAppender">
+        <param name="Target" value="System.out"/>
+        <layout class="org.apache.log4j.PatternLayout">
+            <param name="ConversionPattern" value="%p %c: %m%n"/>
+        </layout>
+    </appender>
+    <!--Корневой logger-->
+    <logger name="ru.skalodrom_rf">
+        <level value="info"/>
+    </logger>
+    <logger name="org.hibernate.SQL" additivity="false">
+        <level value="DEBUG"/>
+        <appender-ref ref="console"/>
+    </logger>
+    <logger name="org.hibernate.type" additivity="false">
+        <level value="TRACE"/>
+        <appender-ref ref="console"/>
+    </logger>
+    <root>
+        <priority value="WARN"/>
+        <appender-ref ref="console"/>
+    </root>
 </log4j:configuration>

@@ -8,6 +8,11 @@
         <param-name>contextConfigLocation</param-name>
         <param-value>classpath:applicationContext.xml</param-value>
     </context-param>
+    <context-param>
+        <param-name>log4jConfigLocation</param-name>
+        <param-value>classpath:log4j.xml</param-value>
+    </context-param>
+
     <!-- Spring -->
     <listener>
         <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
@@ -15,6 +20,9 @@
     <listener>
         <listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
     </listener>
+    <listener>
+       <listener-class>org.springframework.web.util.Log4jConfigListener</listener-class>
+   </listener>
 
     <filter>
         <filter-name>springSecurityFilterChain</filter-name>
@@ -29,7 +37,7 @@
         </init-param>
         <init-param>
             <param-name>configuration</param-name>
-            <param-value>deployment</param-value> <!--development deployment-->
+            <param-value>development</param-value> <!--development deployment-->
         </init-param>
     </filter>
     <filter-mapping>
