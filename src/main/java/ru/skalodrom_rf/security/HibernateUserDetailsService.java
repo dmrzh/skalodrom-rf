@@ -19,6 +19,8 @@ public class HibernateUserDetailsService implements UserDetailsService {
     @Resource
     private UserDao userDao;
 
+    public static final GrantedAuthorityImpl USER_ROLE = new GrantedAuthorityImpl("ROLE_USER");
+
     public HibernateUserDetailsService() {
     }
     
@@ -31,7 +33,8 @@ public class HibernateUserDetailsService implements UserDetailsService {
              throw new UsernameNotFoundException( "HibernateUserDetailsService.notFound Username "+ username+ " not found");
         }
 
-        final GrantedAuthority[] userRole = {new GrantedAuthorityImpl("ROLE_USER")};
+
+        final GrantedAuthority[] userRole = {USER_ROLE};
 
 
 

@@ -12,6 +12,8 @@
 
     <bean id="wicketApplication" class="ru.skalodrom_rf.web.WicketApplication"/>
     <bean id="openSessionInView" class="ru.skalodrom_rf.web.TransactionalRequestCycleProcessor" scope="prototype"/>
+    <bean class="ru.skalodrom_rf.UserService"/>
+    <bean class="ru.skalodrom_rf.web.ProtectedPageListener"/>
 
     <bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
         <property name="location" value="classpath:jdbc.properties"/>
@@ -36,7 +38,7 @@
             <props>
                 <prop key="hibernate.dialect">${hibernate.dialect}</prop>
                 <prop key="hibernate.hbm2ddl.auto">${hibernate.hbm2ddl.auto}</prop>
-                <prop key="hibernate.show_sql">true</prop>
+                <!--<prop key="hibernate.show_sql">true</prop>-->
                 <prop key="hibernate.validator.apply_to_ddl">true</prop>
 
             </props>

@@ -14,10 +14,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import ru.skalodrom_rf.EmailSender;
 import ru.skalodrom_rf.model.Profile;
 import ru.skalodrom_rf.model.User;
+import ru.skalodrom_rf.web.AuthenticatedUser;
 
 
 /**
  */
+@AuthenticatedUser
 public class SendMessagePage extends BasePage{
     @SpringBean
     EmailSender emailSender;

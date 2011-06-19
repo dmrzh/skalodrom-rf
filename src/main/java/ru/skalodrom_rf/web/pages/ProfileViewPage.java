@@ -22,6 +22,7 @@ import ru.skalodrom_rf.web.EnumRendererer;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TreeSet;
 
 /**.*/
 public class ProfileViewPage extends BasePage{
@@ -45,6 +46,10 @@ public class ProfileViewPage extends BasePage{
             return;
         }
         final Profile p = user.getProfile();
+        //todo fix SKALA-xxx
+        TreeSet<WeekDay> prefferedWeekDaySorted = new TreeSet<WeekDay>(new IdCompartor());
+        prefferedWeekDaySorted.addAll(p.getPrefferedWeekDay());
+        p.setPrefferedWeekDay(prefferedWeekDaySorted);
 
         add(new Label("login", p.getUser().getLogin()));
         add(new Label("fio", p.getFio()));

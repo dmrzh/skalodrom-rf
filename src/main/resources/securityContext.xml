@@ -18,6 +18,7 @@
         <intercept-url pattern="/img/*"  access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <intercept-url pattern="/images/*"  access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <intercept-url pattern="/css/*"  access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <intercept-url pattern="/users/**"  access="IS_AUTHENTICATED_ANONYMOUSLY"/>
 
         <intercept-url pattern="/" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
 

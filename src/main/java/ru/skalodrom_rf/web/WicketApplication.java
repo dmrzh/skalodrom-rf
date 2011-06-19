@@ -1,9 +1,6 @@
 package ru.skalodrom_rf.web;
 
-import org.apache.wicket.Page;
-import org.apache.wicket.Request;
-import org.apache.wicket.RequestCycle;
-import org.apache.wicket.Response;
+import org.apache.wicket.*;
 import org.apache.wicket.protocol.http.WebApplication;
 import org.apache.wicket.protocol.http.WebRequest;
 import org.apache.wicket.request.IRequestCycleProcessor;
@@ -12,6 +9,7 @@ import org.apache.wicket.spring.injection.annot.SpringComponentInjector;
 import org.apache.wicket.util.file.Folder;
 import org.apache.wicket.util.file.Path;
 import org.springframework.orm.hibernate3.HibernateTransactionManager;
+import ru.skalodrom_rf.UserService;
 import ru.skalodrom_rf.web.hibernate.TransactionalWebRequestCycle;
 import ru.skalodrom_rf.web.pages.*;
 
@@ -25,6 +23,9 @@ public class WicketApplication extends WebApplication{
     IRequestCycleProcessor openSessionInView;
     @Resource
     HibernateTransactionManager transactionManager;
+
+    @Resource
+    ProtectedPageListener protectedPageListener;
 
     /**
      * Constructor
@@ -43,6 +44,7 @@ public class WicketApplication extends WebApplication{
     protected void init() {
         super.init();
         addComponentInstantiationListener(new SpringComponentInjector(this));
+        addComponentInstantiationListener(protectedPageListener);
 
         mountBookmarkablePage("/register.html", RegisterPage.class);
 
