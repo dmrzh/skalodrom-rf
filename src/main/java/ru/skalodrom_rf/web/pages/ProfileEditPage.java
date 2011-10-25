@@ -97,9 +97,6 @@ public class ProfileEditPage extends BasePage{
         form.add(weekDaysChoice.setSuffix(""));
 
         form.add(new DatesPanel("whenClimb", new HibernateFieldDataProvider<Profile, ClimbTime>(pe,"whenClimb")));
-
-
-        
         add(form);
         add(new FeedbackPanel("feedback2"));
 
@@ -107,18 +104,11 @@ public class ProfileEditPage extends BasePage{
 
     private void addSkalodromForm(Form<Profile> form,HibernateModelList<Skalodrom> selectedScalodroms ) {
         Profile profile=Utils.getCurrntUser(userDao).getProfile();
-        final HibernateModel<Profile> profileModel=new HibernateModel<Profile>(profile);
-
         final List<Skalodrom> skalodroms = skalodromDao.findAll();
         final HibernateModelList<Skalodrom> scalodromsModel = new HibernateModelList<Skalodrom>(skalodroms);
-         final ChoiceRenderer<Skalodrom> rendererer = new ChoiceRenderer<Skalodrom>("name", "id");
-
-
-
-
-
+        final ChoiceRenderer<Skalodrom> rendererer = new ChoiceRenderer<Skalodrom>("name", "id");
         final Palette palette = new Palette("palette", selectedScalodroms,scalodromsModel,rendererer,10,false);
-           form.add(palette);
+        form.add(palette);
 
     }
 

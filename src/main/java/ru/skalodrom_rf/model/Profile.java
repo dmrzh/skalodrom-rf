@@ -1,19 +1,30 @@
 package ru.skalodrom_rf.model;
 
 import net.sf.autodao.PersistentEntity;
+import org.hibernate.annotations.Cascade;
+import org.hibernate.annotations.CascadeType;
 import org.hibernate.annotations.Index;
 import org.hibernate.annotations.Sort;
 import org.hibernate.annotations.SortType;
 
-import javax.persistence.*;
+
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.validation.constraints.NotNull;
 import java.util.Set;
-import java.util.SortedSet;
 import java.util.TreeSet;
 
 @Entity
 public class Profile  implements PersistentEntity<Long>{
-    @Id  @GeneratedValue(strategy = GenerationType.AUTO)
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @OneToOne(mappedBy = "profile")
@@ -23,20 +34,24 @@ public class Profile  implements PersistentEntity<Long>{
     private String email;
     private String fio;
     private String phone;
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne()
+    @Cascade(CascadeType.ALL)
     private Image avatar= new Image();
     private Double weight;
     @Enumerated(EnumType.STRING)
     @NotNull
     private ClimbLevel climbLevel=ClimbLevel.UNKNOWN;
-    @ManyToMany(cascade = CascadeType.ALL)
+    @ManyToMany()
+    //@Cascade(CascadeType.ALL)
     private Set<Skalodrom> whereClimb= new TreeSet<Skalodrom>();
 
     @ManyToMany()
     //@Sort(type = SortType.COMPARATOR, comparator = IdCompartor.class)
-    private Set<WeekDay> prefferedWeekDay=new TreeSet<WeekDay>();
+    //@Cascade(CascadeType.DELETE_ORPHAN)
+    private Set<WeekDay> prefferedWeekDay=new TreeSet<WeekDay>(new IdCompartor());
 
-    @OneToMany( cascade = CascadeType.ALL)
+    @OneToMany()
+    @Cascade(CascadeType.ALL)
     private Set<ClimbTime> whenClimb=new TreeSet<ClimbTime>();
 
     private String about;

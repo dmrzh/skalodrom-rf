@@ -11,8 +11,7 @@ class WeekdaysRenderer implements IChoiceRenderer<WeekDay> {
 
 
     @Override
-    public Object getDisplayValue(WeekDay object) {
-        final WeekDay weekDay = (WeekDay) object;
+    public Object getDisplayValue(WeekDay weekDay ) {
         final String name = weekDay.getName();
         final ClassStringResourceLoader psrl = new ClassStringResourceLoader(WeekdaysRenderer.class);
         return psrl.loadStringResource(null,"weekdays."+name);
@@ -20,6 +19,6 @@ class WeekdaysRenderer implements IChoiceRenderer<WeekDay> {
 
     @Override
     public String getIdValue(WeekDay object, int index) {
-        return ((WeekDay)object).getId().toString();
+        return object.getId().toString();
     }
 }
