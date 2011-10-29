@@ -54,7 +54,7 @@ public class ProfileEditPage extends BasePage{
             @Override
             protected void onSubmit() {
                 final Profile p = model.getObject();
-                //p.setWhereClimb(new TreeSet<Skalodrom>(selectedScalodroms.getObject()));
+                p.setWhereClimb(new TreeSet<Skalodrom>(selectedScalodroms.getObject()));
                 final FileUpload fileUpload = avatarFi.getFileUpload();
                 if(fileUpload!=null){
                     p.getAvatar().setImageData(fileUpload.getBytes());
