@@ -93,22 +93,22 @@
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-core</artifactId>
-            <version>${org.springframework.version}</version>
+            <version>3.0.7.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-config</artifactId>
-            <version>${org.springframework.version}</version>
+            <version>3.0.7.RELEASE</version>
         </dependency>
         <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-web</artifactId>
-            <version>${org.springframework.version}</version>
+            <version>3.0.7.RELEASE</version>
         </dependency>
          <dependency>
             <groupId>org.springframework.security</groupId>
             <artifactId>spring-security-openid</artifactId>
-            <version>${org.springframework.version}</version>
+            <version>3.0.7.RELEASE</version>
         </dependency>
 
 
@@ -243,17 +243,6 @@
                 <artifactId>maven-jetty-plugin</artifactId>
                 <version>6.1.26</version>
             </plugin>
-
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>tomcat-maven-plugin</artifactId>
-                <version>1.1</version>
-                <configuration>
-                    <fork>false</fork>
-                    <server>panda</server>
-                    <url>http://panda/manager</url>
-                </configuration>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-source-plugin</artifactId>
@@ -269,6 +258,12 @@
                 </executions>
               </plugin>
 
+
+                    <!--<plugin>-->
+                      <!--<groupId>org.apache.tomcat.maven</groupId>-->
+                      <!--<artifactId>tomcat7-maven-plugin</artifactId>-->
+                      <!--<version></version>-->
+                    <!--</plugin>-->
 
         </plugins>
     </build>
@@ -320,6 +315,27 @@
                     <version>9.0-801.jdbc4</version>
                 </dependency>
             </dependencies>
+            <build>
+                <plugins>
+                   <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>tomcat-maven-plugin</artifactId>
+                    <version>1.1</version>
+                    <executions>
+                        <execution>
+                            <phase>deploy</phase>
+                            <goals><goal>redeploy</goal></goals>
+                        </execution>
+                    </executions>
+                    <configuration>
+                        <server>skalodrom-rf</server>
+                        <path>/</path>
+                         <url>http://xn--80aiqfgkbpd.xn--p1ai/manager/text</url>
+                    </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+
         </profile>
 
 

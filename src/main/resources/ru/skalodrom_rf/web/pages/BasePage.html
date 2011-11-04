@@ -51,12 +51,18 @@ screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
 		</div>
 		<div class="footer">
             <div>
-                        <!--LiveInternet logo--><a href="http://www.liveinternet.ru/click"
-                        target="_blank"><img src="//counter.yadro.ru/logo?45.6"
-                        title="LiveInternet"
-                        alt="" border="0" width="31" height="31"/></a><!--/LiveInternet-->
+                <!--LiveInternet counter--><script type="text/javascript"><!--
+                document.write("<a href='http://www.liveinternet.ru/click' "+
+                "target=_blank><img src='//counter.yadro.ru/hit?t42.6;r"+
+                escape(document.referrer)+((typeof(screen)=="undefined")?"":
+                ";s"+screen.width+"*"+screen.height+"*"+(screen.colorDepth?
+                screen.colorDepth:screen.pixelDepth))+";u"+escape(document.URL)+
+                ";"+Math.random()+
+                "' alt='' title='LiveInternet' "+
+                "border='0' width='31' height='31'><\/a>")
+                //--></script><!--/LiveInternet-->
 
-                    </div>
+            </div>
 		</div>
 	</div>
 	</div>

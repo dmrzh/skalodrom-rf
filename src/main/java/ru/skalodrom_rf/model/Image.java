@@ -1,6 +1,7 @@
 package ru.skalodrom_rf.model;
 
 import net.sf.autodao.PersistentEntity;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -14,7 +15,8 @@ public class Image  implements PersistentEntity<Long> {
      @Id
      @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    @Lob
+
+    @Type(type = "org.hibernate.type.BinaryType")
     private byte[] imageData = new byte[0];
 
     public Image() {
