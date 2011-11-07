@@ -9,6 +9,8 @@
         <intercept-url pattern="/login.html*" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <intercept-url pattern="/register.html*/**"  access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <intercept-url pattern="/resources/**" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <intercept-url pattern="/skalodroms/index.html" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
+        <intercept-url pattern="/skalodroms/skala-city.html" access="IS_AUTHENTICATED_ANONYMOUSLY"/>
 
          <intercept-url pattern="/message.html*"  access="IS_AUTHENTICATED_ANONYMOUSLY"/>
         <intercept-url pattern="/reminder.html"  access="IS_AUTHENTICATED_ANONYMOUSLY"/>
