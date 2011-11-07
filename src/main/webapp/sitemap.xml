@@ -4,14 +4,20 @@
     <url>
         <loc>http://xn--80aiqfgkbpd.xn--p1ai/index.html</loc>
         <lastmod>2011-05-20</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>weekly</changefreq>
         <priority>1</priority>
     </url>
      <url>
         <loc>http://xn--80aiqfgkbpd.xn--p1ai/skalodroms/skala-city.html</loc>
         <lastmod>2011-11-07</lastmod>
-        <changefreq>monthly</changefreq>
+        <changefreq>weekly</changefreq>
         <priority>1</priority>
     </url>
+    <url>
+       <loc>http://xn--80aiqfgkbpd.xn--p1ai/skalodroms/index.html</loc>
+       <lastmod>2011-11-07</lastmod>
+       <changefreq>weekly</changefreq>
+       <priority>1</priority>
+   </url>
 </urlset>
 
