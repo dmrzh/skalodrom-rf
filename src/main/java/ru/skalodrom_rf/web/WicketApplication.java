@@ -12,7 +12,7 @@ import org.springframework.orm.hibernate3.HibernateTransactionManager;
 import ru.skalodrom_rf.web.hibernate.TransactionalWebRequestCycle;
 import ru.skalodrom_rf.web.pages.*;
 import ru.skalodrom_rf.web.pages.skalodroms.ExtremePage;
-import ru.skalodrom_rf.web.pages.skalodroms.SkalasityPage;
+import ru.skalodrom_rf.web.pages.skalodroms.SkalacityPage;
 import ru.skalodrom_rf.web.pages.skalodroms.SkalodromsPage;
 
 import javax.annotation.Resource;
@@ -60,7 +60,7 @@ public class WicketApplication extends WebApplication{
         mountBookmarkablePage("/FileNotFound.html", FileNotFoundPage.class);
         mountBookmarkablePage("/message.html", MessagePage.class);
         mount(new IndexedParamUrlCodingStrategy("/users",ProfileViewPage.class));
-        mountBookmarkablePage("/skalodroms/skala-city.html",SkalasityPage.class);
+        mountBookmarkablePage("/skalodroms/skala-city.html",SkalacityPage.class);
         mountBookmarkablePage("/skalodroms/extreme.html",ExtremePage.class);
 
         mountBookmarkablePage("/skalodroms/index.html",SkalodromsPage.class);
