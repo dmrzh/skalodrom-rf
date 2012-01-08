@@ -365,6 +365,10 @@
             <id>autodao</id>
             <url>http://autodao.sourceforge.net/maven2-snapshots</url>
         </repository>
+        <repository>
+            <id>wicket-autodao</id>
+            <url>http://wicket-autodao.sourceforge.net/m2-repo</url>
+        </repository>
     </repositories>
 
     <properties>
