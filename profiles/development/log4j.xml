@@ -13,14 +13,14 @@
   <logger name="ru.skalodrom_rf">
     <level value="INFO"/>
   </logger>
-    <logger name="org.hibernate.SQL" additivity="false">
-       <level value="DEBUG" />
-        <appender-ref ref="console" />
-    </logger>
-     <logger name="org.hibernate.type" additivity="false">
-       <level value="TRACE" />
-         <appender-ref ref="console" />
-    </logger>
+    <!--<logger name="org.hibernate.SQL" additivity="false">-->
+       <!--<level value="DEBUG" />-->
+        <!--<appender-ref ref="console" />-->
+    <!--</logger>-->
+     <!--<logger name="org.hibernate.type" additivity="false">-->
+       <!--<level value="TRACE" />-->
+         <!--<appender-ref ref="console" />-->
+    <!--</logger>-->
   <root>
     <priority value ="WARN" />
     <appender-ref ref="console" />
