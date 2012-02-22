@@ -118,6 +118,11 @@
             <version>2.2.4</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>com.googlecode.flyway</groupId>
+            <artifactId>flyway-core</artifactId>
+            <version>1.5</version>
+        </dependency>
 
         <dependency>
             <groupId>org.hibernate</groupId>
@@ -204,6 +209,7 @@
         </dependency>
     </dependencies>
     <build>
+        <defaultGoal>package</defaultGoal>
         <resources>
             <resource>
                 <filtering>false</filtering>
@@ -257,7 +263,6 @@
                   </execution>
                 </executions>
               </plugin>
-
 
                     <!--<plugin>-->
                       <!--<groupId>org.apache.tomcat.maven</groupId>-->
@@ -361,10 +366,6 @@
 
     </profiles>
     <repositories>
-        <repository>
-            <id>autodao</id>
-            <url>http://autodao.sourceforge.net/maven2-snapshots</url>
-        </repository>
         <repository>
             <id>wicket-autodao</id>
             <url>http://wicket-autodao.sourceforge.net/m2-repo</url>
