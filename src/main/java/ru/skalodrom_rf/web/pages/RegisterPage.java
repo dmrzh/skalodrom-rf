@@ -37,7 +37,7 @@ public class RegisterPage extends BasePage{
         try {
            prng = SecureRandom.getInstance("SHA1PRNG");
         } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();  
+            e.printStackTrace();
         }
     }
 
@@ -59,7 +59,7 @@ public class RegisterPage extends BasePage{
 
             form.add(new RequiredTextField<String>("login").add(new StringValidator.LengthBetweenValidator(2,32)).add(new PatternValidator("[a-z0-9]*")));
             form.add(new PasswordTextField("password").add(new StringValidator.LengthBetweenValidator(5,32)));
-            form.add(new RequiredTextField<String>("profile.email").add(EmailAddressValidator.getInstance()));
+            form.add(new RequiredTextField<String>("profile.email.address").add(EmailAddressValidator.getInstance()));
             captchaImageResource = new CaptchaImageResource(captchaPassword);
 
         final Image image = new Image("captchaImage", captchaImageResource);
@@ -77,10 +77,9 @@ public class RegisterPage extends BasePage{
                             }else if(userDao.get(user.getLogin())!= null){
                                 error("пользователь с таким логином уже существует");
                             } else{
-                                user.setActivationCode(Math.abs(prng.nextInt()));
                                 userDao.create(user);
                                 //send activation email
-                                sendActivationMessage(user);
+                                emailSender.sendActivationMessage(user,"Регистрация");
                                 captchaPassword=Integer.toString(prng.nextInt(1000));
                                 captchaImageResource = new CaptchaImageResource(captchaPassword);
                                 final Image image = new Image("captchaImage", captchaImageResource);
@@ -96,17 +95,7 @@ public class RegisterPage extends BasePage{
         add(form);
     }
 
-    private void sendActivationMessage(User user){
-        final String prefixToWicketHandler = RequestCycle.get().getRequest().getRelativePathPrefixToWicketHandler();
-        String str = "Добро пожаловать на скалором.рф \n код активации: " + user.getActivationCode()+
-            "\n url активации: " + RequestUtils.toAbsolutePath(prefixToWicketHandler)+
-            "activate.html?login="+user.getLogin()+ "&activationCode="+user.getActivationCode();
 
-        str=str+"\n \n Чтобы вы были доступны в поиске, заполните свой профиль.";
-
-        emailSender.sendMessage(user,"Регистрация",str);
-
-    }
 
     public String getCaptchaText() {
         return captchaText;

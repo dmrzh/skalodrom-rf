@@ -2,6 +2,7 @@ package ru.skalodrom_rf.web.pages;
 
 import org.apache.wicket.PageParameters;
 import org.apache.wicket.markup.html.basic.Label;
+import org.apache.wicket.markup.html.panel.EmptyPanel;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,9 +14,9 @@ import ru.skalodrom_rf.dao.UserDao;
 import ru.skalodrom_rf.model.User;
 import ru.skalodrom_rf.security.HibernateUserDetailsService;
 import ru.skalodrom_rf.web.components.AfterActivationPanel;
-import ru.skalodrom_rf.web.components.EmptyPanel;
 
 /**
+ * todo add servlet adn redirect to specific page.
  */
 public class ActivateUserPage extends BasePage {
 
@@ -35,11 +36,10 @@ public class ActivateUserPage extends BasePage {
             }
 
             String activationCode = extractParam(parameters, "activationCode");
-            if (user.getActivationCode()!=null &&!activationCode.equals(user.getActivationCode().toString())) {
+            if (! user.getProfile().getEmail().confirmAddress(activationCode)) {
                 throwExeption();
             }
             add(new Label("resultMessage", "Аккаунт активирован!"));
-            user.setActivationCode(null);
             userDao.saveOrUpdate(user);
             autoLogin(user);
             add(new AfterActivationPanel("afterActivation"));

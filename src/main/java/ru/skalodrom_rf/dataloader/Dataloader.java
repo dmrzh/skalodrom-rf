@@ -13,7 +13,7 @@ import ru.skalodrom_rf.model.*;
 import javax.annotation.Resource;
 
 /**
- * Load initial data to database/
+ * Load initial data to database.
  */
 public class Dataloader {
     private static final Logger LOG= LoggerFactory.getLogger(Dataloader.class);
@@ -53,7 +53,7 @@ public class Dataloader {
         user.getProfile().setFio("Дима");
 
         user.setPassword("");
-        user.getProfile().setEmail("dima@rzhevskiy.info");
+        user.getProfile().getEmail().setNewAdress("dima@rzhevskiy.info");
         user.getProfile().getWhenClimb().add(climbTime);
         user.getProfile().getPrefferedWeekDay().add(tuesday);
         userDao.create(user);

@@ -32,7 +32,7 @@ public interface ProfileDao extends Dao<Profile, Long> {
              "where s1=:s and weekDay=:wd")
      List<Profile> findByScalodromAndWeekDay(@Named("s")Skalodrom s, @Named("wd") WeekDay prefferedWeekDay);
 
-     @Finder(query = "select p from Profile p where p.email=:email")
+     @Finder(query = "select p from Profile p where p.email.address=:email")
      List<Profile> findByEmail(@Named("email")String email);
 
 }

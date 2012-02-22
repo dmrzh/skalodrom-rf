@@ -26,7 +26,7 @@ class ProtectedPageListener implements IComponentInstantiationListener {
         }
     }
       private boolean hasEmail() {
-        String email = userService.getCurrentUser().getProfile().getEmail();
+        String email = userService.getCurrentUser().getProfile().getEmail().getAddress();
         return email!=null && email.length()>0;
     }
 }

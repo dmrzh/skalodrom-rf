@@ -30,8 +30,10 @@ public class Profile  implements PersistentEntity<Long>{
     @OneToOne(mappedBy = "profile")
     private User user;
 
-    @Index(name ="email_indx")
-    private String email;
+    @OneToOne
+    @Cascade(CascadeType.ALL)
+    @NotNull
+    private EmailAddress email=new EmailAddress();
     private String fio;
     private String phone;
     @OneToOne()
@@ -75,11 +77,11 @@ public class Profile  implements PersistentEntity<Long>{
         this.user = user;
     }
 
-    public String getEmail() {
+    public EmailAddress getEmail() {
         return email;
     }
 
-    public void setEmail(String email) {
+    public void setEmail(EmailAddress email) {
         this.email = email;
     }
 

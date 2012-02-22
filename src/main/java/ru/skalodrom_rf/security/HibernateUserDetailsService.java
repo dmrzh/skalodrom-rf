@@ -38,7 +38,7 @@ public class HibernateUserDetailsService implements UserDetailsService {
 
 
 
-        if(user.getActivationCode()==null){
+        if(user.getProfile().getEmail().getAddress()!=null){
             springSecurityUser = new User(username, user.getPassword(), true, true, true, true, userRole);
         }else{
             throw new NotActivatedException( "HibernateUserDetailsService.notFound Username "+ username+ " not activated");

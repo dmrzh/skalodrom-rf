@@ -20,7 +20,6 @@ public class User implements PersistentEntity<String>{
 
     private String password;
 
-    private Integer activationCode;
 
     @OneToOne(cascade = CascadeType.ALL)
     private Profile profile=new Profile();
@@ -36,13 +35,6 @@ public class User implements PersistentEntity<String>{
         this.profile = profile;
     }
 
-    public Integer getActivationCode() {
-        return activationCode;
-    }
-
-    public void setActivationCode(Integer activationCode) {
-        this.activationCode = activationCode;
-    }
 
     public String getLogin() {
         return login;

@@ -53,7 +53,7 @@ public class ProfileTest {
         user.getProfile().setFio("Надя");
 
         user.setPassword("");
-        user.getProfile().setEmail("nadya@rzhevskiy.info");
+        user.getProfile().getEmail().setNewAdress("nadya@rzhevskiy.info");
         userDao.create(user);
         List<WeekDay> all = prefferedWeekDayDao.findAll();
 

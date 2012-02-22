@@ -11,7 +11,12 @@ import org.apache.wicket.model.Model;
 import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import ru.skalodrom_rf.EmailSender;
+import ru.skalodrom_rf.UserService;
+import ru.skalodrom_rf.dao.EmailMessageDao;
+import ru.skalodrom_rf.model.EmailMessage;
 import ru.skalodrom_rf.model.Profile;
 import ru.skalodrom_rf.model.User;
 import ru.skalodrom_rf.web.AuthenticatedUser;
@@ -23,6 +28,13 @@ import ru.skalodrom_rf.web.AuthenticatedUser;
 public class SendMessagePage extends BasePage{
     @SpringBean
     EmailSender emailSender;
+    
+    @SpringBean
+    UserService userService;
+    
+    @SpringBean
+    EmailMessageDao emailMessageDao;
+
     public SendMessagePage(final HibernateModel<Profile> whomModel) {
         add(new Label("whom", toProfileString(whomModel.getObject())));
         final Form form = new Form("form");
@@ -33,13 +45,20 @@ public class SendMessagePage extends BasePage{
         form.add(new TextArea<String>("text", text));
         final Button button = new Button("submit") {
             @Override
+            @Transactional()
             public void onSubmit() {
-                final String subjectText = "сообщение через сайт скалодром.рф[" + subject.getObject() + "]";
-                final User to = whomModel.getObject().getUser();
-                 final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-                String s = "\n\n Письмо отправлено с сайта скалодром.рф  от http://скалодром.рф/users/"+authentication.getName();
-                emailSender.sendMessage(to, subjectText,text.getObject()+ s);
+
+                EmailMessage emailMessage = new EmailMessage(userService.getCurrentUser(), whomModel.getObject().getUser(),
+                        subject.getObject(), text.getObject());
+
+                saveMessage(emailMessage);
+                emailSender.sendUserToUser(emailMessage);
                 RequestCycle.get().setResponsePage(IndexPage.class);
+            }
+
+            @Transactional(propagation = Propagation.REQUIRES_NEW)
+            public void saveMessage(EmailMessage emailMessage) {
+                emailMessageDao.saveOrUpdate(emailMessage);
             }
         };
         form.add(button);

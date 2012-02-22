@@ -16,6 +16,7 @@ import org.apache.wicket.spring.injection.annot.SpringBean;
 import org.apache.wicket.util.lang.Bytes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import ru.skalodrom_rf.EmailSender;
 import ru.skalodrom_rf.dao.*;
 import ru.skalodrom_rf.model.*;
 import ru.skalodrom_rf.web.EnumRendererer;
@@ -36,6 +37,9 @@ public class ProfileEditPage extends BasePage{
     private ProfileDao profileDao;
     @SpringBean
     SkalodromDao skalodromDao;
+    
+    @SpringBean
+    EmailSender emailSender;
 
     @SpringBean
     private PrefferedWeekDayDao prefferedWeekDayDao;
@@ -60,11 +64,14 @@ public class ProfileEditPage extends BasePage{
                     p.getAvatar().setImageData(fileUpload.getBytes());
                 }
                 profileDao.saveOrUpdate(p);
+                if(p.getEmail().getActivationCode()!=null){
+                    emailSender.sendActivationMessage(p.getUser(),"Cмена почтового ящика");
+                }
                 LOG.debug("profile saved "+model.getObject()); 
             }
         };
         form.add(new RequiredTextField("fio"));
-        form.add(new RequiredTextField("email"));
+        form.add(new RequiredTextField("email.address"));
         form.add(new TextField("phone"));
 
 
